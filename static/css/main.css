@@ -2112,7 +2112,7 @@ ul.list-col li:not(:last-child)::after {
 }
 
 .font600 {
-    font-weight: 600 !important;
+    font-weight: 900 !important;
 }
 
 .font700 {

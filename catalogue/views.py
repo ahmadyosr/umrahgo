@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from catalogue.models import Package 
+from catalogue.models import Package  , Room 
 # Create your views here.
 
 
@@ -12,8 +12,11 @@ def agency(request , agency_id ):
 	return render(request , 'result-grid.html' )
 
 def package(request , package_id):
+	context = {}
+	context['package'] = Package.objects.get(id = package_id) 
+	context['rooms'] = Room.objects.filter(package = context['package']) 
 
-	return render(request , 'detail-page.html')
+	return render(request , 'detail-page.html' , context )
 
 def list(request):
 	packages = Package.objects.all()

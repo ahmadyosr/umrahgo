@@ -32,11 +32,12 @@
 	<link rel="stylesheet" href="/static/icons/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
 	<link rel="stylesheet" href="/static/icons/simple-line-icons/css/simple-line-icons.css">
 	<link rel="stylesheet" href="/static/icons/rivolicons/style.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
 	<!-- Google Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300italic,300' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+	<!-- <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300italic,300' rel='stylesheet' type='text/css'> -->
+	<!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,600,600italic,700,700italic' rel='stylesheet' type='text/css'> -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Rakkas" rel="stylesheet"> -->
 
 	<!-- CSS Custom -->
 	<link href="/static/css/style.css" rel="stylesheet">
@@ -239,7 +240,7 @@
 		<header id="header">
 	  
 			<!-- start Navbar (Header) -->
-			<nav class="navbar navbar-primary " >
+			<nav class="navbar navbar-primary navbar-fixed-top navbar-sticky-function" style="min-width:100px;">
 				
 				<div class="navbar-top" >
 				
@@ -252,9 +253,9 @@
 								
 									<div class="navbar-mini">
 										<ul class="clearfix">
-										<!-- 
+										
 											<li class="user-action">
-												<a data-toggle="modal" href="#loginModal" class="btn">Sign up/in</a>
+												<a data-toggle="modal" href="#loginModal" class="btn">اتصل بنا</a>
 											</li>
 
 											<li class="dropdown bt-dropdown-click hidden-xs">
@@ -267,7 +268,7 @@
 													<li><a href="#"><i class="ion-social-euro"></i> Europe</a></li>
 													<li><a href="#"><i class="ion-social-yen"></i> Yen</a></li>
 												</ul>
-											</li> -->
+											</li> 
 											
 											<li class="dropdown bt-dropdown-click hidden-xs">
 												<a id="currncy-dropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -301,15 +302,14 @@
 						
 								</div>
 							</div>
-							<div class="flex-shrink flex-columns">
-								<a class="navbar-logo" href="index.html">
+							<div class="flex-shrink flex-columns" style="margin-right:40px	">
+								<a class="navbar-logo" href="{% url 'landing_page' %}">
 									<img src="/static/images/logo_arabic.png" alt="Logo" />
 								</a>
 							</div>
 						</div>
 
 					</div>
-					
 				</div>
 				
 				<div class="navbar-bottom hidden-sm hidden-xs" >

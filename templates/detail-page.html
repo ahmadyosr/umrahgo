@@ -4,7 +4,35 @@
 		<div class="main-wrapper scrollspy-container">
 		
 			<!-- start end Page title -->
-			<div class="page-title detail-page-title" style="background-image:url('images/detail/header.jpg');">
+			<div class="page-title" style="background-image:url('/static/images/header.jpg');">
+				
+				<div class="container">
+				
+					<div class="row">
+					
+						<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3" dir="rtl">
+						
+							<h1 class="hero-title">{{package.title}}</h1>
+							<small class="hero-title">{{package.title}}</small>
+							<!-- 
+							<ol class="breadcrumb-list">
+								<li><a href="index.html">Homepage</a></li>
+								<li><a href="#">Desinations</a></li>
+								<li><a href="#">City</a></li>
+								<li><span>Result list</span></li>
+							</ol>
+							 -->
+						</div>
+						
+					</div>
+
+				</div>
+				
+			</div>
+			<!-- end Page title -->
+			
+			<!-- start end Page title -->
+			<div class="page-title detail-page-title" style="background-image:url('images/detail/header.jpg');display:none;">
 				
 				<div class="container">
 				
@@ -15,7 +43,7 @@
 							<h1 class="hero-title">Croatia Sailing &amp; Cruising</h1>
 							<p class="line18">He do subjects prepared bachelor juvenile ye oh. He feelings removing informed he as ignorant we prepared.</p>
 							
-							<ul class="list-col clearfix ">
+							<ul class="list-col clearfix " style="display:none;" >
 								<li class="price-box" dir="rtl">
 									<div class="meta">
 										<span class="block">$1422</span>
@@ -61,7 +89,7 @@
 							
 						</div>
 						
-						<div class="flex-column flex-md-4 flex-align-bottom flex-sm-12 mt-20-sm ">
+						<div class="flex-column flex-md-4 flex-align-bottom flex-sm-12 mt-20-sm " style="display:none;">
 							<div class="text-right text-left-sm">
 								<a href="#section-5" class="anchor btn btn-primary">See dates &amp; Book Now</a>
 							</div>
@@ -94,36 +122,8 @@
 				<div class="container " >
 			
 					<div class="row ">
-						<div class="col-md-3 col-sm-3 hidden-sm hidden-xs " dir="rtl">
-						
-							<div class="scrollspy-sidebar sidebar-detail" role="complementary">
-							
-								<ul class="scrollspy-sidenav">
-								
-									<li>
-										<ul class="nav">
-											<li><a href="#section-0" class="anchor">Highlights</a></li>
-											<li><a href="#section-1" class="anchor">Gallery</a></li>
-											<li><a href="#section-2" class="anchor">Itinerary</a></li>
-											<li><a href="#section-3" class="anchor">Tour Accommodation</a></li>
-											<li><a href="#section-4" class="anchor">What's Included</a></li>
-											<li><a href="#section-5" class="anchor">Availabilities</a></li>
-											<li><a href="#section-6" class="anchor">Information &amp; FAQ</a></li>
-											<li><a href="#section-7" class="anchor">Reviews</a></li>
-										</ul>
-									</li>
 
-								</ul>
-								
-								<a href="#" class="btn btn-primary">Change Search</a>
-								
-								<div style="width: 100%; height: 20px;"></div>
-								
-							</div>
-
-						</div>
-
-						<div class="col-md-9" role="main">
+						<div class="col-md-9 col-xs-12 col-sm-12 pull-right" role="main">
 
 							<div class="detail-content-wrapper">
 								<!-- 
@@ -144,72 +144,58 @@
 									 -->
 									<div id="section-3" class="detail-content" dir="rtl">
 									
-										<div class="section-title text-left">
-											<h4>Tour Accommodation</h4>
+										<div class="section-title text-right ">
+											<h4>فنادق مكة والمدينة</h4>
 										</div>
 										
 										<div class="hotel-item-wrapper">
 										
 											<div class="row gap-1">
 											
-												<div class="col-sm-xss-12 col-xs-6 col-sm-4 col-md-4">
+												<div class="col-sm-xss-12 col-xs-6 col-sm-6 col-md-6">
 												
 													<div class="hotel-item mb-1">
 														<a href="#">
 															<div class="image">
-																<img src="images/accomodation/01.jpg" alt="Hotel" />
+																<img src="{{package.madinah_hotel.thumbnail.url}}" alt="Hotel" />
 															</div>
 															<div class="content">
-																<h6>Beach Hilton Hotel</h6>
+																<h6>فندق المدينة : {{package.madinah_hotel.title}}</h6>
 															</div>
 														</a>
 													</div>
 													
 												</div>
 												
-												<div class="col-sm-xss-12 col-xs-6 col-sm-4 col-md-4">
+												<div class="col-sm-xss-12 col-xs-6 col-sm-6 col-md-6">
 												
 													<div class="hotel-item mb-1">
 														<a href="#">
 															<div class="image">
-																<img src="images/accomodation/02.jpg" alt="Hotel" />
+																<img src="{{package.makkah_hotel.thumbnail.url}}" alt="Hotel" />
 															</div>
 															<div class="content">
-																<h6>The Privilege Floor @ Croatia</h6>
-															</div>
-														</a>
-													</div>
-													
-												</div>
-												
-												<div class="col-sm-xss-12 col-xs-6 col-sm-4 col-md-4">
-												
-													<div class="hotel-item mb-1">
-														<a href="#">
-															<div class="image">
-																<img src="images/accomodation/03.jpg" alt="Hotel" />
-															</div>
-															<div class="content">
-																<h6>Croatia Grande Palace Hotel</h6>
+																<h6>فندق مكة : {{package.makkah_hotel.title}}</h6>
 															</div>
 														</a>
 													</div>
 													
 												</div>
 											
+											
 											</div>
 										
 										</div>
 										
-										<p>Unpacked now declared put you confined daughter improved. Celebrated imprudence few interested especially reasonable off one. Wonder bed elinor family secure met. It want gave west into high no in.</p>
+										<p style="display:none;">Unpacked now declared put you confined daughter improved. Celebrated imprudence few interested especially reasonable off one. Wonder bed elinor family secure met. It want gave west into high no in.</p>
 									</div>
 									<div id="section-5" class="detail-content" dir="rtl">
 
-										<div class="section-title text-left">
-											<h4>Availability</h4>
+										<div class="section-title text-right">
+											<h4>الأصناف</h4>
 										</div>
-										
-										<div class="row mb-20">
+									
+										<div class="row mb-20" style="display:none;">
 											<div class="col-sm-6">
 												<div class="form-group form-icon">
 													<i class="fa fa-calendar"></i>
@@ -233,162 +219,21 @@
 											</div>
 										</div>
 										
-										<div class="availabily-wrapper">
-										
-											<ul class="availabily-list">
-												
-												<li class="availabily-heading clearfix">
-												
-													<div class="date-from">
-														start
-													</div>
-													
-													<div class="date-to">
-														end
-													</div>
-													
-													<div class="status">
-														status
-													</div>
-													
-													<div class="price">
-														price
-													</div>
-													
-													<div class="action">
-														&nbsp;
-													</div>
-												
-												</li>
-												
-												<li class="availabily-content clearfix">
-													
-													<div class="date-from">
-														<span class="availabily-heading-label">start:</span>
-														Monday
-														<span>March 7, 2016</span>
-													</div>
-													
-													<div class="date-to">
-														<span class="availabily-heading-label">end:</span>
-														Thursday
-														<span>March 10, 2016</span>
-													</div>
-													
-													<div class="status">
-														<span class="availabily-heading-label">status:</span>
-														seats left
-														<span>15</span>
-													</div>
-													
-													<div class="price">
-														<span class="availabily-heading-label">price:</span>
-														<span>$1458</span>
-													</div>
-													
-													<div class="action">
-														<a href="#" class="btn btn-primary btn-sm btn-inverse">Book now</a>
-													</div>
-												
-												</li>
-												
-												<li class="availabily-content clearfix">
-													
-													<div class="date-from">
-														<span class="availabily-heading-label">start:</span>
-														Saturday
-														<span>March 26, 2016</span>
-													</div>
-													
-													<div class="date-to">
-														<span class="availabily-heading-label">end:</span>
-														Tuesday
-														<span>March 29, 2016</span>
-													</div>
-													
-													<div class="status">
-														<span class="availabily-heading-label">status:</span>
-														seats left
-														<span>20</span>
-													</div>
-													
-													<div class="price">
-														<span class="availabily-heading-label">price:</span>
-														<span>$1400</span>
-													</div>
-													
-													<div class="action">
-														<a href="#" class="btn btn-primary btn-sm btn-inverse">Book now</a>
-													</div>
-												
-												</li>
-												
-												<li class="availabily-content sold-out clearfix">
-													
-													<div class="date-from">
-														<span class="availabily-heading-label">start:</span>
-														Sunday
-														<span>April 10, 2016</span>
-													</div>
-													
-													<div class="date-to">
-														<span class="availabily-heading-label">end:</span>
-														Wednesday
-														<span>April 13, 2016</span>
-													</div>
-													
-													<div class="status">
-														<span class="availabily-heading-label">status:</span>
-														<span class="text-success">sold-out</span>
-													</div>
-													
-													<div class="price">
-														<span class="availabily-heading-label">price:</span>
-														<span>$1300</span>
-													</div>
-													
-													<div class="action">
-														<a href="#" class="btn btn-primary btn-sm btn-inverse">Book now</a>
-													</div>
-												
-												</li>
-												
-												<li class="availabily-content clearfix">
-													
-													<div class="date-from">
-														<span class="availabily-heading-label">start:</span>
-														Friday
-														<span>April 18, 2016</span>
-													</div>
-													
-													<div class="date-to">
-														<span class="availabily-heading-label">end:</span>
-														Monday
-														<span>April 21, 2016</span>
-													</div>
-													
-													<div class="status">
-														<span class="availabily-heading-label">status:</span>
-														seats left
-														<span>4</span>
-													</div>
-													
-													<div class="price">
-														<span class="availabily-heading-label">price:</span>
-														<span>$1458</span>
-													</div>
-													
-													<div class="action">
-														<a href="#" class="btn btn-primary btn-sm btn-inverse">Book now</a>
-													</div>
-												
-												</li>
-												
-											</ul>
-											
-										</div>
-										
-										<div class="text-center mt-30">
+										  <table class="table" >
+									      <tr>
+									        <td ><span class="availabily-heading-label">حجم الغرفة</span></td>
+									        <td>تكلفة الشخص</td>
+									        <td></td>
+									      </tr>
+									      {% for room in rooms %} 
+									      <tr>
+									        <td>{{room.room_class.class_code}} </td>
+									        <td>{{room.person_price}}</td>
+									        <td><a href="#" class="btn btn-primary btn-sm btn-inverse">احجز</a></td>
+									      </tr>
+									      {% endfor %} 
+									  </table>										
+										<div class="text-center mt-30" style="display:none;">
 										
 											<button class="btn btn-primary">Show more departures</button>
 										</div>
@@ -397,8 +242,8 @@
 									
 									<div id="section-1" class="detail-content" dir="ltr">
 									
-										<div class="section-title text-left">
-											<h4>Gallery</h4>
+										<div class="section-title text-right">
+											<h4>الصور</h4>
 										</div>
 										
 										
@@ -445,7 +290,7 @@
 
 									</div>
 									
-									<div id="section-2" class="detail-content" dir="rtl">
+									<div id="section-2" class="detail-content" dir="rtl" style="display:none;">
 										
 										<div class="section-title text-left">
 											<h4>Itinerary</h4>
@@ -575,8 +420,8 @@
 									
 									<div id="section-4" class="detail-content" dir="rtl">
 									
-										<div class="section-title text-left">
-											<h4>What's included</h4>
+										<div class="section-title text-right">
+											<h4>ماذا يشمل؟</h4>
 										</div>
 										
 										<ul class="list-with-icon with-heading">
@@ -624,7 +469,7 @@
 											</li>
 											
 										</ul>
-										
+										<!-- 
 										<h5 class="heading">Optional Excursions</h5>
 										<p>Why painful the sixteen how minuter looking nor. Subject but why ten earnest husband imagine sixteen brandon. Are unpleasing occasional celebrated motionless unaffected conviction out.</p>
 										
@@ -670,14 +515,14 @@
 												<p>He always do do former.</p>
 											</li>
 											
-										</ul>
+										</ul> -->
 							
 									</div>
 									
 									<div class="detail-content">
 									
-										<div class="section-title text-left">
-											<h4>Similar Packages</h4>
+										<div class="section-title text-right">
+											<h4>باكجات مشابهة</h4>
 										</div>
 										
 										<div class="GridLex-gap-20-wrappper package-grid-item-wrapper on-page-result-page alt-smaller">
@@ -713,7 +558,7 @@
 													<div class="package-grid-item"> 
 														<a href="#">
 															<div class="image">
-																<img src="images/tour-package/02.jpg" alt="Tour Package" />
+																<img src="/static/images/header.jpg" alt="Tour Package" />
 																<div class="absolute-in-image">
 																	<div class="duration"><span>4 days 3 nights</span></div>
 																</div>
@@ -765,7 +610,7 @@
 
 									</div>
 									
-									<div id="section-6" class="detail-content" dir="rtl">
+									<div id="section-6" class="detail-content" dir="rtl" style="display:none;">
 									
 										<div class="section-title text-left">
 											<h4>Information &amp; FAQ</h4>
@@ -998,6 +843,79 @@
 						</div>
 
 			
+						<div class="col-md-3 col-sm-12 col-xs-12" dir="rtl" style="">
+						<!-- <div class="col-md-3 col-sm-3 hidden-sm hidden-xs " dir="rtl" style=""> -->
+						<div class="content-wrapper" > 
+							<div class="detail-content">
+									
+										<div class="section-title text-right">
+											<h4>وكالات مقترحة</h4>
+										</div>
+										
+										<div class="GridLex-gap-20-wrappper package-grid-item-wrapper on-page-result-page alt-smaller">
+						
+											<div class="GridLex-grid-noGutter-equalHeight">
+											
+												<div class="GridLex-col-12_sm-12_xs-12 mb-20">
+													<div class="package-grid-item"> 
+														<a href="#">
+															<div class="image">
+																<img src="/static/images/header.jpg" alt="Tour Package" />
+																<!-- <div class="absolute-in-image">
+																	<div class="duration"><span>4 days 3 nights</span></div>
+																</div> -->
+															</div>
+															<div class="content clearfix pull-right">
+																<h6>Paris in Love</h6><!-- 
+																<div class="rating-wrapper">
+																	<div class="raty-wrapper">
+																		<div class="star-rating-12px" data-rating-score="4.0"></div> <span> / 7 review</span>
+																	</div>
+																</div>
+																<div class="absolute-in-content">
+																	<span class="btn"><i class="fa fa-heart-o"></i></span>
+																	<div class="price">$1422</div>
+																</div> -->
+															</div>
+														</a>
+													</div>
+												</div>
+												
+										
+											</div>
+									
+										</div>
+
+									</div>
+									</div>
+
+							<div class="scrollspy-sidebar sidebar-detail" role="complementary" style="display:none;">
+							
+								<ul class="scrollspy-sidenav">
+								
+									<li>
+										<ul class="nav">
+											<li><a href="#section-0" class="anchor">Highlights</a></li>
+											<!-- <li><a href="#section-2" class="anchor">Itinerary</a></li> -->
+											<li><a href="#section-3" class="anchor">Tour Accommodation</a></li>
+											<li><a href="#section-1" class="anchor">Gallery</a></li>
+											<li><a href="#section-4" class="anchor">What's Included</a></li>
+											<!-- <li><a href="#section-5" class="anchor">Availabilities</a></li> -->
+											<!-- <li><a href="#section-6" class="anchor">Information &amp; FAQ</a></li> -->
+											<!-- <li><a href="#section-7" class="anchor">Reviews</a></li> -->
+										</ul>
+									</li>
+
+								</ul>
+								
+								<a href="#" class="btn btn-primary">الرجوع للقائمة</a>
+								
+								<div style="width: 100%; height: 20px;"></div>
+								
+							</div>
+
+						</div>
+
 					</div>
 				
 				</div>

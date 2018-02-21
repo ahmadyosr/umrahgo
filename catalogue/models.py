@@ -29,7 +29,6 @@ class Agency(models.Model):
 class Package(models.Model):
 	agency = models.ForeignKey(Agency, null = True 	) 
 	title = models.CharField(max_length = 50) 
-	rooms = models.ForeignKey('Room')
 	level = models.IntegerField(default = 3) 
 
 	makkah_nights = models.IntegerField(default = 0) 
@@ -42,7 +41,8 @@ class Package(models.Model):
 	airlines = models.CharField(max_length = 50 , blank = True)
 	ticket_cost = models.IntegerField(default = 0) 
 
-	person_price = models.IntegerField(default = 0)
+	prices_start_from = models.IntegerField(default = 0)
+	nights = models.IntegerField(default = 0)
 	def __unicode__(self):
 		return self.title 
 
@@ -50,6 +50,7 @@ class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 
 	stars = models.IntegerField(default = 0) 
 	photoshots = models.ManyToManyField('Photoshot' , blank = True ) 
+	thumbnail = models.FileField(upload_to ='thumbnails/'  , null = True )
 
 	def __unicode__(self):
 		return self.title
@@ -70,14 +71,16 @@ class Photoshot(models.Model):
 
 class RoomClass(models.Model):
 	title = models.CharField(max_length = 50 ) 
-	class_code = models.CharField(max_length = 20 ) 
+	class_code = models.CharField(max_length = 20) 
 	def __unicode__(self):
 		return self.title
 
 class Room(models.Model):
+	package = models.ForeignKey(Package , null = True) 
 	room_class = models.ForeignKey('RoomClass') 
 	currency = models.CharField(max_length = 50)
-
+	person_price = models.IntegerField(default = 0) 
+	
 	def __unicode__(self):
 		return self.room_class.class_code
 

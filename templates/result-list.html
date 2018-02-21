@@ -84,23 +84,24 @@
 							{% for package in packages %} 
 							<div class="package-list-item clearfix rtl">
 									<div class="image pull-right">
-										<img src="{{package.thumbnail.url}}" alt="Tour Package" />
+										<a  href="{% url 'package' package_id=package.id %}">
+										<img src="{{package.thumbnail.url}}" alt="Tour Package" style="max-height:250px;" />
+										</a>
 										<div class="absolute-in-image">
-											<div class="duration"><span>4 days 3 nights</span></div>
+											<div class="duration" dir="rtl" ><span>{{package.nights}} ليالي</span> </div>
 										</div>
 									</div>
-									
+																		
 									<div class="content">
-										<h5>Best of Egypt </h5>
+										<h5><a href="{% url 'package' package_id=package.id %}" >Best of Egypt </a></h5>
 										<div class="row gap-10">
 											<div class="col-sm-12 col-md-9 pull-right">
 												
 												<p class="line18">Letter wooded direct two men indeed income sister. Impression up admiration partiality is...</p>
 												
-												<ul class="list-info">
-													<li><!-- <span class="icon"><i class="fa fa-map-marker"></i></span> --> <span class="font600">Countries: (1)</span> Egypt</li>
-													<li><!-- <span class="icon"><i class="fa fa-flag"></i></span>  --><span class="font600">Starting Point:</span> Cairo</li>
-													<li><!-- <span class="icon"><i class="fa fa-flag"></i></span> --> <span class="font600">Ending Point:</span> Cairo</li>
+												<ul class="list-info" dir="rtl">
+													<li><!-- <span class="icon"><i class="fa fa-map-marker"></i></span> --> <span class="font600 "><strong>فندق المدينة</strong></span> {{package.madinah_hotel.title}}</li>
+													<li><!-- <span class="icon"><i class="fa fa-flag"></i></span>  --><span class="font600 "><strong>فندق مكة</strong></span>  {{package.madinah_hotel.title}}</li>
 												</ul>
 											</div>
 											<div class="col-xs-12 col-sm-12 col-md-3  pull-left" style="text-align:center;">
