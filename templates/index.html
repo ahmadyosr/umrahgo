@@ -1,0 +1,459 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+<div class="main-wrapper">
+		
+			<!-- start hero-header with windows height -->
+			<div class="hero" style="background-image:url('/static/images/hero-header/01.jpg');">
+				
+				<div class="container">
+				
+					<div class="row">
+					
+						<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+						
+							<h1 class="hero-title">يلا نروح عمرة </h1>
+							<p class="lead">Visit Europe, America, Asia, Africa or beyond!</p>
+
+						</div>
+						
+					</div>
+					
+					<div class="main-search-wrapper full-width " >
+					
+						<div class="inner">
+							
+							
+								<div class="form-group ">
+
+									<a href="{% url 'list' %}" class="btn btn-primary btn-lg">تصفح العروض</a>
+									
+								</div>
+							
+							<!-- <div class="column-item ">
+							
+								<div class="form-group">
+								
+									<select name="destination" class="select2-multi form-control" data-placeholder="Choose a Destination" multiple>
+										<option value="">Choose a Destination</option>
+										<option value="0">Any Destination</option>
+										<option value="Albania">Albania</option>
+										<option value="Austria">Austria</option>
+										<option value="Belgium">Belgium</option>
+										<option value="Bosnia">Bosnia</option>
+										<option value="Croatia">Croatia</option>
+										<option value="Czech Republic">Czech Republic</option>
+										<option value="Denmark">Denmark</option>
+										<option value="Egypt">Egypt</option>
+										<option value="England">England</option>
+										<option value="Estonia">Estonia</option>
+										<option value="Finland">Finland</option>
+										<option value="France">France</option>
+										<option value="Germany">Germany</option>
+										<option value="Greece">Greece</option>
+										<option value="Herzegovina">Herzegovina</option>
+										<option value="Hungary">Hungary</option>
+										<option value="Ireland">Ireland</option>
+										<option value="Italy">Italy</option>
+										<option value="Latvia">Latvia</option>
+										<option value="Liechtenstein">Liechtenstein</option>
+										<option value="Lithuania">Lithuania</option>
+										<option value="Luxembourg">Luxembourg</option>
+										<option value="Monaco">Monaco</option>
+										<option value="Montenegro">Montenegro</option>
+										<option value="Netherlands">Netherlands</option>
+										<option value="Northern Ireland">Northern Ireland</option>
+										<option value="Poland">Poland</option>
+										<option value="Portugal">Portugal</option>
+										<option value="Russia">Russia</option>
+										<option value="Scotland">Scotland</option>
+										<option value="Serbia">Serbia</option>
+										<option value="Slovakia">Slovakia</option>
+										<option value="Slovenia">Slovenia</option>
+										<option value="Spain">Spain</option>
+										<option value="Sweden">Sweden</option>
+										<option value="Switzerland">Switzerland</option>
+										<option value="Turkey">Turkey</option>
+										<option value="Vatican City">Vatican City</option>
+										<option value="Wales">Wales</option>
+									</select>
+
+								</div>
+							
+							</div>
+							
+							<div class="column-item">
+							
+								<div class="form-group">
+								
+									<select name="month" class="select2-multi form-control" data-placeholder="Choose a Departure Month" multiple>
+										<option value="">Choose a Departure Month</option>
+										<option value="0">Any Departure Month</option>
+										<option value="1">January</option>
+										<option value="2">February</option>
+										<option value="3">March</option>
+										<option value="4">April</option>
+										<option value="5">May</option>
+										<option value="6">June</option>
+										<option value="7">July</option>
+										<option value="8">August</option>
+										<option value="9">September</option>
+										<option value="10">October</option>
+										<option value="11">November</option>
+										<option value="12">December</option>
+									</select>
+									
+								</div>
+							
+							</div>
+							
+						 -->
+							
+						</div>
+						
+					</div>
+				
+				</div>
+				
+			</div>
+			<!-- end hero-header with windows height -->
+			
+			<div class="post-hero bg-light">
+			
+				<div class="container">
+					
+					<div class="row rtl">
+						
+						<div class="col-sm-4">
+							<div class="featured-count clearfix  ">
+								<div class="icon pull-right rtl-left-margin" ><i class="pe-7s-map-marker"></i></div>
+								<div class="content ">
+									<h6>300+ Destinations</h6>
+									<span>Tastes giving in passed direct me valley supply.</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-sm-4">
+							<div class="featured-count clearfix">
+								<div class="icon pull-right rtl-left-margin"> <i class="pe-7s-user"></i></div>
+								<div class="content ">
+									<h6>500+ Travel Guides</h6>
+									<span>Prepared do an dissuade whatever steepest.</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-sm-4">
+							<div class="featured-count clearfix">
+								<div class="icon pull-right rtl-left-margin"> <i class="pe-7s-smile"></i></div>
+								<div class="content ">
+									<h6>20000+ Happy Customers</h6>
+									<span>Devonshire invitation discovered indulgence.</span>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+<!-- 
+			<section>
+			
+				<div class="container">
+				
+					<div class="row">
+						
+						<div class="col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+							
+							<div class="section-title">
+							
+								<h3>Top Destinations</h3>
+								
+							</div>
+							
+						</div>
+					
+					</div>
+					
+					<div class="grid destination-grid-wrapper rtl">
+			
+						<div class="grid-item" data-colspan="10" data-rowspan="4">
+							<a href="result-grid.html" class="top-destination-image-bg" style="background-image:url('/static/images/destination-grid/02.jpg');">
+								<div class="relative">
+									<h4>Croatia</h4>
+									<span>Starting from $322</span>
+								</div>
+							</a>
+						</div>
+						
+						<div class="grid-item" data-colspan="10" data-rowspan="10">
+							<a href="result-grid.html" class="top-destination-image-bg" style="background-image:url('/static/images/destination-grid/01.jpg');">
+								<div class="relative">
+									<h4>Turkey</h4>
+									<span>Starting from $322</span>
+								</div>
+							</a>
+						</div>
+						
+						<div class="grid-item" data-colspan="5" data-rowspan="6">
+							<a href="result-grid.html" class="top-destination-image-bg" style="background-image:url('/static/images/destination-grid/03.jpg');">
+								<div class="relative">
+									<h4>USA</h4>
+									<span>تبدا الأسعار من 4343</span>
+								</div>
+							</a>
+						</div>
+						
+						<div class="grid-item" data-colspan="5" data-rowspan="6">
+							<a href="result-grid.html" class="top-destination-image-bg" style="background-image:url('/static/images/destination-grid/04.jpg');">
+								<div class="relative">
+									<h4>Emirates</h4>
+									<span>Starting from $322</span>
+								</div>
+							</a>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+			</section>
+ -->
+
+<!-- 
+			<section class="bg-light">
+			
+				<div class="container">
+				
+					<div class="row text-center">
+								<div class="form-group">
+								
+									<a href="#" class="btn btn-primary btn-lg">تصفح العروض بالأردن</a>
+									
+								</div>
+					</div>
+				</div>
+			</section>
+ -->
+
+			<section class="bg-light">
+			
+				<div class="container">
+				
+					<div class="row">
+						
+						<div class="col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+							
+							<div class="section-title">
+							
+								<h3>باكجات مميزة</h3>
+								<p>أفضل الباكجات الموجودة صديق</p>
+								
+							</div>
+							
+						</div>
+					
+					</div>
+					
+					<div class="GridLex-gap-30-wrappper package-grid-item-wrapper rtl">
+						<div class="GridLex-grid-noGutter-equalHeight "  dir="rtl">
+						{% for package in packages %} 
+							<div class="GridLex-col-4_sm-6_xs-12 mb-30" >
+								<div class="package-grid-item "> 
+									<a href="{% url 'package' package_id=package.id %}">
+										<div class="image">
+											<img src="{{package.thumbnail.url}}" alt="Tour Package" />
+											<div class="absolute-in-image">
+												<div class="duration"><span>4 days 3 nights</span></div>
+											</div>
+										</div>
+										<div class="content clearfix">
+											<h5>Classic Europe</h5>
+											<div class="rating-wrapper">
+												<div class="raty-wrapper">
+													<!-- <div class="star-rating-read-only" data-rating-score="3.5"></div>  -->
+													<span> / 7 review</span>
+												</div>
+											</div>
+											<div class="absolute-in-content">
+												<div class="price">$1422</div>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
+						{% endfor %} 
+
+						</div>
+					</div>
+					
+				</div>
+				
+			</section>
+			
+			<section class="overflow-hidden why-us-half-image-wrapper">
+			
+				<div class="GridLex-grid-noGutter-equalHeight">
+					
+					<div class="GridLex-col-6_sm-12 image-bg">
+						<div class="image-bg" style="background-image:url('/static/images/image-01.jpg');"></div>
+					</div>
+					
+					<div class="GridLex-col-6_sm-12">
+						
+						<div class="why-us-half-image-content rtl">
+						
+							<div class="section-title  text-right">
+							
+								<h3>Why Booking With Us</h3>
+								<p class="">There are several seasons that you must travel with us</p>
+								
+							</div>
+							
+							<div class="featured-item">
+							
+								<h4>Experts On Tour</h4>
+								
+								<div class="content clearfix">
+								
+									<div class="icon pull-right rtl-left-margin">
+										<i class="pe-7s-users"></i>
+									</div>
+									
+									<p class="">Blind would equal while oh mr lain led and fact none. One preferred sportsmen resolving the happiness continued. High at of in loud rich true.</p>
+									
+								</div>
+							</div>
+							
+							<div class="featured-item">
+							
+								<h4>Quality Accommodation</h4>
+								
+								<div class="content clearfix">
+								
+									<div class="icon pull-right rtl-left-margin">
+										<i class="pe-7s-home"></i>
+									</div>
+									
+									<p class="">Admiration stimulated cultivated reasonable be projection possession of. Real no near room ye bred sake if some. Is arranging furnished knowledge.</p>
+									
+								</div>
+							</div>
+							
+							
+							<div class="featured-item">
+							
+								<h4>Comfortable Transport</h4>
+								
+								<div class="content clearfix">
+								
+									<div class="icon pull-right rtl-left-margin">
+										<i class="pe-7s-car"></i>
+									</div>
+									
+									<p>Effect twenty indeed beyond for not had county. The use him without greatly can private. Increasing it unpleasant no of contrasted no continuing.</p>
+									
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+					
+				</div>
+				
+			</section>
+			
+			<section class="bg-light">
+			
+				<div class="container">
+				
+					<div class="row">
+						
+						<div class="col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+							
+							<div class="section-title">
+							
+								<h3>Testimonial</h3>
+								<p>What our customers say about us</p>
+							</div>
+							
+						</div>
+					
+					</div>
+					
+					<div class="testimonial-wrapper rtl">
+					
+						<div class="row">
+							
+							<div class="col-xs-12 col-sm-12 col-md-6 pull-right">
+								<div class="testimonial-item clearfix">
+									<div class="image pull-right rtl-static rtl-left-margin">
+										<img src="/static/images/man/01.jpg" alt="Man" />
+									</div>
+									<div  >
+										<h4 style="color:black">Antony Robert</h4>
+										<h6 style="color:grey">From Spain</h6>
+										<p style="color:grey">She meant new their sex could defer child. An lose at quit to life do dull. Moreover end horrible endeavor entrance any families. Income appear extent on of thrown in admire.</p>
+									</div>
+								</div>
+							</div>
+							
+							
+						</div>
+						
+					</div>
+					
+				</div>
+				
+			</section>
+			
+			<div class="newsletter-wrapper">
+			
+				<div class="container">
+				
+					<div class="flex-row flex-align-middle flex-gap-30" dir="rtl">
+							
+						<div class="flex-columns flex-sm-12">
+							<div class="newsletter-form">
+								<form class="">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Search for...">
+										<span class="input-group-btn">
+											<button class="btn btn-primary" type="button">Signup <i class="fa fa-long-arrow-right"></i></button>
+										</span>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="flex-column flex-sm-12">
+							<div class="newsletter-text clearfix">
+								<div class="icon rtl-static pull-right rtl-left-margin">
+									<i class="pe-7s-mail"></i>
+								</div>
+								<div class="content">
+									<h3>Signup for Newsletter</h3>
+									<p>Affronting everything discretion men now own did. Still round match we to. Frankness pronounce daughters remainder extensive has but.</p>
+								</div>
+							</div>
+						</div>
+					
+					
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="overflow-hidden">
+			
+				<div class="instagram-wrapper">
+					<div id="instagram" class="instagram"></div>
+				</div>
+				
+			</div>
+			
+</div>
+{% endblock %} 
