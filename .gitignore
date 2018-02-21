@@ -1,0 +1,5 @@
+*.pyc
+*~
+.DS_Store
+/collected_static
+__pycache__
