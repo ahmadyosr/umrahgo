@@ -14,6 +14,8 @@
 						
 							<h1 class="hero-title">{{package.title}}</h1>
 							<small class="hero-title">{{package.title}}</small>
+							<h1 class="hero-title">{{package.prices_start_from}} دينار </h1>
+
 							<!-- 
 							<ol class="breadcrumb-list">
 								<li><a href="index.html">Homepage</a></li>
@@ -102,15 +104,15 @@
 			</div>
 			<!-- end Page title -->
 			
-			<div class="breadcrumb-wrapper bg-light-2 " >
+			<div class="breadcrumb-wrapper bg-light-2 "  >
 				
 				<div class="container">
 				
 					<ol class="breadcrumb-list" dir="rtl">
-						<li><a href="index.html">Homepage</a></li>
-						<li><a href="#">Desinations</a></li>
-						<li><a href="#">City</a></li>
-						<li><span>Croatia Sailing &amp; Cruising</span></li>
+						<li><a href="/">الرئيسية</a></li>
+						<li><a href="{% url 'list' %}?country_code=JO">{{package.agency.country.title}}</a></li>
+						<li><a href="{% url 'agency' agency_id=package.agency.id %}">{{package.agency.title}}</a></li>
+						<li><span>{{package.title}}</span></li>
 					</ol>
 					
 				</div>
@@ -142,53 +144,7 @@
 
 									</div>
 									 -->
-									<div id="section-3" class="detail-content" dir="rtl">
-									
-										<div class="section-title text-right ">
-											<h4>فنادق مكة والمدينة</h4>
-										</div>
-										
-										<div class="hotel-item-wrapper">
-										
-											<div class="row gap-1">
-											
-												<div class="col-sm-xss-12 col-xs-6 col-sm-6 col-md-6">
-												
-													<div class="hotel-item mb-1">
-														<a href="#">
-															<div class="image">
-																<img src="{{package.madinah_hotel.thumbnail.url}}" alt="Hotel" />
-															</div>
-															<div class="content">
-																<h6>فندق المدينة : {{package.madinah_hotel.title}}</h6>
-															</div>
-														</a>
-													</div>
-													
-												</div>
-												
-												<div class="col-sm-xss-12 col-xs-6 col-sm-6 col-md-6">
-												
-													<div class="hotel-item mb-1">
-														<a href="#">
-															<div class="image">
-																<img src="{{package.makkah_hotel.thumbnail.url}}" alt="Hotel" />
-															</div>
-															<div class="content">
-																<h6>فندق مكة : {{package.makkah_hotel.title}}</h6>
-															</div>
-														</a>
-													</div>
-													
-												</div>
-											
-											
-											</div>
-										
-										</div>
-										
-										<p style="display:none;">Unpacked now declared put you confined daughter improved. Celebrated imprudence few interested especially reasonable off one. Wonder bed elinor family secure met. It want gave west into high no in.</p>
-									</div>
+									{% if rooms %} 
 									<div id="section-5" class="detail-content" dir="rtl">
 
 										<div class="section-title text-right">
@@ -239,7 +195,55 @@
 										</div>
 
 									</div>
+									{% endif %}
 									
+									<div id="section-3" class="detail-content" dir="rtl">
+									
+										<div class="section-title text-right ">
+											<h4>فنادق مكة والمدينة</h4>
+										</div>
+										
+										<div class="hotel-item-wrapper">
+										
+											<div class="row gap-1">
+											
+												<div class="col-sm-xss-12 col-xs-6 col-sm-6 col-md-6">
+												
+													<div class="hotel-item mb-1">
+														<a href="#">
+															<div class="image">
+																<img src="{{package.madinah_hotel.thumbnail.url}}" alt="Hotel" />
+															</div>
+															<div class="content">
+																<h6>فندق المدينة : {{package.madinah_hotel.title}}</h6>
+															</div>
+														</a>
+													</div>
+													
+												</div>
+												
+												<div class="col-sm-xss-12 col-xs-6 col-sm-6 col-md-6">
+												
+													<div class="hotel-item mb-1">
+														<a href="#">
+															<div class="image">
+																<img src="{{package.makkah_hotel.thumbnail.url}}" alt="Hotel" />
+															</div>
+															<div class="content">
+																<h6>فندق مكة : {{package.makkah_hotel.title}}</h6>
+															</div>
+														</a>
+													</div>
+													
+												</div>
+											
+											
+											</div>
+										
+										</div>
+										
+										<p style="display:none;">Unpacked now declared put you confined daughter improved. Celebrated imprudence few interested especially reasonable off one. Wonder bed elinor family secure met. It want gave west into high no in.</p>
+									</div> 
 									<div id="section-1" class="detail-content" dir="ltr">
 									
 										<div class="section-title text-right">
@@ -250,40 +254,20 @@
 										<div class="slick-gallery-slideshow">
 					
 											<div class="slider gallery-slideshow">
-												<div><div class="image"><img src="http://crenoveative.com/envato/tour-packer/images/detail-gallery/03.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="http://crenoveative.com/envato/tour-packer/images/detail-gallery/03.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="http://crenoveative.com/envato/tour-packer/images/detail-gallery/03.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/04.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/05.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/06.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/07.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/08.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/09.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/10.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/11.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/12.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/13.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/14.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/15.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/16.jpg" alt="Image" /></div></div>
+											{% for photo in photos1 %} 
+												<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
+											{% endfor %} 
+											{% for photo in photos2 %} 
+												<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
+											{% endfor %} 
 											</div>
 											<div class="slider gallery-nav">
-												<div><div class="image"><img src="http://crenoveative.com/envato/tour-packer/images/detail-gallery/03.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="http://crenoveative.com/envato/tour-packer/images/detail-gallery/03.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="http://crenoveative.com/envato/tour-packer/images/detail-gallery/03.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/04-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/05-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/06-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/07-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/08-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/09-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/10-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/11-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/12-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/13-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/14-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/15-sm.jpg" alt="Image" /></div></div>
-												<div><div class="image"><img src="images/detail-gallery/16-sm.jpg" alt="Image" /></div></div>
+											{% for photo in photos1 %} 
+												<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
+											{% endfor %} 
+											{% for photo in photos2 %} 
+												<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
+											{% endfor %} 
 											</div>
 											
 										</div>
@@ -418,7 +402,7 @@
 									</div>
 									
 									
-									<div id="section-4" class="detail-content" dir="rtl">
+									<div id="section-4" class="detail-content" dir="rtl" style="display:none;">
 									
 										<div class="section-title text-right">
 											<h4>ماذا يشمل؟</h4>
@@ -427,43 +411,43 @@
 										<ul class="list-with-icon with-heading">
 										
 											<li>
-												<i class="fa fa-check-circle text-primary"></i>
+												<i class="fa fa-check-circle text-primary " style="display:none"></i>
 												<h6 class="heading mt-0">Guide</h6>
 												<p>Adieus except say barton put feebly favour him.</p>
 											</li>
 											
 											<li>
-												<i class="fa fa-check-circle text-primary"></i>
+												<i class="fa fa-check-circle text-primary" style="display:none"></i>
 												<h6 class="heading mt-0">Meals</h6>
 												<p>4 breakfast &amp; 3 dinners </p>
 											</li>
 											
 											<li>
-												<i class="fa fa-check-circle text-primary"></i>
+												<i class="fa fa-check-circle text-primary" style="display:none"></i>
 												<h6 class="heading mt-0">Transport</h6>
 												<p>Modern air conditioned coach with reclining seats, TV for showing DVDs, and toilet</p>
 											</li>
 											
 											<li>
-												<i class="fa fa-check-circle text-primary"></i>
+												<i class="fa fa-check-circle text-primary" style="display:none"></i>
 												<h6 class="heading mt-0">5 Experiences</h6>
 												<p>Warmth object matter course active law spring six. Pursuit showing tedious unknown winding see had man add.</p>
 											</li>
 											
 											<li>
-												<i class="fa fa-check-circle text-primary"></i>
+												<i class="fa fa-check-circle text-primary" style="display:none"></i>
 												<h6 class="heading mt-0">Other</h6>
 												<p>Free Wi-fi in all hotels <br />All taxes and fees <br />Any public transport used as part of the tour (excludes free days) <br />Free Expat Explore tour souvenir</p>
 											</li>
 											
 											<li>
-												<i class="fa fa-times-circle text-light"></i>
+												<i class="fa fa-times-circle text-light" style="display:none"></i>
 												<h6 class="heading mt-0">Flights</h6>
 												<p>Warmth object matter course active law spring six <a href="#">line to some where</a>. Pursuit showing tedious unknown winding see had man add.</p>
 											</li>
 											
 											<li>
-												<i class="fa fa-times-circle text-light"></i>
+												<i class="fa fa-times-circle text-light" style="display:none"></i>
 												<h6 class="heading mt-0">Insurance</h6>
 												<p>Had repulsive dashwoods suspicion sincerity but advantage now him. Remark easily garret nor nay <a href="#">line to some where</a>. Civil those mrs enjoy shy fat merry. You greatest jointure saw horrible.</p>
 											</li>
@@ -519,7 +503,7 @@
 							
 									</div>
 									
-									<div class="detail-content">
+									<div class="detail-content" style="display:none;" >
 									
 										<div class="section-title text-right">
 											<h4>باكجات مشابهة</h4>
@@ -528,7 +512,7 @@
 										<div class="GridLex-gap-20-wrappper package-grid-item-wrapper on-page-result-page alt-smaller">
 						
 											<div class="GridLex-grid-noGutter-equalHeight">
-											
+											{% for pcakge in packages %} 
 												<div class="GridLex-col-4_sm-4_xs-12 mb-20">
 													<div class="package-grid-item"> 
 														<a href="#">
@@ -553,56 +537,7 @@
 														</a>
 													</div>
 												</div>
-												
-												<div class="GridLex-col-4_sm-4_xs-12 mb-20">
-													<div class="package-grid-item"> 
-														<a href="#">
-															<div class="image">
-																<img src="/static/images/header.jpg" alt="Tour Package" />
-																<div class="absolute-in-image">
-																	<div class="duration"><span>4 days 3 nights</span></div>
-																</div>
-															</div>
-															<div class="content clearfix">
-																<h6>Classic Europe</h6>
-																<div class="rating-wrapper">
-																	<div class="raty-wrapper">
-																		<div class="star-rating-12px" data-rating-score="3.5"></div> <span> / 7 review</span>
-																	</div>
-																</div>
-																<div class="absolute-in-content">
-																	<span class="btn"><i class="fa fa-heart text-primary"></i></span>
-																	<div class="price">$1422</div>
-																</div>
-															</div>
-														</a>
-													</div>
-												</div>
-												
-												<div class="GridLex-col-4_sm-4_xs-12 mb-20">
-													<div class="package-grid-item"> 
-														<a href="#">
-															<div class="image">
-																<img src="images/tour-package/03.jpg" alt="Tour Package" />
-																<div class="absolute-in-image">
-																	<div class="duration"><span>4 days 3 nights</span></div>
-																</div>
-															</div>
-															<div class="content clearfix">
-																<h6>Best of Egypt</h6>
-																<div class="rating-wrapper">
-																	<div class="raty-wrapper">
-																		<div class="star-rating-12px" data-rating-score="4.5"></div> <span> / 7 review</span>
-																	</div>
-																</div>
-																<div class="absolute-in-content">
-																	<span class="btn"><i class="fa fa-heart-o"></i></span>
-																	<div class="price">$1422</div>
-																</div>
-															</div>
-														</a>
-													</div>
-												</div>
+											{% endfor %} 
 									
 											</div>
 									
@@ -849,24 +784,24 @@
 							<div class="detail-content">
 									
 										<div class="section-title text-right">
-											<h4>وكالات مقترحة</h4>
+											<h4>باكجات مقترحة</h4>
 										</div>
 										
 										<div class="GridLex-gap-20-wrappper package-grid-item-wrapper on-page-result-page alt-smaller">
 						
 											<div class="GridLex-grid-noGutter-equalHeight">
-											
+											{% for package in packages %} 
 												<div class="GridLex-col-12_sm-12_xs-12 mb-20">
 													<div class="package-grid-item"> 
 														<a href="#">
 															<div class="image">
-																<img src="/static/images/header.jpg" alt="Tour Package" />
+																<img src="{{package.thumbnail.url}}" alt="Tour Package" />
 																<!-- <div class="absolute-in-image">
 																	<div class="duration"><span>4 days 3 nights</span></div>
 																</div> -->
 															</div>
 															<div class="content clearfix pull-right">
-																<h6>Paris in Love</h6><!-- 
+																<h6>{{package.title}}</h6><!-- 
 																<div class="rating-wrapper">
 																	<div class="raty-wrapper">
 																		<div class="star-rating-12px" data-rating-score="4.0"></div> <span> / 7 review</span>
@@ -880,7 +815,7 @@
 														</a>
 													</div>
 												</div>
-												
+											{% endfor %} 
 										
 											</div>
 									

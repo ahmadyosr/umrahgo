@@ -2780,11 +2780,11 @@ ul.review-list li .rating-wrapper {
  * Payment
  */
 
-.payment-container {
-    border-left: 1px dashed #CCC;
-    padding-left: 40px;
-    margin-left: 13px;
-    padding-right: 15px;
+.payment-container {/*
+    border-right: 1px dashed #CCC;
+    padding-right: 40px;
+    margin-right: 13px;
+    padding-left:  15px;*/
 }
 
 .payment-box {

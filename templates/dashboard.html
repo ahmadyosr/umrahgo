@@ -1,0 +1,86 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+		<div class="main-wrapper">
+			
+			<div class="breadcrumb-wrapper bg-light-2">
+				
+				<div class="container" dir="rtl">
+				
+							<ol class="breadcrumb-list" dir="rtl">
+								<li><a href="/">الرئيسية</a></li>
+								<li><span style="color:grey;">لوحة التحكم</span></li>
+							</ol>
+							
+				</div>
+				
+			</div>
+			
+			<div class="content-wrapper">
+			
+				<div class="container">
+			
+					<div class="row" dir="rtl">
+					
+
+						<div style="max-width:500px;margin-right:auto;margin-left:auto" role="main">
+	
+							<div class="section-title text-left">
+								
+								<h3>مرحبا {{user.username}}</small></h3>
+								
+							</div>
+							
+							<div class="payment-container" >
+							
+				
+									<div class="col-md-12">
+									
+										
+										<div class="col-md-12">
+											
+											<div class="">
+											
+												<div class="row gap-0">
+												
+													
+												</div>
+												<div class="col-md-12 col-xs-12 " dir="rtl"  >
+													<form action="{% url 'login_user' %}"> 
+														<label  class="col-xs-12 " >البريد الالكتروني</label>
+														<input   type="email"  class="form-control" >
+														<label   class="col-xs-12" >كلمة المرور</label>
+														<input   type="password"  class="form-control" >
+													<div class="col-md-12 mt-30" style="text-align:center;">
+															<input type="submit" class="btn btn-primary" value="دخول"> 
+															<input type="submit" class="btn btn-default" value="حساب جديد"> 
+													</div>
+													</form>
+												</div>	
+												
+												
+												</div>
+											</div>
+									
+										</div>
+										
+									</div>
+									
+									<div class="row mt-20">
+											
+									</div>
+									
+								
+							</div>
+							
+						</div>
+
+
+					</div>
+				
+				</div>
+					
+			</div>
+
+		</div>
+		<!-- end Main Wrapper -->
+{% endblock %} 

@@ -32,6 +32,9 @@
 	<link rel="stylesheet" href="/static/icons/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
 	<link rel="stylesheet" href="/static/icons/simple-line-icons/css/simple-line-icons.css">
 	<link rel="stylesheet" href="/static/icons/rivolicons/style.css">
+
+	<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery-migrate-1.2.1.min.js"></script>
 	<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
 	<!-- Google Fonts -->
@@ -253,12 +256,11 @@
 								
 									<div class="navbar-mini">
 										<ul class="clearfix">
-										
 											<li class="user-action">
 												<a data-toggle="modal" href="#loginModal" class="btn">اتصل بنا</a>
 											</li>
 
-											<li class="dropdown bt-dropdown-click hidden-xs">
+											<li class="dropdown bt-dropdown-click hidden-xs" style="display:none;">
 												<a id="language-dropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 													<i class="ion-social-usd hidden-xss"></i> Dollar
 													<span class="caret"></span>
@@ -327,55 +329,26 @@
 							<div class="col-sm-9">
 								
 								<div id="navbar" class="collapse navbar-collapse navbar-arrow pull-right">
-									<ul class="nav navbar-nav" id="responsive-menu">
-										<li><a href="index.html">Home</a>
+									<ul class="nav navbar-nav " id="responsive-menu ">
+										<li><a href="{% url 'dashboard' %}">دخول الشركات <span class="label label-primary">جديد</span></a></li>
+										<li><a href="{% url 'contact' %}">اتصل بنا</a></li>
+										<li><a href="{% url 'about' %}">من نحن</a></li>
+										<!-- <li><a href="blog.html">المدونة</a></li> -->
+										<li><a>المناطق</a>
 											<ul>
-												<li><a href="index.html">Home 01 - Default</a></li>
-												<li><a href="index-02.html">Home 02 - Background Slider</a></li>
-												<li><a href="index-03.html">Home 03 - Video Background</a></li>
-												<li><a href="index-04.html">Home 04 - Smaller Package Items</a></li>
-												<li>
-													<a href="#">Color Variants</a>
-													 <ul>
-														<li><a href="index.html">Default Color</a></li>
-														<li><a href="index-color-02.html">Color 02</a></li>
-														<li><a href="index-color-03.html">Color 03</a></li>
-														<li><a href="index-color-04.html">Color 04</a></li>
-														<li><a href="index-color-05.html">Color 05</a></li>
-													</ul>
-												</li>
+											{% for country in countries %} 
+												<li><a href="{% url 'list' %}?country_code={{country.country_code}}">{{country.title}}</a></li>
+											{% endfor %} 
 											</ul>
 										</li>
-										<li><a href="result-grid.html">Tour Package</a>
+										<li><a>الوكالات</a>
 											<ul>
-												<li><a href="result-list.html">Result - List</a></li>
-												<li><a href="result-grid.html">Result - Grid</a></li>
-												<li><a href="detail-page.html">Detail Page</a></li>
+											{% for agency in agencies %} 
+												<li><a href="{% url 'agency' agency_id=agency.id %}">{{agency.title}}</a></li>
+											{% endfor %} 
 											</ul>
 										</li>
-										<li><a href="about.html">About Us</a></li>
-										<li><a href="blog.html">Blog</a>
-											<ul>
-												<li><a href="blog.html">Blog</a></li>
-												<li><a href="blog-single.html">Blog Single</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Pages</a>
-											<ul>
-												<li><a href="result-list.html">Result - List</a></li>
-												<li><a href="result-grid.html">Result - Grid</a></li>
-												<li><a href="detail-page.html">Detail Page</a></li>
-												<li><a href="payment.html">Payment</a></li>
-												<li><a href="confirmation.html">Confirmation</a></li>
-												<li><a href="faq.html">FAQ</a></li>
-												<li><a href="about.html">About Us</a></li>
-												<li><a href="static-page.html">Static Page</a></li>
-												<li><a href="blog.html">Blog</a></li>
-												<li><a href="blog-single.html">Blog Single</a></li>
-												<li><a href="contact.html">Contact us</a></li>
-											</ul>
-										</li>
-										<li><a href="contact.html">Contact us</a></li>
+										<li><a href="/">الرئيسية</a></li>
 									</ul>
 								</div><!--/.nav-collapse -->
 								
@@ -409,11 +382,11 @@
 				
 					<div class="row rtl">
 				
-						<div class="col-xs-12 col-sm-7 col-md-9">
+						<div class="col-xs-12 col-sm-6 col-md-6">
 
 							<div class="row gap-10">
 							
-								<div class="col-xs-12 col-sm-4 col-md-3 mt-30-xs">
+								<div class="col-xs-12 col-sm-4 col-md-3 mt-30-xs" style="display:none;" >
 								
 									<h5 class="footer-title">About Tour Packer</h5>
 									
@@ -430,7 +403,7 @@
 									
 								</div>
 								
-								<div class="col-xs-12 col-sm-4 col-md-3 mt-30-xs">
+								<div class="col-xs-12 col-sm-4 col-md-3 mt-30-xs" style="display:none;">
 
 									<h5 class="footer-title">Customer service</h5>
 									
@@ -438,7 +411,7 @@
 									
 										<li><a href="static-page.html">Payment</a></li>
 										<li><a href="static-page.html">Feedback</a></li>
-										<li><a href="static-page.html">Contact us</a></li>
+										<li><a href="static-page.html">اتصل بنا </a></li>
 										<li><a href="static-page.html">Travel advisories</a></li>
 										<li><a href="static-page.html">FAQ</a></li>
 										<li><a href="static-page.html">Site map</a></li>
@@ -447,7 +420,7 @@
 									
 								</div>
 								
-								<div class="col-xs-12 col-sm-4 col-md-3 mt-30-xs">
+								<div class="col-xs-12 col-sm-4 col-md-3 mt-30-xs pull-right">
 
 									<h5 class="footer-title">Others</h5>
 									
@@ -468,12 +441,12 @@
 
 						</div>
 						
-						<div class="col-xs-12 col-sm-5 col-md-3">
+						<div class="col-xs-12 col-sm-6 col-md-6">
 						
 							<div class="footer-logo pull-right">
 								<img src="/static/images/logo_arabic.png" alt="Logo" />
 							</div>
-							<p class="footer-address"><br>324 Yarang Road, T.Chabangtigo, Muanng Pattani 9400 <br/> <i class="fa fa-phone"></i> +66 28 878 5452 <br/> <i class="fa fa-phone"></i> +66 2 547 2223 <br/> <i class="fa fa-envelope-o"></i> <a href="#">support@tourpacker.com</a></p>
+							<p class="footer-address"><br><br>324 Yarang Road, T.Chabangtigo, Muanng Pattani 9400 <br/> <i class="fa fa-phone"></i> +66 28 878 5452 <br/> <i class="fa fa-phone"></i> +66 2 547 2223 <br/> <i class="fa fa-envelope-o"></i> <a href="#">support@tourpacker.com</a></p>
 							
 							<div class="footer-social">
 							
@@ -508,8 +481,6 @@
 
 
 <!-- JS -->
-<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery.waypoints.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>

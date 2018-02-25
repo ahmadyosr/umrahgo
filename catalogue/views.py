@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from catalogue.models import Package  , Room 
+from catalogue.models import Package  , Room  , Agency 
 # Create your views here.
 
 
@@ -9,19 +9,35 @@ def landing_page(request):
 	return render(request ,'index.html' , {'packages': packages} ) 
 
 def agency(request , agency_id ):
-	return render(request , 'result-grid.html' )
+	context = {}
+	context['packages'] = Package.objects.filter(agency_id = agency_id ) 
+	context['recommended_agencies'] = Agency.objects.all()[:3]
+	context['agency'] = Agency.objects.get(id = agency_id)
+	return render(request , 'agency.html', context )
 
 def package(request , package_id):
 	context = {}
 	context['package'] = Package.objects.get(id = package_id) 
 	context['rooms'] = Room.objects.filter(package = context['package']) 
+	context['packages'] = Package.objects.all()[:3]
+	context['recommended_agencies'] = Agency.objects.all()[:3]
 
+	context['photos1'] = context['package'].madinah_hotel.photoshots.all() 
+	context['photos2'] = context['package'].makkah_hotel.photoshots.all() 
+	
 	return render(request , 'detail-page.html' , context )
 
 def list(request):
-	packages = Package.objects.all()
-	return render(request , 'result-list.html', {'packages' : packages } ) 
+	country_code = request.GET.get('country_code') 
+	packages = Package.objects.filter(agency__country__country_code = country_code )
+	return render(request , 'result-list.html', {'packages' : packages } )
 
 def about(request):
 	return render(request , 'about.html' )
+
+
+def contact(request):
+
+	return render(request , 'contact.html') 
+
 

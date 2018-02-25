@@ -12,15 +12,13 @@
 					
 						<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
 						
-							<h1 class="hero-title">Result list</h1>
+							<h1 class="hero-title">{{packages.0.agency.country.title}}</h1>
 							
-							<ol class="breadcrumb-list">
-								<li><a href="index.html">Homepage</a></li>
-								<li><a href="#">Desinations</a></li>
-								<li><a href="#">City</a></li>
-								<li><span>Result list</span></li>
+							<ol class="breadcrumb-list" dir="rtl">
+								<li><a href="/">الرئيسية</a></li>
 							</ol>
 							
+					
 						</div>
 						
 					</div>
@@ -41,9 +39,9 @@
 							
 							<div class="sorting-wrappper rtl">
 			
-								<div class="sorting-header">
-									<h3 class="sorting-title uppercase">3 Countries: Germany, France, Austria</h3>
-									<p class="sorting-lead">587 results found</p>
+								<div class="sorting-header" dir="rtl">
+									<h3 class="sorting-title uppercase"> باكج عمرة {{packages.count}} يوجد </h3>
+									<!-- <p class="sorting-lead">587 results found</p> -->
 								</div>
 								
 								<div class="sorting-content">
@@ -52,14 +50,11 @@
 									
 										<div class="col-sm-12 col-md-12" dir="rtl">
 											<div class="sort-by-wrapper">
-												<label class="sorting-label">Sort by: </label> 
+												<label class="sorting-label">تصنيف حسب  </label> 
 												<div class="sorting-middle-holder">
 													<ul class="sort-by">
-														<li class="active up"><a href="" ="#">Name <i class="fa fa-long-arrow-down"></i></a></li>
-														<li><a href="#">Price</a></li>
-														<li><a href="#">Location</a></li>
-														<li><a href="#">Start Rating</a></li>
-														<li><a href="#">User Rating</a></li>
+														<li class="active up"><a href="" ="#">الأرخص <i class="fa fa-long-arrow-up"></i></a></li>
+														<li ><a href="#">الأغلى <i class="fa fa-long-arrow-down"></i></a></li>
 													</ul>
 												</div>
 											</div>
@@ -85,7 +80,7 @@
 							<div class="package-list-item clearfix rtl">
 									<div class="image pull-right">
 										<a  href="{% url 'package' package_id=package.id %}">
-										<img src="{{package.thumbnail.url}}" alt="Tour Package" style="max-height:250px;" />
+										<img src="{{package.thumbnail}}" alt="Tour Package" style="max-height:250px;" />
 										</a>
 										<div class="absolute-in-image">
 											<div class="duration" dir="rtl" ><span>{{package.nights}} ليالي</span> </div>
@@ -93,11 +88,11 @@
 									</div>
 																		
 									<div class="content">
-										<h5><a href="{% url 'package' package_id=package.id %}" >Best of Egypt </a></h5>
+										<h5><a href="{% url 'package' package_id=package.id %}" >{{package.title}} </a></h5>
 										<div class="row gap-10">
 											<div class="col-sm-12 col-md-9 pull-right">
 												
-												<p class="line18">Letter wooded direct two men indeed income sister. Impression up admiration partiality is...</p>
+												<p class="line18">{{package.about}}.</p>
 												
 												<ul class="list-info" dir="rtl">
 													<li><!-- <span class="icon"><i class="fa fa-map-marker"></i></span> --> <span class="font600 "><strong>فندق المدينة</strong></span> {{package.madinah_hotel.title}}</li>
@@ -112,9 +107,9 @@
 													</div>
 												</div>
 												 -->
-												<div class="price" dir="rtl">{{package.person_price}} دينار</div>
+												<div class="price" dir="rtl">{{package.prices_start_from}} دينار</div>
 												
-												<a href="{% url 'package' package_id=package.id %}" class="btn btn-primary btn-lg">view</a>
+												<a href="{% url 'package' package_id=package.id %}" class="btn btn-primary btn-lg">عرض</a>
 												
 											</div>
 										</div>

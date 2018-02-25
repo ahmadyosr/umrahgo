@@ -61,6 +61,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'catalogue',
+    'dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -90,6 +91,8 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'catalogue.base_context.agencies',
+                'catalogue.base_context.countries',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -164,3 +167,4 @@ MEDIA_URL                 = '/media/'
 
 
 
+LOGIN_URL = '/login_user/'

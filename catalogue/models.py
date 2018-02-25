@@ -6,12 +6,14 @@ from django.db import models
 
 class Country(models.Model):
 	title = models.CharField(max_length = 50)
+	country_code = models.CharField(max_length = 3 , default = 'JO' ) 
 	currency = models.CharField(max_length = 50)
 
 	def __unicode__(self):
 		return self.title
 
 class Agency(models.Model):
+	
 	country = models.ForeignKey(Country) 
 	city = models.CharField(max_length = 50) 
 	title = models.CharField(max_length = 50) 
@@ -22,7 +24,7 @@ class Agency(models.Model):
 	phone_number = models.CharField(max_length = 50)
 	email = models.CharField(max_length = 50)
 	facebook_page = models.CharField(max_length = 50)
-		
+	logo  = models.FileField(upload_to = 'logos/' , null = True ) 
 	def __unicode__(self):
 		return self.title 
 
@@ -43,6 +45,18 @@ class Package(models.Model):
 
 	prices_start_from = models.IntegerField(default = 0)
 	nights = models.IntegerField(default = 0)
+
+	# upgrades to suite the needs of the registered agencies 
+	#rooms 
+	user = models.ForeignKey(User, null = True)
+
+	double_cost = models.IntegerField(default = 0)
+	triple_cost = models.IntegerField(default = 0)
+	quad_cost = models.IntegerField(default = 0)
+	five_cost = models.IntegerField(default = 0)
+	
+	include_transportation = models.BooleanField(default = False)
+		
 	def __unicode__(self):
 		return self.title 
 
