@@ -20,67 +20,128 @@
 				<div class="container">
 			
 					<div class="row" dir="rtl">
-					
 
-						<div style="max-width:500px;margin-right:auto;margin-left:auto" role="main">
-	
-							<div class="section-title text-left">
-								
-								<h3>مرحبا {{user.username}}</small></h3>
-								
+						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
+						{% for message in messages %} 
+							<div class="alert alert-info" > 
+							{{message}}
 							</div>
-							
-							<div class="payment-container" >
-							
-				
-									<div class="col-md-12">
-									
-										
-										<div class="col-md-12">
-											
-											<div class="">
-											
-												<div class="row gap-0">
-												
-													
-												</div>
-												<div class="col-md-12 col-xs-12 " dir="rtl"  >
-													<form action="{% url 'login_user' %}"> 
-														<label  class="col-xs-12 " >البريد الالكتروني</label>
-														<input   type="email"  class="form-control" >
-														<label   class="col-xs-12" >كلمة المرور</label>
-														<input   type="password"  class="form-control" >
-													<div class="col-md-12 mt-30" style="text-align:center;">
-															<input type="submit" class="btn btn-primary" value="دخول"> 
-															<input type="submit" class="btn btn-default" value="حساب جديد"> 
-													</div>
-													</form>
-												</div>	
-												
-												
-												</div>
-											</div>
-									
-										</div>
-										
-									</div>
-									
-									<div class="row mt-20">
-											
-									</div>
-									
-								
+						{% endfor %} 
+
+							<div class="section-fortitle text-right">
+								<h5>عروض العمرة</h5>
+								<hr>
 							</div>
-							
+						<div class="col-md-12 col-xs-12 col-sm-12" > 
+						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
+							<div class="form-group text-center">
+									<a class="btn btn-danger btn-lg" href="{% url 'dashboard_package' %}" > اضافة عرض عمرة</a>
+							</div>
+						</div>
+						<div class="col-md-12" style="overflow-x:scroll;text-align:center;"> 
+							<table class="table" >
+									      <tr>
+									        <td></td>
+									        <td>شامل السفر</td>
+									        <td>فندق مكة</td>
+									        <td>فندق المدينة</td>
+									        <td>ثنائي</td>
+									        <td>ثﻻثي</td>
+									        <td>رباعي</td>
+									        <td>خماسي</td>
+									      </tr>
+										{% for p in packages %} 
+									      <tr>
+									        <td><a  onclick="return confirm('هل تريد حذف العرض؟')"  href="{% url 'remove_package' package_id=p.id %}" class="btn btn-primary btn-sm btn-inverse">حذف</a></td>
+									        <td>{% if p.include_transportation %}نعم{% else %}ﻻ{% endif %} </td>
+									        <td>{{p.makkah_hotel_title}}</td>
+									        <td>{{p.madinah_hotel_title}}</td>
+									        <td>{{p.double_cost}}</td>
+									        <td>{{p.triple_cost}}</td>
+									        <td>{{p.quad_cost}}</td>
+									        <td>{{p.five_cost}}</td>
+									      </tr>
+										{% endfor %} 
+
+							</table>
+							{% if not packages %}
+							<p >ﻻ يوجد عروض مضافة</p>
+							{% endif %} 
 						</div>
 
+						</div>
 
+							<div  class="col-md-12" >
+							<form action="{% url 'dashboard' %}" method="POST">
+							{% csrf_token %} 
+							<div class="section-fortitle text-right mt-5">
+								<h5>معلومات الوكالة السياحية</h5>
+								<hr>
+							</div>
+							<h3>قم بتحديث بيانات الشركة</h3>
+
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 pull-right">
+							  <label for="pwd4">الدولة <span style="color:red;">*</span></label>
+							  <select required name="country" class="form-control" id="pwd4" value="{{agency.country}}">
+							  {% for country in countries %} 
+							  	<option value="{{country.id}}">{{country.title}}</option>
+							  {% endfor %} 
+							  </select>
+							</div>
+
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 ">
+							  <label for="pwd5">المدينة <span style="color:red;">*</span></label>
+							  <input required name="city" type="text" class="form-control" id="pwd5" value="{{agency.city}}" >
+							</div>
+							
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 pull-right">
+							  <label for="pwd4">اسم الشركة <span style="color:red;">*</span></label>
+							  <input required name="title" type="text" class="form-control" id="pwd4" value="{{agency.title}}" >
+							</div>
+
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 ">
+							  <label for="pwd5">العنوان</label>
+							  <input  name="address" type="text" class="form-control" id="pwd5" value="{{agency.address}}">
+							</div>
+							
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 ">
+							  <label for="pwd4">رقم الهاتف</label>
+							  <input  name="phone_number" type="text" class="form-control" id="pwd4" value="{{agency.phone_number}}">
+							</div>
+
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 ">
+							  <label for="pwd5">البريد الالكتروني</label>
+							  <input  name="email" type="text" class="form-control" id="pwd5" value="{{agency.email}}">
+							</div>
+							
+
+	
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 ">
+							  <label for="pwd4">الموقع الالكتروني</label>
+							  <input  name="website" type="text" class="form-control" id="pwd4"  value="{{agency.website}}">
+							</div>
+							
+							<div class="form-group col-md-6 col-sm-6 col-xs-12 ">
+							  <label for="pwd5">رابط صفحة الفيسبوك</label>
+							  <input  name="facebook_page" type="text" class="form-control" id="pwd5" value="{{agency.facebook_page}}">
+							</div>
+							
+							<div class="form-group text-center">
+									<input  type="submit" class="btn btn-success btn-lg"  value="اتمام" >
+							</div>
+							</form>
+						</div>
+
+						</div>
+							
 					</div>
-				
+
+
 				</div>
+				
+			</div>
 					
 			</div>
 
-		</div>
 		<!-- end Main Wrapper -->
 {% endblock %} 

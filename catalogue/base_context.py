@@ -6,5 +6,5 @@ def agencies(request):
 	return {'agencies' : Agency.objects.only('id' , 'title') }
 
 def countries(request):
-
+	
 	return {'countries' : Country.objects.only('id' , 'title') }

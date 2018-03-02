@@ -13,32 +13,34 @@ class Country(models.Model):
 		return self.title
 
 class Agency(models.Model):
-	
-	country = models.ForeignKey(Country) 
-	city = models.CharField(max_length = 50) 
-	title = models.CharField(max_length = 50) 
-	about = models.CharField(max_length = 500)
-	
+	country = models.ForeignKey(Country , null = True ) 
+	city = models.CharField(max_length = 50 , blank = True ) 
+	title = models.CharField(max_length = 50 , blank = True ) 
+	about = models.CharField(max_length = 500 , blank = True )
 
-	address = models.CharField(max_length = 50)
-	phone_number = models.CharField(max_length = 50)
-	email = models.CharField(max_length = 50)
-	facebook_page = models.CharField(max_length = 50)
+	address = models.CharField(max_length = 50 , blank = True )
+	phone_number = models.CharField(max_length = 50 , blank = True )
+	email = models.CharField(max_length = 50 , blank = True )
+	website = models.CharField(max_length = 50  , blank = True ) 
+	facebook_page = models.CharField(max_length = 50 , blank = True )
 	logo  = models.FileField(upload_to = 'logos/' , null = True ) 
+
+	# for suppliers 
+	user = models.ForeignKey(User , null = True )
 	def __unicode__(self):
 		return self.title 
 
 class Package(models.Model):
 	agency = models.ForeignKey(Agency, null = True 	) 
-	title = models.CharField(max_length = 50) 
+	title = models.CharField(max_length = 50 , blank = True ) 
 	level = models.IntegerField(default = 3) 
 
 	makkah_nights = models.IntegerField(default = 0) 
 	madinah_nights = models.IntegerField(default = 0) 
 	thumbnail = models.FileField(upload_to ='thumbnails/'  , null = True )
 
-	makkah_hotel = models.ForeignKey('MakkahHotel')
-	madinah_hotel = models.ForeignKey('MadinahHotel')
+	makkah_hotel = models.ForeignKey('MakkahHotel'  , null = True )
+	madinah_hotel = models.ForeignKey('MadinahHotel'  , null = True )
 
 	airlines = models.CharField(max_length = 50 , blank = True)
 	ticket_cost = models.IntegerField(default = 0) 
@@ -48,15 +50,20 @@ class Package(models.Model):
 
 	# upgrades to suite the needs of the registered agencies 
 	#rooms 
+	
 	user = models.ForeignKey(User, null = True)
+
+	makkah_hotel_title = models.CharField(max_length =100, blank = True )
+	madinah_hotel_title = models.CharField(max_length =100 , blank = True )
 
 	double_cost = models.IntegerField(default = 0)
 	triple_cost = models.IntegerField(default = 0)
 	quad_cost = models.IntegerField(default = 0)
 	five_cost = models.IntegerField(default = 0)
-	
+
+	transport = models.CharField(max_length = 20 , blank = True  )	
 	include_transportation = models.BooleanField(default = False)
-		
+
 	def __unicode__(self):
 		return self.title 
 

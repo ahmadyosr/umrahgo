@@ -1,0 +1,118 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+		<div class="main-wrapper">
+			
+			<div class="breadcrumb-wrapper bg-light-2">
+				
+				<div class="container" dir="rtl">
+				
+							<ol class="breadcrumb-list" dir="rtl">
+								<li><a href="/">الرئيسية</a></li>
+								<li><span style="color:grey;">لوحة التحكم</span></li>
+							</ol>
+							
+				</div>
+				
+			</div>
+			
+			<div class="content-wrapper">
+			
+				<div class="container">
+			
+					<div class="row" dir="rtl">
+					
+
+						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
+	
+							<div class="section-title text-right">
+								<h3>لوحة التحكم</h3>
+							</div>
+						<div class="col-md-12 col-xs-12 col-sm-12" > 
+						<form action="{% url 'dashboard_package' %}" method="POST">
+						{% csrf_token %} 
+						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
+							<h1>اضافة باكج عمرة </h1>
+							<div class="alert alert-success" > 
+								أضف باكج جديد ، قم بتحديد اسم الفندق في مكة والمدينة ، وتكلفة الشخص حسب حجم الغرفة
+							</div>
+							<div class="form-group">
+							  <label for="makkah_hotel">فندق مكة</label>
+							  <input required name="makkah_hotel_title" type="text" class="form-control" id="makkah_hotel">
+							</div>
+							<div class="form-group">
+							  <label for="pwd">فندق المدينة</label>
+							  <input required name="madinah_hotel_title" type="text" class="form-control" id="pwd">
+							</div>
+
+							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							  <label for="pwd4">عدد ليالي مكة</label>
+							  <input required name="makkah_nights" type="Number" value="0" class="form-control" id="pwd4">
+							</div>
+							
+							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							  <label for="pwd5">عدد ليالي المدينة</label>
+							  <input required name="madinah_nights" type="Number" value="0" class="form-control" id="pwd5">
+							</div>
+							
+
+							<div class="form-group">
+							  <label for="pwd">تكلفة الشخص</label>
+							</div>
+
+
+							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							  <label for="pwd2">غرفة ثنائي</label>
+							  <input required name="double_cost" type="Number" value="0" class="form-control" id="pwd2">
+							</div>
+							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							  <label for="pwd3">غرفة ثﻻثي</label>
+							  <input required name="triple_cost" type="Number" value="0" class="form-control" id="pwd3">
+							</div>
+							
+							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							  <label for="pwd4">غرفة رباعي</label>
+							  <input required name="quad_cost" type="Number" value="0" class="form-control" id="pwd4">
+							</div>
+							
+							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							  <label for="pwd5">غرفة خماسي</label>
+							  <input required name="five_cost" type="Number" value="0" class="form-control" id="pwd5">
+							</div>
+							
+							<div class="form-group">
+							  <label for="include">وسيلة السفر</label>
+							  <select name="transport" class="form-control">
+							  <option value="True">نقل بري</option>
+							  <option value="False">طيران</option>
+							  </select>
+							</div>
+							
+							<div class="form-group">
+							  <label for="include">تكلفة الشخص شاملة  تكاليف السفر</label>
+							  <select  name="include_transportation"  class="form-control">
+							  <option value="True">نعم</option>
+							  <option value="False">ﻻ</option>
+							  </select>
+							</div>
+							
+
+							<div class="form-group text-center">
+									<input required type="submit" class="btn btn-success btn-lg"  value="اتمام" >
+							</div>
+						</div>
+						</form>
+
+						</div>								
+						</div>
+							
+					</div>
+
+
+				</div>
+				
+			</div>
+					
+			</div>
+
+		<!-- end Main Wrapper -->
+{% endblock %} 
