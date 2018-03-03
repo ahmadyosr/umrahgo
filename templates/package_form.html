@@ -19,7 +19,7 @@
 			
 				<div class="container">
 			
-					<div class="row" dir="rtl">
+					<div class="row" >
 					
 
 						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
@@ -31,55 +31,98 @@
 						<form action="{% url 'dashboard_package' %}" method="POST">
 						{% csrf_token %} 
 						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
-							<h1>اضافة باكج عمرة </h1>
-							<div class="alert alert-success" > 
+							<h1 dir="rtl" >اضافة باكج عمرة </h1>
+							<div class="alert alert-success"  dir="rtl" > 
 								أضف باكج جديد ، قم بتحديد اسم الفندق في مكة والمدينة ، وتكلفة الشخص حسب حجم الغرفة
 							</div>
-							<div class="form-group">
-							  <label for="makkah_hotel">فندق مكة</label>
-							  <input required name="makkah_hotel_title" type="text" class="form-control" id="makkah_hotel">
-							</div>
-							<div class="form-group">
-							  <label for="pwd">فندق المدينة</label>
-							  <input required name="madinah_hotel_title" type="text" class="form-control" id="pwd">
+							<div dir="rtl" class="form-group">
+							  <label for="makkah_hotel">حجم الغرفة</label>
+							  <select name="transport" class="form-control">
+							  <option value="True">ثنائي</option>
+							  <option value="False">ثﻻثي</option>
+							  </select>
 							</div>
 
-							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							<div dir="rtl" class="form-group">
+							  <label for="makkah_hotel">فندق مكة</label>
+							  <select name="transport" class="form-control">
+							  <option value="True">ثنائي</option>
+							  <option value="False">ثﻻثي</option>
+							  </select>
+							</div>
+
+										
+							<div class="slick-gallery-slideshow">
+		
+								<div class="slider gallery-slideshow">
+								{% for photo in photos1 %} 
+									<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
+								{% endfor %} 
+								{% for photo in photos2 %} 
+									<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
+								{% endfor %} 
+								</div>
+								<div class="slider gallery-nav">
+								{% for photo in photos1 %} 
+									<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
+								{% endfor %} 
+								{% for photo in photos2 %} 
+									<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
+								{% endfor %} 
+								</div>
+								
+							</div>
+							<div dir="rtl" class="form-group">
+							  <label for="pwd">فندق المدينة</label>
+							  <select name="transport" class="form-control">
+							  <option value="True">ثنائي</option>
+							  <option value="False">ثﻻثي</option>
+							  </select>							
+							</div>
+<!-- 
+							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
 							  <label for="pwd4">عدد ليالي مكة</label>
 							  <input required name="makkah_nights" type="Number" value="0" class="form-control" id="pwd4">
 							</div>
 							
-							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
 							  <label for="pwd5">عدد ليالي المدينة</label>
 							  <input required name="madinah_nights" type="Number" value="0" class="form-control" id="pwd5">
 							</div>
-							
+							 -->
 
-							<div class="form-group">
+							<!-- <div dir="rtl" class="form-group">
 							  <label for="pwd">تكلفة الشخص</label>
 							</div>
 
 
-							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
 							  <label for="pwd2">غرفة ثنائي</label>
 							  <input required name="double_cost" type="Number" value="0" class="form-control" id="pwd2">
 							</div>
-							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
 							  <label for="pwd3">غرفة ثﻻثي</label>
 							  <input required name="triple_cost" type="Number" value="0" class="form-control" id="pwd3">
 							</div>
 							
-							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
 							  <label for="pwd4">غرفة رباعي</label>
 							  <input required name="quad_cost" type="Number" value="0" class="form-control" id="pwd4">
 							</div>
 							
-							<div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
 							  <label for="pwd5">غرفة خماسي</label>
 							  <input required name="five_cost" type="Number" value="0" class="form-control" id="pwd5">
 							</div>
-							
-							<div class="form-group">
+							 -->
+							<div dir="rtl" class="form-group">
+							  <label for="include">عدد الأشخاص</label>
+							  <select name="transport" class="form-control">
+							  <option value="True">نقل بري</option>
+							  <option value="False">طيران</option>
+							  </select>
+							</div>
+							<div dir="rtl" class="form-group">
 							  <label for="include">وسيلة السفر</label>
 							  <select name="transport" class="form-control">
 							  <option value="True">نقل بري</option>
@@ -87,17 +130,9 @@
 							  </select>
 							</div>
 							
-							<div class="form-group">
-							  <label for="include">تكلفة الشخص شاملة  تكاليف السفر</label>
-							  <select  name="include_transportation"  class="form-control">
-							  <option value="True">نعم</option>
-							  <option value="False">ﻻ</option>
-							  </select>
-							</div>
-							
 
-							<div class="form-group text-center">
-									<input required type="submit" class="btn btn-success btn-lg"  value="اتمام" >
+							<div dir="rtl" class="form-group text-center">
+									<input required type="submit" class="btn btn-success btn-lg"  value="التالي" >
 							</div>
 						</div>
 						</form>

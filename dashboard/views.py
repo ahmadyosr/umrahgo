@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , logout , login
 from django.contrib.auth.models import User
 from django.db import IntegrityError 
-from catalogue.models import Package  , Agency 
+from catalogue.models import Package  , Agency  , Photoshot
 from django.http import HttpResponse
 from dashboard.forms import PackageForm
 from .forms import AgencyForm
@@ -37,6 +37,7 @@ def dashboard(request):
     return render(request , 'dashboard.html' , context )
 
 def dashboard_package(request):
+    context={}
     if request.method == 'POST' : 
         form = PackageForm(request.POST)
 
@@ -48,7 +49,11 @@ def dashboard_package(request):
 
             return redirect('dashboard')
 
-    return render(request , 'package_form.html' )
+
+    context['photos1'] = Photoshot.objects.all()[:6]
+    context['photos2'] = context['photos1']
+    
+    return render(request , 'package_form.html' , context )
 
 @login_required
 def remove_package(request, package_id):
@@ -62,11 +67,13 @@ def remove_package(request, package_id):
 """
 Authentication views 
 """
-
 def register_user(request):
+    print request.session.items()
     if request.method == 'POST' : 
         username = request.POST.get('username')
         password = request.POST.get('password')
+        phone_number = request.POST.get('phone_number') 
+
         try : 
             user = User.objects.create(
                 username = username 
@@ -77,11 +84,13 @@ def register_user(request):
 
         user.set_password(password)
         user.save() 
+        user.userprofile.phone_number = phone_number  
+        user.userprofile.save()
 
         user = authenticate(username= username, password = password )
         login(request ,user)
-
-        return redirect('dashboard') 
+        
+        return redirect('profile') 
         
     return render(request , 'register.html' )
 
@@ -98,7 +107,7 @@ def login_user(request):
 
         if user : 
             login(request, user)
-            return redirect('dashboard')
+            return redirect('profile')
 
         else : 
             messages.add_message(request , messages.INFO  , 'اسم المستخدم وكلمة المرور ﻻ يتطابقان' )

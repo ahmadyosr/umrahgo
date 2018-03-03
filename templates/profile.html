@@ -1,0 +1,180 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+		<div class="main-wrapper">
+			
+			<div class="breadcrumb-wrapper bg-light-2">
+				
+				<div class="container" dir="rtl">
+				
+							<ol class="breadcrumb-list" dir="rtl">
+								<li><a href="/">الرئيسية</a></li>
+								<li><span style="color:grey;">لوحة التحكم</span></li>
+							</ol>
+							
+				</div>
+				
+			</div>
+			
+			<div class="content-wrapper" style="padding-top: 0%;">
+			
+				<div class="container">
+					<div class="row" >
+						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
+	<!-- 
+							<div class="section-title text-right">
+								<h3>التسجيل للعمرة</h3>
+							</div> -->
+						<div class="col-md-12 col-xs-12 col-sm-12"  > 
+						<form action="{% url 'reservation' %}?next_=true" method="POST">
+						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
+					
+							<h1 dir="rtl" >معلومات الحجز</h1>
+							<div class="alert alert-success"  dir="rtl" > 
+								<strong>تنويه</strong> سنقوم بالتواصل معك لاستلام جواز السفر والدفعة النقدية من عنوانك بأقرب وقت نرجوع التحقق من التالي : 
+								<ul style="list-style-type:disc;margin-right: 5%;">
+								<li>جواز سفر صالح حتى 7 أشهر من تاريخ الرحلة</li>
+								<li>صور شخصية عدد 2 بخلفية بيضاء</li>
+								</ul>
+								<strong>تنويه</strong> سنقوم بالتواصل معك على الرقم 8778979+ ، تستطيع تحديث الرقم في حال كنت قد أخطأت في ادخاله: 
+
+				            <div class="input-group" style="width:70%;">
+				                <input type="text" class="form-control"  dir="ltr" value="23242242" >
+				                <span class="input-group-btn">
+				                    <button type="button" class="btn btn-primary" onclick="return confirm('هل تريد حذف العرض؟')" >تحديث الرقم</button>
+				                </span>
+				            </div>
+							</div>
+							<div style="text-align: center;">
+							<!-- <small>الحالة</small><br> -->
+							<!-- <span style="color:;">مندوبنا لم يقم باستلام جواز السفر</span> -->
+							<h3><span class="label label-danger">غير مدفوع</span></h3>
+							<span class="label label-danger">مندوبنا لم يقم باستلام جواز السفر</span>
+							</div>
+							<!-- 
+							<div dir="rtl" class="form-group">
+							  <small for="pwd" style="color:#43C458" >تكلفة السكن في فندق أجياد السكن وفندق في المدينة المنورة: 432432 دينار </small>
+							</div> --><!-- 
+							<div class="form-group" dir="rtl"> 
+							  <table class="table" >
+							  	<span style="color:#43C458" >2 غرفة خماسية ل 20 شخص </span>
+							  <tr>
+							    <td>فندق مكة </td>
+							    <td>فندق المدينة</td>
+							  </tr>
+							  <tr>
+							    <td>ابراج الكسوة</td>
+							    <td>فندق في المنطقة المركزية</td>
+							  </tr>
+							</table>
+							</div> -->
+							<div class="form-group" dir="rtl" style="display:none"> 
+							<!-- <p style="border-bottom: 0.3px solid #d3d3d3 ">الفندق</p> -->
+							<style>
+						       #map {
+						        height: 400px;
+						        width: 100%;
+						       }
+						    </style>
+						    
+						    <div id="map"></div>
+						    <script>
+						        var coordinates = "200,200";
+						        var x = parseFloat(coordinates.split(',')[0]);
+						        var y = parseFloat(coordinates.split(',')[1]);
+
+						        function initMap() {
+						        var uluru = {lat: x, lng: y};
+						        var map = new google.maps.Map(document.getElementById('map'), {
+						          zoom: 16,
+						          center: uluru
+						        });
+						        var marker = new google.maps.Marker({
+						          position: uluru,
+						          map: map
+						        });
+						      }
+						    </script>
+						    <script async defer
+						    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ0p2O62_ZIYzQO_NnC2UPU90H4cUUX9M&callback=initMap">
+						    </script>
+							</div>
+
+							<div class="form-group" dir="rtl"> 
+							  <table class="table" >
+							  	<span style="color:#43C458" >تكاليف الرحلة</span>
+							  <tr>
+							    <td>تكلفة السكن / للشخص  </td>
+							    <td>50</td>
+							  </tr>
+							  <tr>
+							    <td>تكلفة النقل / للشخص </td>
+							    <td>30</td>
+							  </tr>
+							  <tr>
+							    <td>التأشيرة / للشخص </td>
+							    <td>30</td>
+							  </tr>
+							  <tr>
+							    <td>استلام الجوازات من البيت</td>
+							    <td>7</td>
+							  </tr>
+							  <tr>
+							    <td  style="color:#43C458" >تكلفة الشخص</td>
+							    <td  style="color:#43C458" >234 دينار</td>
+							  </tr>
+							  <tr>
+							    <td  style="color:#43C458" >المجموع ل 1 شخص </td>
+							    <td  style="color:#43C458" >234 دينار</td>
+							  </tr>
+							</table>
+							</div>
+							<div class="form-group" dir="rtl"> 
+							  <table class="table" >
+							  	<span style="color:#43C458" >التفاصيل</span>
+							  <tr>
+							    <td>موعد الإنطلاق</td>
+							    <td>الاربعاء القادم 2-3-2018</td>
+							  </tr>
+							  <tr>
+							    <td>الشركة المشرفة</td>
+							    <td>شركة روابي القدس <span class="label label-primary">رقم هاتف 789779499+</span></td>
+							  </tr>
+							  <tr>
+							    <td>وسيلة السفر</td>
+							    <td>طريق بري</td>
+							  </tr>
+							  <tr>
+							    <td>الغرفة</td>
+							    <td>2 غرفة ثنائية ل5 أشخاص</td>
+							  </tr>
+							  <tr>
+							    <td>فندق مكة</td>
+							    <td>فندق أبراج الكسوة</td>
+							  </tr>
+							  <tr>
+							    <td>فندق المدينة</td>
+							    <td>في المنطقة المركزية</td>
+							  </tr>
+							</table>
+							</div>
+							<div dir="rtl" class="form-group text-center" style="margin-top:10%;">
+									<a  href="{% url 'reservation' %}" class="btn btn-primary">تعديل الحجز</a>
+							</div>
+
+						</div>
+						</form>
+
+						</div>								
+						</div>
+							
+					</div>
+
+
+				</div>
+				
+			</div>
+					
+			</div>
+
+		<!-- end Main Wrapper -->
+{% endblock %} 

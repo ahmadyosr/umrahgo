@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect 	
 from django.http import HttpResponse
-from catalogue.models import Package  , Room  , Agency 
+from catalogue.models import Package  , Room  , Agency , Photoshot , Hotel 
+from customer.forms import ReservationForm
 # Create your views here.
 
 
@@ -41,3 +42,24 @@ def contact(request):
 	return render(request , 'contact.html') 
 
 
+
+""" 
+Ajax Call from retail_checkout_form.html 
+"""
+def get_hotel_photos(request, hotel_id ):
+	# to calcuulate the total we need :
+	# check_in + check_out + meal + rooms_qty
+
+	# calculate total 
+	hotel = Hotel.objects.get(id = hotel_id ) 
+	photos = hotel.photoshots.all()
+	xml = "<RESPONSE>"   
+
+	for photo in photos : 
+		xml+= "<PHOTO_URL>"+ str(photo.file.url) + "</PHOTO_URL>"
+	xml += "</RESPONSE>"
+	return HttpResponse(xml , content_type = "application/xml" )
+
+def get_hotel_rooms_classes(request , hotel_id):
+
+	return HttpResponse(status = 200 )

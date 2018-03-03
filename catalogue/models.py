@@ -13,6 +13,7 @@ class Country(models.Model):
 		return self.title
 
 class Agency(models.Model):
+	active = models.BooleanField(default = True ) 
 	country = models.ForeignKey(Country , null = True ) 
 	city = models.CharField(max_length = 50 , blank = True ) 
 	title = models.CharField(max_length = 50 , blank = True ) 

@@ -2,7 +2,7 @@
 {% block main_wrapper %} 
 <div class="main-wrapper">
 			<!-- start hero-header with windows height -->
-			<div class="hero" style="background-image:url('/static/images/backgrounds/hero.jpg');">
+			<div class="hero" style="display:none;background-image:url('/static/images/backgrounds/hero.jpg');">
 				
 				<div class="container">
 				
@@ -24,7 +24,7 @@
 							
 								<div class="form-group ">
 
-									<a href="{% url 'list' %}?country_code=JO" class="btn btn-primary btn-lg">تصفح العروض</a>
+									<a href="#how_it_works" class="btn btn-primary btn-lg">ابدأ</a>
 									
 								</div>
 							
@@ -237,7 +237,7 @@
 			</section>
  -->
 
-			<section class="bg-light">
+			<section class="bg-light" style="display:none;" >
 			
 				<div class="container">
 				
@@ -292,28 +292,28 @@
 				
 			</section>
 			
-			<section class="overflow-hidden why-us-half-image-wrapper">
+			<section id="how_it_works" class="overflow-hidden why-us-half-image-wrapper">
 			
-				<div class="GridLex-grid-noGutter-equalHeight">
+				<div class="GridLex-grid-noGutter-equalHeight" style="margin-right: 7%;">
 					<!-- 
 					<div class="GridLex-col-6_sm-12 image-bg">
 						<div class="image-bg" style="background-image:url('/static/images/backgrounds/split.jpg');"></div>
 					</div> -->
 					
-					<div class="GridLex-col-12_sm-12 col-md-12">
+					<div class=""  style="max-width: 400px;margin-right: auto;margin-left: auto;margin-top:5%; margin-bottom:5%;" >
 						
-						<div class="why-us-half-image-content rtl">
+						<div class=" rtl" >
 						
 							<div class="section-title  text-right">
 							
-								<h3>كيف تستخدم الموقع؟</h3>
+								<h3>طريقة عملنا</h3>
 								<p class=""></p>
 								
 							</div>
 							
 							<div class="featured-item">
 							
-								<h4>تصفح العروض</h4>
+								<h4>اختر الفندق المناسب</h4>
 								
 								<div class="content clearfix">
 								
@@ -328,7 +328,7 @@
 							
 							<div class="featured-item">
 							
-								<h4>اختر الباكج المناسب</h4>
+								<h4>اختر الشركة المشرفة على الرحلة</h4>
 								
 								<div class="content clearfix">
 								
@@ -344,7 +344,7 @@
 							
 							<div class="featured-item">
 							
-								<h4>سافر واستمتع</h4>
+								<h4>مندوبنا رح ييجي لعندك</h4>
 								
 								<div class="content clearfix">
 								
@@ -357,6 +357,28 @@
 								</div>
 							</div>
 							
+							<div class="featured-item">
+							
+								<h4>بنعملك تأشيرة</h4>
+								
+								<div class="content clearfix">
+								
+									<div class="icon pull-right rtl-left-margin">
+										<i class="pe-7s-car"></i>
+									</div>
+									
+									<p>احزم أمتعتك جيدا قبل السفر ، سواء كنت ستسافر برا ً أو جواً </p>
+									
+								</div>
+							</div>
+							
+							
+							<div class="featured-item" style="text-align: center;">
+								<div class="content clearfix">
+									<a href="{% url 'reservation' %}"  class="btn btn-primary btn-lg" > ابدأ</a>
+								</div>
+							</div>
+							
 						</div>
 						
 					</div>
@@ -364,7 +386,68 @@
 				</div>
 				
 			</section>
-			
+			<section class="bg-light" >
+			<div style="max-width:500px;margin-right:auto;margin-left:auto" role="main">
+			<div style="margin-right: 10px;margin-left: 10px" >
+							<div class="section-title text-right" >
+								
+								<h3>تسجيل الدخول</h3>
+								
+							</div>
+							{% if messages %} 
+							{% for message in messages %} 
+							<div class="alert alert-danger">
+							{{message}}	
+							</div>
+							{% endfor %} 
+							{% else %} 
+							<div class="alert alert-success" dir="rtl">
+							مرحبا بعودتك ، قم بتسجيل الدخول لمتابعة الحجز الخاص بك  
+							</div>
+							{% endif %} 
+							<div class="payment-container" >
+							
+				
+									<div class="col-md-12">
+									
+										
+										<div class="col-md-12">
+											
+											<div class="">
+											
+												<div class="row gap-0">
+												
+													
+												</div>
+												<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
+													<form action="{% url 'login_user' %}" method="POST">
+													{% csrf_token %}  
+														<label  class="col-xs-12 " >البريد الالكتروني</label>
+														<input  name="username" type="email"  class="form-control" >
+														<label   class="col-xs-12" >كلمة المرور</label>
+														<input  name="password" type="password"  class="form-control" >
+													<div class="col-md-12 mt-30" style="text-align:center;">
+															<input type="submit" class="btn btn-primary" value="دخول"> 
+													<a class="btn btn-danger" href="{% url 'register_user' %}" >حساب جديد </a>
+													</div>
+													</form>
+												</div>	
+												
+												
+												</div>
+											</div>
+									
+										</div>
+										
+									</div>
+									
+									<div class="row mt-20">
+											
+									</div>
+									
+							</div>	
+							</div>
+			</section>
 			<section class="bg-light" style="display:none;" >
 			
 				<div class="container">
