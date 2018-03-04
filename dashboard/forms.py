@@ -1,5 +1,5 @@
 from django import forms 
-from catalogue.models import Package , Agency 
+from catalogue.models import  Agency 
 
 
 class AgencyForm(forms.ModelForm):
@@ -22,22 +22,4 @@ class AgencyForm(forms.ModelForm):
 		'website' , 
 		'facebook_page' 
 		]
-
-
-class PackageForm(forms.ModelForm):
-	class Meta : 
-		model = Package
-		fields = [
-		'makkah_hotel_title' , 
-		'madinah_hotel_title' , 
-		'makkah_nights' , 
-		'madinah_nights' , 
-		'double_cost' , 
-		'triple_cost' , 
-		'quad_cost' , 
-		'five_cost' , 
-		'transport' , 
-		'include_transportation' 
-		]
-
 

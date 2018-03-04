@@ -35,6 +35,49 @@
 								قم بادخال خيارات السكن المناسبة لك ثم اضغط على "التالي" لإكمال الطلب
 							</div>
 
+							<div dir="rtl" class="form-group" >
+							  <label for="include">الشركة المشرفة</label>
+							  <select id="agencySelect" name="agency" class="form-control">
+							  {% for agency in agencies %} 
+							  <option value="{{agency.id}}">{{agency.title}}</option>
+							  {% endfor %} 
+							  </select>
+							</div>
+							<div class="form-group" dir="rtl"> 
+							  <table class="table" >
+							  	<span style="color:#43C458" >معلومات السكن</span>
+							  <tr>
+							    <td>حجم الغرفة </td>
+							    <td>عدد الغرف</td>
+							    <td>الاشخاص</td>
+							  </tr>
+							  <tr>
+							    <td>خماسي</td>
+							    <td>2</td>
+							    <td>30</td>
+							  </tr>
+							</table>
+							  <table class="table" >
+							  	<span style="color:#43C458" >تكاليف الرحلة</span>
+							  <tr>
+							    <td>تكلفة السكن / للشخص  </td>
+							    <td>50</td>
+							  </tr>
+							  <tr>
+							    <td>تكلفة النقل / للشخص </td>
+							    <td>30</td>
+							  </tr>
+							  <tr>
+							    <td>التأشيرة / للشخص </td>
+							    <td>30</td>
+							  </tr>
+							  <tr>
+							    <td>استلام الجوازات من البيت</td>
+							    <td>7</td>
+							  </tr>
+							</table>
+							</div>	
+							<br>
 							<div dir="rtl" class="form-group">
 							  <label for="makkah_hotel">فندق مكة</label>
 							  <select id="makkah_hotel_select" name="makkah_hotel" class="form-control">
@@ -48,6 +91,13 @@
 							  <select name="room_size" class="form-control">
 							  <option value="True">ثنائي</option>
 							  <option value="False">ثﻻثي</option>
+							  </select>
+							</div>
+							<div dir="rtl" class="form-group">
+							  <label for="makkah_hotel">عدد الأشخاص</label>
+							  <select name="guests_qty" class="form-control">
+							  <option value="True">1</option>
+							  <option value="False">2</option>
 							  </select>
 							</div>
 							<div class="form-group" dir="rtl" style="display: none"> 
@@ -103,21 +153,14 @@
 							  <option value="False">طيران</option>
 							  </select>
 							</div>
-							 -->
+							 --><!-- 
 							<div dir="rtl" class="form-group">
 							  <label for="makkah_hotel">عدد الغرف</label>
 							  <select name="rooms_qty" class="form-control">
 							  <option value="True">1</option>
 							  <option value="False">2</option>
 							  </select>
-							</div>
-							<div dir="rtl" class="form-group">
-							  <label for="makkah_hotel">عدد الأشخاص</label>
-							  <select name="guests_qty" class="form-control">
-							  <option value="True">1</option>
-							  <option value="False">2</option>
-							  </select>
-							</div>
+							</div> -->
 							<div dir="rtl" class="form-group">
 							  <label for="include">وسيلة السفر</label>
 							  <select name="transport" class="form-control">
@@ -125,50 +168,9 @@
 							  <option value="False">طيران</option>
 							  </select>
 							</div>
-							<div class="form-group" dir="rtl"> 
-							  <table class="table" >
-							  	<span style="color:#43C458" >معلومات السكن</span>
-							  <tr>
-							    <td>حجم الغرفة </td>
-							    <td>عدد الغرف</td>
-							    <td>الاشخاص</td>
-							  </tr>
-							  <tr>
-							    <td>خماسي</td>
-							    <td>2</td>
-							    <td>30</td>
-							  </tr>
-							</table>
-							  <table class="table" >
-							  	<span style="color:#43C458" >تكاليف الرحلة</span>
-							  <tr>
-							    <td>تكلفة السكن / للشخص  </td>
-							    <td>50</td>
-							  </tr>
-							  <tr>
-							    <td>تكلفة النقل / للشخص </td>
-							    <td>30</td>
-							  </tr>
-							  <tr>
-							    <td>التأشيرة / للشخص </td>
-							    <td>30</td>
-							  </tr>
-							  <tr>
-							    <td>استلام الجوازات من البيت</td>
-							    <td>7</td>
-							  </tr>
-							</table>
-							</div>	
-							<br>
+							
 							<div class="alert alert-success"  dir="rtl" > 
 								اختر الشركة التي ستقوم بالاشراف على النقل والعمرة بشكل عام
-							</div>
-							<div dir="rtl" class="form-group" >
-							  <label for="include">الشركة المشرفة</label>
-							  <select name="agency" class="form-control">
-							  <option value="True">نقل بري</option>
-							  <option value="False">طيران</option>
-							  </select>
 							</div>
 							<div dir="rtl" class="form-group">
 							  <label for="include">موعد الإنطلاق</label>
@@ -185,7 +187,7 @@
 
 							<div dir="rtl" class="form-group text-center" style="margin-top:10%;">
 									<!-- <a  href="{% url 'reservation' %}" class="btn btn-success btn-lg" >رجوع</a> -->
-									<input type="submit" class="btn btn-danger btn-lg" >
+									<input type="submit" class="btn btn-danger btn-lg" value="التالي" >
 									<!-- <input required type="submit" class="btn btn-danger btn-lg"  value="التالي" > -->
 							</div>
 
@@ -289,7 +291,7 @@ hotel_select.on('change',function(){
     });
 
 
-
+var agencySelect = $('#agencySelect')
 </script>
 			</div>
 
