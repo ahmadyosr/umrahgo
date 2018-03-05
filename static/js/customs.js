@@ -406,38 +406,38 @@ jQuery(function($) {
 		/**
 		 * Instagram
 		 */
-		function createPhotoElement(photo) {
-			var innerHtml = $('<img>')
-			.addClass('instagram-image')
-			.attr('src', photo.images.thumbnail.url);
+		// function createPhotoElement(photo) {
+		// 	var innerHtml = $('<img>')
+		// 	.addClass('instagram-image')
+		// 	.attr('src', photo.images.thumbnail.url);
 
-			innerHtml = $('<a>')
-			.attr('target', '_blank')
-			.attr('href', photo.link)
-			.append(innerHtml);
+		// 	innerHtml = $('<a>')
+		// 	.attr('target', '_blank')
+		// 	.attr('href', photo.link)
+		// 	.append(innerHtml);
 
-			return $('<div>')
-			.addClass('instagram-placeholder')
-			.attr('id', photo.id)
-			.append(innerHtml);
-		}
+		// 	return $('<div>')
+		// 	.addClass('instagram-placeholder')
+		// 	.attr('id', photo.id)
+		// 	.append(innerHtml);
+		// }
 
-		function didLoadInstagram(event, response) {
-			var that = this;
-			$.each(response.data, function(i, photo) {
-			$(that).append(createPhotoElement(photo));
-			});
-		}
+		// function didLoadInstagram(event, response) {
+		// 	var that = this;
+		// 	$.each(response.data, function(i, photo) {
+		// 	$(that).append(createPhotoElement(photo));
+		// 	});
+		// }
 
-		$(document).ready(function() {
+		// $(document).ready(function() {
 			
-			$('#instagram').on('didLoadInstagram', didLoadInstagram);
-			$('#instagram').instagram({
-			count: 20,
-			userId: 302604202,
-			accessToken: '735306460.4814dd1.03c1d131c1df4bfea491b3d7006be5e0'
-			});
+		// 	$('#instagram').on('didLoadInstagram', didLoadInstagram);
+		// 	$('#instagram').instagram({
+		// 	count: 20,
+		// 	userId: 302604202,
+		// 	accessToken: '735306460.4814dd1.03c1d131c1df4bfea491b3d7006be5e0'
+		// 	});
 
-		});
+		// });
 
 })(jQuery);

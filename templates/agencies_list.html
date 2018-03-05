@@ -1,19 +1,97 @@
 {% extends 'base.html' %} 
 {% block main_wrapper %} 
+<style>
+/* styling used to mimmick pinterest style */
+@font-face{font-family:'Calluna';
+ src:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/callunasansregular-webfont.woff') format('woff');
+}
+body {
+	background: url(//subtlepatterns.com/patterns/scribble_light.png);
+  font-family: Calluna, Arial, sans-serif;
+  min-height: 1000px;
+}
+#columns {
+	column-width: 450px;
+	column-gap: 15px;
+  width: 90%;
+	max-width: 1100px;
+	margin: 50px auto;
+}
+
+div#columns figure {
+	background: #fefefe;
+	border: 2px solid #fcfcfc;
+	/*box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);*/
+	margin: 0 2px 15px;
+	/*padding: 15px;*/
+	padding-bottom: 10px;
+	/*transition: opacity .4s ease-in-out;*/
+  display: inline-block;
+  column-break-inside: avoid;
+}
+
+div#columns figure img hola{
+	width: 100%; height: auto;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 5px;
+}
+
+div#columns figure figcaption {
+  font-size: .9rem;
+	color: #444;
+  line-height: 1.5;
+}
+
+div#columns small { 
+  font-size: 1rem;
+  float: right; 
+  text-transform: uppercase;
+  color: #aaa;
+} 
+
+div#columns small a { 
+  color: #666; 
+  text-decoration: none; 
+  transition: .4s color;
+}
+/*
+div#columns:hover figure:not(:hover) {
+	opacity: 0.4;
+}*/
+
+@media screen and (max-width: 750px) { 
+  #columns { column-gap: 0px; }
+  #columns figure { width: 100%; }
+}
+</style>
 		<div class="main-wrapper">
 			
-			<div class="breadcrumb-wrapper bg-light-2">
+			<!-- start end Page title -->
+			<div class="page-title" style="background-image:url('/static/images/backgrounds/amman.jpg');">
 				
-				<div class="container" dir="rtl">
+				<div class="container">
 				
-							<ol class="breadcrumb-list" dir="rtl">
+					<div class="row" dir="rtl">
+					
+						<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+						
+							<h1 class="hero-title">XXXX{{agency.title}}</h1>
+							
+							<ol class="breadcrumb-list">
 								<li><a href="/">الرئيسية</a></li>
-								<li><span style="color:grey;">لوحة التحكم</span></li>
+								<li><a  href="{% url 'list' %}?country_code=JO">NNN</a></li>
+								<li>ABD</li>
 							</ol>
 							
+						</div>
+						
+					</div>
+
 				</div>
 				
 			</div>
+			<!-- end Page title -->
 			
 			<div class="content-wrapper" style="padding-top: 5%;">
 			
@@ -21,15 +99,20 @@
 			
 					<div class="row" >
 						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
-							<div class="section-title text-right">
-								<h3>التسجيل للعمرة</h3>
+
+							<div class="sorting-wrappper rtl">
+			
+								<div class="sorting-header">
+									<h3 class="sorting-title uppercase">3 Countries: Germany, France, Austria</h3>
+									<p class="sorting-lead">587 results found</p>
+								</div>
+
 							</div>
-						<div class="col-md-12 col-xs-12 col-sm-12"  > 
-							<div class="col-md-6" > 
-							{% for i in range_list %} 
-							<div class="col-md-12">
-							<a href="#" style="color:#777777;">
-							<div style="padding:10px;margin-top:10px">
+							
+						<div id="columns">
+						{% for i in range_list %} 
+						<figure style="width:100%">
+							<div style="padding:10px;">
 							<div dir="rtl" class="form-group" >
 								<h3 dir="rtl" >شركة كيف حالك <small>ابتداء من</small></h3>
 							</div>
@@ -55,53 +138,15 @@
 							  {% endif %}
 							</table>
 							<div style="text-align: center;">
-							<a href="#" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
+							<a href="{% url 'agency' agency_id=1 %}" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
 							</div>
 							</div>	
 							</div>
-							</a>
-							</div>
-							{% endfor %}
-							</div>
-							<div class="col-md-6" > 
-							{% for i in range_list %} 
-							<div class="col-md-12">
-							<a href="#" style="color:#777777;">
-							<div style="padding:10px;margin-top:10px">
-							<div dir="rtl" class="form-group" >
-								<h3 dir="rtl" >شركة كيف حالك <small>ابتداء من</small></h3>
-							</div>
-							<div class="form-group" dir="rtl"> 
-							  <table class="table" >
-							  	<span style="color:#43C458" >معلومات السكن</span>
-							  <tr>
-							    <td>حجم الغرفة </td>
-							    <td>تكلفة الشخص</td>
-							  </tr>
-							  {% if not forloop.counter > 6 %} 
-							  <tr>
-							    <td>خماسي</td>
-							    <td>2</td>
-							  </tr>
-							  {% else %} 
-							  {% for i in range_list %} 
-							  <tr>
-							    <td>خماسي</td>
-							    <td>2</td>
-							  </tr>
-							  {% endfor %} 
-							  {% endif %}
-							</table>
-							<div style="text-align: center;">
-							<a href="#" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
-							</div>
-							</div>	
-							</div>
-							</a>
-							</div>
-							{% endfor %}
-							</div>
-						</div>								
+						<figcaption>Cinderella wearing European fashion of the mid-1860’s</figcaption>
+						</figure>
+						{% endfor %} 
+						<small>Art &copy; <a href="//clairehummel.com">Claire Hummel</a></small>
+						</div>
 						</div>
 							
 					</div>

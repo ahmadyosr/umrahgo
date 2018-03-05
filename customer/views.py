@@ -15,22 +15,10 @@ def profile(request):
 	return render(request , 'profile.html'  )
 
 def reservation(request):
-	context = {}
-	next_ = False 
-
-	if request.GET.get('next_'):
-		for item in request.GET.items():
-			request.session[item[0]] = item[1]
-		return redirect('register_user')
-	
-	context['next_'] = next_
-	context['photos'] = Photoshot.objects.all()[:6]
-	context['makkah_hotels'] = MakkahHotel.objects.only('id' ,'title' ,'stars') 
-	context['agencies'] = Agency.objects.filter(active = True)
-
-	return render(request , 'reservation.html' , context )
-
-
+    context = {}
+    context['photos'] = Photoshot.objects.all()[:5]
+    context['range_list'] = range(10)
+    return render(request , 'reservation.html' , context )
 
 
 """

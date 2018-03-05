@@ -14,9 +14,12 @@ def agencies_list(request):
 	return render(request , 'agencies_list.html', {'range_list': range(10)}  )
 
 def agency(request , agency_id ):
+
 	context = {}
 	context['recommended_agencies'] = Agency.objects.all()[:3]
 	context['agency'] = Agency.objects.get(id = agency_id)
+	context['photos'] = Photoshot.objects.all()[:6]
+	context['range_list'] = range(5)
 	return render(request , 'agency.html', context )
 
 def package(request , package_id):
