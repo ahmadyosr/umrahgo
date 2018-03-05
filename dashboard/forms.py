@@ -23,3 +23,21 @@ class AgencyForm(forms.ModelForm):
 		'facebook_page' 
 		]
 
+
+class PackageForm(forms.ModelForm):
+	class Meta : 
+		model = Package
+		fields = [
+		'makkah_hotel_title' , 
+		'madinah_hotel_title' , 
+		'makkah_nights' , 
+		'madinah_nights' , 
+		'double_cost' , 
+		'triple_cost' , 
+		'quad_cost' , 
+		'five_cost' , 
+		'transport' , 
+		'include_transportation' 
+		]
+
+
