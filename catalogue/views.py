@@ -9,6 +9,10 @@ def landing_page(request):
 	packages= [] 
 	return render(request ,'index.html' , {'packages': packages} ) 
 
+def agencies_list(request):
+
+	return render(request , 'agencies_list.html', {'range_list': range(10)}  )
+
 def agency(request , agency_id ):
 	context = {}
 	context['recommended_agencies'] = Agency.objects.all()[:3]

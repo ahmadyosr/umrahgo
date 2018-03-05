@@ -51,7 +51,7 @@ class Package(models.Model):
 	transport = models.CharField(max_length =10 , default ="BUS") # choices are('BUS' , 'FLIGHT')
 
 	class Meta : 
-		unique_together = ('madinah_hotel' , 'makkah_hotel' , 'transport' )
+		unique_together = ('agency' ,'madinah_hotel' , 'makkah_hotel' , 'transport' )
 
 class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 

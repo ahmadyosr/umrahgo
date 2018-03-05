@@ -1,0 +1,206 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+		<div class="main-wrapper">
+			
+			<div class="breadcrumb-wrapper bg-light-2">
+				
+				<div class="container" dir="rtl">
+				
+							<ol class="breadcrumb-list" dir="rtl">
+								<li><a href="/">الرئيسية</a></li>
+								<li><span style="color:grey;">لوحة التحكم</span></li>
+							</ol>
+							
+				</div>
+				
+			</div>
+			
+			<div class="content-wrapper" style="padding-top: 5%;">
+			
+				<div class="container">
+			
+					<div class="row" >
+						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
+							<div class="section-title text-right">
+								<h3>التسجيل للعمرة</h3>
+							</div>
+						<div class="col-md-12 col-xs-12 col-sm-12"  > 
+							<div class="col-md-6" > 
+							{% for i in range_list %} 
+							<div class="col-md-12">
+							<a href="#" style="color:#777777;">
+							<div style="padding:10px;margin-top:10px">
+							<div dir="rtl" class="form-group" >
+								<h3 dir="rtl" >شركة كيف حالك <small>ابتداء من</small></h3>
+							</div>
+							<div class="form-group" dir="rtl"> 
+							  <table class="table" >
+							  	<span style="color:#43C458" >معلومات السكن</span>
+							  <tr>
+							    <td>حجم الغرفة </td>
+							    <td>تكلفة الشخص</td>
+							  </tr>
+							  {% if not forloop.counter == 4 %} 
+							  <tr>
+							    <td>خماسي</td>
+							    <td>2</td>
+							  </tr>
+							  {% else %} 
+							  {% for i in range_list %} 
+							  <tr>
+							    <td>خماسي</td>
+							    <td>2</td>
+							  </tr>
+							  {% endfor %} 
+							  {% endif %}
+							</table>
+							<div style="text-align: center;">
+							<a href="#" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
+							</div>
+							</div>	
+							</div>
+							</a>
+							</div>
+							{% endfor %}
+							</div>
+							<div class="col-md-6" > 
+							{% for i in range_list %} 
+							<div class="col-md-12">
+							<a href="#" style="color:#777777;">
+							<div style="padding:10px;margin-top:10px">
+							<div dir="rtl" class="form-group" >
+								<h3 dir="rtl" >شركة كيف حالك <small>ابتداء من</small></h3>
+							</div>
+							<div class="form-group" dir="rtl"> 
+							  <table class="table" >
+							  	<span style="color:#43C458" >معلومات السكن</span>
+							  <tr>
+							    <td>حجم الغرفة </td>
+							    <td>تكلفة الشخص</td>
+							  </tr>
+							  {% if not forloop.counter > 6 %} 
+							  <tr>
+							    <td>خماسي</td>
+							    <td>2</td>
+							  </tr>
+							  {% else %} 
+							  {% for i in range_list %} 
+							  <tr>
+							    <td>خماسي</td>
+							    <td>2</td>
+							  </tr>
+							  {% endfor %} 
+							  {% endif %}
+							</table>
+							<div style="text-align: center;">
+							<a href="#" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
+							</div>
+							</div>	
+							</div>
+							</a>
+							</div>
+							{% endfor %}
+							</div>
+						</div>								
+						</div>
+							
+					</div>
+
+
+				</div>
+				
+			</div>
+<!-- <script type="text/javascript" src="/static/js/slick.min.js"></script> -->
+
+<script>
+
+var hotel_select = $('#makkah_hotel_select')
+
+hotel_select.on('change',function(){
+        $.ajax({
+
+        url: "/get_hotel_photos/" + hotel_select.val()  ,
+             success: function(result){
+            	var slideshow = $('#slideshow')
+            	$('#slideshow').html('')
+            	var nav_slider = $('#navslider')
+            	$('#navslider').html('')
+            	// alert($('#navslider').html())
+
+            	$('#slideshow').attr('class' , 'slider gallery-slideshow')
+            	$('#navslider').attr('class' , 'slider gallery-nav')
+            	
+				var images_html = ""
+                $(result).find('PHOTO_URL').each(function(){
+                	console.log('one');
+                	var div0  = $('<div>')
+                	var div = $('<div>')
+                	var inner_div = $('<div>' , {'class' : 'image'} ) 
+                	var image = $('<img>' , {'src' : $(this).text()})
+                	var element = $(div0).append($(div).append($(inner_div).append((image))))
+                	images_html = images_html + $(element).clone().html()
+                })
+	        	$('#navslider').html('')
+	        
+				$('.gallery-slideshow').slick('unslick');				
+				$('.gallery-nav').slick('unslick')
+				
+	        	$('#navslider').html(images_html)
+	        	$('#slideshow').html(images_html)
+
+
+				$('.gallery-slideshow').slick({
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					speed: 500,
+					arrows: true,
+					fade: true,
+					asNavFor: '.gallery-nav'
+				});
+				$('.gallery-nav').slick({
+					slidesToShow: 7,
+					slidesToScroll: 4,
+					speed: 500,
+					asNavFor: '.gallery-slideshow',
+					dots: false,
+					centerMode: true,
+					focusOnSelect: true,
+					infinite: true,
+					responsive: [
+						{
+						breakpoint: 1199,
+						settings: {
+							slidesToShow: 7,
+							}
+						}, 
+						{
+						breakpoint: 991,
+						settings: {
+							slidesToShow: 5,
+							}
+						}, 
+						{
+						breakpoint: 767,
+						settings: {
+							slidesToShow: 5,
+							}
+						}, 
+						{
+						breakpoint: 480,
+						settings: {
+							slidesToShow: 3,
+							}
+						}
+					]
+				});
+         }
+    }); 
+    });
+
+
+var agencySelect = $('#agencySelect')
+</script>
+			</div>
+
+		<!-- end Main Wrapper -->
+{% endblock %} 
