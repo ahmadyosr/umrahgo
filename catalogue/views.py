@@ -1,32 +1,23 @@
 from django.shortcuts import render , redirect 	
 from django.http import HttpResponse
-from catalogue.models import  Agency , Photoshot , Hotel 
+from catalogue.models import  Agency , Photoshot , Hotel , Package
 from customer.forms import ReservationForm
 # Create your views here.
 
 
 def landing_page(request):
-	# packages = Package.objects.all()[:10]
 	packages= [] 
 	return render(request ,'index.html' , {'packages': packages} ) 
 
 def agency(request , agency_id ):
 	context = {}
-	# context['packages'] = Package.objects.filter(agency_id = agency_id ) 
 	context['recommended_agencies'] = Agency.objects.all()[:3]
 	context['agency'] = Agency.objects.get(id = agency_id)
 	return render(request , 'agency.html', context )
 
 def package(request , package_id):
 	context = {}
-	# context['package'] = Package.objects.get(id = package_id) 
-	# context['rooms'] = Room.objects.filter(package = context['package']) 
-	# context['packages'] = Package.objects.all()[:3]
-	# context['recommended_agencies'] = Agency.objects.all()[:3]
 
-	# context['photos1'] = context['package'].madinah_hotel.photoshots.all() 
-	# context['photos2'] = context['package'].makkah_hotel.photoshots.all() 
-	
 	return render(request , 'detail-page.html' , context )
 
 def list(request):
@@ -63,34 +54,78 @@ def get_hotel_photos(request, hotel_id ):
 
 	return HttpResponse(xml , content_type = "application/xml" )
 
-def get_hotel_rooms_classes(request , hotel_id):
-	hotel = Hotel.objects.get(id = hotel_id ) 
-	rooms = hotel.rooms.all() 
+
+"""
+when change agency change the following
+1- hotels
+1.5- hotel rooms
+2- available dates 
+3- transport method 
+"""
+
+def get_agency_makkah_hotels(request, agency_id) : 
+	hotels = []
+	makkah_hotels = Package.objects.filter(id = agency_id).values('makkah_hotel__id', 'makkah_hotel__title')
+	for hotel in makkah_hotels : 
+		if hotel not in hotels:
+			hotels.append(hotel)
 
 	xml = "<RESPONSE>"   
 
-	for room in rooms : 
-		xml+= "<ROOM>"+ "<ROOM_ID>" +  str(room.id) +"</ROOM_ID>" + "<ROOM_TITLE>" + str(room.title) + "</ROOM_TITLE>" + "</ROOM>"
+	for hotel in hotels : 
+		xml += "<HOTEL><HOTEL_ID>"+ str(hotel.id) +"</HOTEL_ID>" \
+		+ "<HOTEL_TITLE>"+ str(hotel.title) +"</HOTEL_TITLE></HOTEL>"
 
 	xml += "</RESPONSE>"
 
 	return HttpResponse(xml , content_type = "application/xml" )
 
-
-def get_agency_dates(request , agency_id):
-	agency = Agency.objects.get(id = agency_id ) 
-	dates = available_dates.rooms.all() 
+# on change of makkah hotel choices
+def get_madinah_hotels(request, agency_id ,  makkah_hotel_id ) : 
+	madinah_hotels = Package.objects.filter(
+		agency__id = agency_id ,
+		makkah_hotel__id = makkah_hotel_id
+		).values(
+		'madinah_hotel__id' ,
+		'madinah_hotel__title', 
+		)
 
 	xml = "<RESPONSE>"   
 
-	for room in rooms : 
-		xml+= "<AGENCY>"+ "<AGENCY_ID>" +  str(room.id) +"</AGENCY_ID>" + "<AGENCY_TITLE>" + str(room.title) + "</AGENCY_TITLE>" + "</AGENCY>"
+	for hotel in madinah_hotels : 
+		xml += "<HOTEL><HOTEL_ID>"+ str(hotel.id) +"</HOTEL_ID>" \
+		+ "<HOTEL_TITLE>"+ str(hotel.title) +"</HOTEL_TITLE></HOTEL>"
+
+	xml += "</RESPONSE>"
+
+	return HttpResponse(xml , content_type = "application/xml" )
+
+	return 
+
+# on change of madinah hotel 
+def get_package_rooms(request , agency_id , makkah_hotel_id , madinah_hotel_id, transport ):
+	# uniqueness of this query is guaranteed in schema design 
+	package = Package.objects.get(makkha_hotel__id = makkah_hotel_id , madinah_hotel__id = madinah_hotel_id , transport = transport ) 
+	xml = "<RESPONSE>"   
+
+	if package.single_room_cost > 0 : 
+		xml += "<SINGLE_COST>"+ str(package.single_room_cost) +"</SINGLE_COST>"
 		
+	if package.double_room_cost > 0 : 
+		xml += "<DOUBLE_COST>"+ str(package.double_room_cost) +"</DOUBLE_COST>"
+
+	if package.trip_cost > 0 : 
+		xml += "<TRIP_COST>"+ str(package.trip_cost) +"</TRIP_COST>"
+
+	if package.quad_cost > 0 : 
+		xml += "<QUAD_COST>"+ str(package.quad_cost) +"</QUAD_COST>"
+
+	if package.quin_cost > 0 : 
+		xml += "<QUIN_COST>"+ str(package.quin_cost) +"</QUIN_COST>"
+
 	xml += "</RESPONSE>"
 
 	return HttpResponse(xml , content_type = "application/xml" )
-
-
 
 def get_agency_available_dates(request , agency_id):
 	agency = Agency.objects.get(id = agency_id ) 
@@ -102,5 +137,18 @@ def get_agency_available_dates(request , agency_id):
 		xml+= "<DATE>"+ str(date.date.isoformat()) +"</DATE>"
 
 	xml += "</RESPONSE>"
+
+	return HttpResponse(xml , content_type = "application/xml" )
+
+def get_package_travel_methods(request , madinah_hotel_id , makkah_hotel_id ):
+	package = Package.objects.filter(makkha_hotel__id = makkah_hotel_id , madinah_hotel__id = madinah_hotel_id )
+
+	xml = "<RESPONSE>"   
+
+	for date in dates : 
+		xml+= "<DATE>"+ str(date.date.isoformat()) +"</DATE>"
+
+	xml += "</RESPONSE>"
+
 
 	return HttpResponse(xml , content_type = "application/xml" )

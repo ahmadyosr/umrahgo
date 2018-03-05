@@ -333,9 +333,9 @@
 									<ul class="nav navbar-nav" id="responsive-menu">
 										{% if request.user.is_authenticated %} 
 										<li><a href="{% url 'logout_user' %}">تسجيل الخروج</a></li>
-										<li><a href="">لوحة التحكم  <span class="label label-primary">جديد</span></a></li>
+										<li><a href="">لوحة التحكم  <span class="label label-primary">شركات</span></a></li>
 										{% else %} 
-										<li><a href="{% url 'login_user' %}">دخول الشركات  <span class="label label-primary">جديد</span></a></li>
+										<li><a href="{% url 'login_user' %}">دخول الشركات  <span class="label label-primary">شركات</span></a></li>
 										{% endif %} 
 										<li><a href="{% url 'about' %}">من نحن</a></li>
 										<li><a href="{% url 'contact' %}">اتصل بنا</a></li>

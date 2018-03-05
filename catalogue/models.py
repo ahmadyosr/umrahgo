@@ -30,12 +30,28 @@ class Agency(models.Model):
 	logo  = models.FileField(upload_to = 'logos/' , null = True ) 
 
 	available_dates = models.ManyToManyField(Date) 
-	bus_cost = models.IntegerField(default = 0 ) # zero means there are no 
-	flight_cost = models.IntegerField(default = 0 ) # zero means there are no 
+	# bus_cost = models.IntegerField(default = 0 ) # zero means there are no 
+	# flight_cost = models.IntegerField(default = 0 ) # zero means there are no 
 	# for suppliers 
 	user = models.ForeignKey(User , null = True )
 	def __unicode__(self):
 		return self.title 
+
+class Package(models.Model):
+	agency = models.ForeignKey(Agency)
+	makkah_hotel = models.ForeignKey('MakkahHotel')
+	madinah_hotel = models.ForeignKey('MadinahHotel')
+	
+	single_room_cost = models.IntegerField(default = 0 )
+	double_room_cost = models.IntegerField(default = 0 )
+	trip_room_cost = models.IntegerField(default = 0 )
+	quad_room_cost = models.IntegerField(default = 0 )
+	quin_room_cost = models.IntegerField(default = 0 )
+
+	transport = models.CharField(max_length =10 , default ="BUS") # choices are('BUS' , 'FLIGHT')
+
+	class Meta : 
+		unique_together = ('madinah_hotel' , 'makkah_hotel' , 'transport' )
 
 class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 
@@ -43,7 +59,6 @@ class Hotel(models.Model):
 	photoshots = models.ManyToManyField('Photoshot' , blank = True ) 
 	thumbnail = models.FileField(upload_to ='thumbnails/'  , null = True )
 
-	rooms = models.ManyToManyField('RoomClass')
 	def __unicode__(self):
 		return self.title
 
