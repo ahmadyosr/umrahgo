@@ -306,7 +306,7 @@
 								</div>
 							</div>
 							<div class="flex-shrink flex-columns" style="margin-right:40px	">
-								<a class="navbar-logo" href="{% url 'landing_page' %}">
+								<a class="navbar-logo" href="{% url 'catalogue:landing_page' %}">
 									<img src="/static/images/logo_arabic.png" alt="Logo" />
 								</a>
 							</div>
@@ -333,27 +333,27 @@
 									<ul class="nav navbar-nav" id="responsive-menu">
 										{% if request.user.is_authenticated %} 
 										<li><a href="{% url 'logout_user' %}">تسجيل الخروج</a></li>
-										<li><a href="{% url 'supplier' %}">لوحة التحكم  <span class="label label-primary">شركات</span></a></li>
+										<li><a href="">لوحة التحكم <span class="label label-primary">fix this</span></a></li>
 										{% else %} 
 										<li><a href="{% url 'login_user' %}">دخول الشركات  <span class="label label-primary">شركات</span></a></li>
 										{% endif %} 
-										<li><a href="{% url 'about' %}">من نحن</a></li>
-										<li><a href="{% url 'contact' %}">اتصل بنا</a></li>
+										<li><a href="{% url 'catalogue:about' %}">من نحن</a></li>
+										<li><a href="{% url 'catalogue:contact' %}">اتصل بنا</a></li>
 										<li><a >الدول</a>
 											<ul>
 												{% for country in countries %} 
-												<li><a href="{% url 'list' %}?country_code=country.country_code">{{country.title}}</a></li>
+												<li><a href="{% url 'catalogue:list' %}?country_code=country.country_code">{{country.title}}</a></li>
 												{% endfor %} 
 											</ul>
 										</li>
 										<li><a>الوكالات</a>
 											<ul>
 												{% for agency in agencies %} 
-												<li><a href="{% url 'agency' agency_id=agency.id %}">{{agency.title}}</a></li>
+												<li><a href="{% url 'catalogue:agency' agency_id=agency.id %}">{{agency.title}}</a></li>
 												{% endfor %} 
 											</ul>
 										</li>
-										<li><a href="{% url 'landing_page' %}">الرئيسية</a></li>
+										<li><a href="{% url 'catalogue:landing_page' %}">الرئيسية</a></li>
 										
 									</ul>
 								</div><!--/.nav-collapse -->

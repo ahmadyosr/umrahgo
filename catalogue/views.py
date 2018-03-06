@@ -13,6 +13,7 @@ def agencies_list(request):
 
 	return render(request , 'agencies_list.html', {'range_list': range(10)}  )
 
+
 def agency(request , agency_id ):
 
 	context = {}

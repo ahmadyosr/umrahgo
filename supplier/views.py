@@ -12,16 +12,13 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 @login_required() 
-def agency(request , agency_id ):
+def agency(request , agency_id):
     context= {} 
-    packages = Package.objects.filter(created_by = request.user).exclude(is_removed = True ) 
-    context['packages'] = packages 
+    agency =  Agency.objects.get(id = agency_id ) 
+    packages = Package.objects.filter(created_by = agency.created_by).exclude(is_removed = True ) 
 
-    agency =  Agency.objects.get(created_by = request.user ) 
 
     if request.method == 'POST':
-        agency = Agency.objects.get(created_by = request.user ) 
-
         form = AgencyForm(request.POST, instance = agency ) 
         if form.is_valid() : 
             form.save()
@@ -30,11 +27,15 @@ def agency(request , agency_id ):
             context['form_errors'] = form.errors
 
     context['agency'] = agency 
-    return render(request , 'supplier.html' , context )
+    context['packages'] = packages 
+    if request.user.is_staff : 
+        context['matched_agencies'] = Agency.objects.filter(created_by__is_staff = False)
+
+    return render(request , 'agency.html' , context )
 
 def supplier_package(request):
     context={}
-
+    agency = Agency.objects.get(created_by =request.user ) 
     if request.method == 'POST' : 
         form = PackageForm(request.POST)
 
@@ -45,7 +46,7 @@ def supplier_package(request):
             instance.save()
             messages.add_message(request , messages.INFO , 'تمت اضافة عرض العمرة بنجاح ')
 
-            return redirect('supplier')
+            return redirect('agency' , agency_id = agency.id )
 
     context['photos1'] = Photoshot.objects.all()[:6]
     context['photos2'] = context['photos1']

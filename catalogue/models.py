@@ -17,7 +17,8 @@ class Date(models.Model):
 
 class Agency(models.Model):
 	created_by = models.ForeignKey(User , null = True )
-	dashboard_agency = models.ForeignKey('Agency', null = True)
+	supplier_account_agency = models.ForeignKey('Agency', null = True)
+
 	active = models.BooleanField(default = True )
 	country = models.ForeignKey(Country , null = True )
 	city = models.CharField(max_length = 50 , blank = True ) 
@@ -30,7 +31,7 @@ class Agency(models.Model):
 	website = models.CharField(max_length = 50  , blank = True ) 
 	facebook_page = models.CharField(max_length = 50 , blank = True )
 	logo  = models.FileField(upload_to = 'logos/' , null = True ) 
-	
+
 	available_dates = models.ManyToManyField(Date) 
 	# bus_cost = models.IntegerField(default = 0 ) # zero means there are no 
 	# flight_cost = models.IntegerField(default = 0 ) # zero means there are no 

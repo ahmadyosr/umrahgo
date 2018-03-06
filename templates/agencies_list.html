@@ -80,7 +80,7 @@ div#columns:hover figure:not(:hover) {
 							
 							<ol class="breadcrumb-list">
 								<li><a href="/">الرئيسية</a></li>
-								<li><a  href="{% url 'list' %}?country_code=JO">NNN</a></li>
+								<li><a  href="{% url 'catalogue:list' %}?country_code=JO">NNN</a></li>
 								<li>ABD</li>
 							</ol>
 							
@@ -138,7 +138,7 @@ div#columns:hover figure:not(:hover) {
 							  {% endif %}
 							</table>
 							<div style="text-align: center;">
-							<a href="{% url 'agency' agency_id=1 %}" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
+							<a href="{% url 'catalogue:agency' agency_id=1 %}" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
 							</div>
 							</div>	
 							</div>

@@ -48,7 +48,7 @@ def register_user(request):
         user.save()
 
         # create agency 
-        Agency.objects.create(
+        agency = Agency.objects.create(
             created_by = user, 
             title = title ,
             country_id = country_id ,  
@@ -58,7 +58,7 @@ def register_user(request):
         user = authenticate(username= username, password = password )
         login(request ,user)
         
-        return redirect('supplier') 
+        return redirect('agency' , agency_id= agency.id) 
         
     context = {}
     context['countries'] = Country.objects.all() 
@@ -78,14 +78,11 @@ def login_user(request):
 
         if user : 
             login(request, user)
-            return redirect('dashboard')
+            agency = Agency.objects.get(created_by = user)
+            return redirect('supplier:agency' , agency_id = agency.id)
 
         else : 
             messages.add_message(request , messages.INFO  , 'اسم المستخدم وكلمة المرور ﻻ يتطابقان' )
-
-
-        # else : 
-			# messages.add_message(request , messages.INFO ,  ''  ) 
 
     return render(request , 'login.html'  ) 
 
