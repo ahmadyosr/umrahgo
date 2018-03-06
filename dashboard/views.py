@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError 
 from catalogue.models import Package  , Agency  , Photoshot
 from django.http import HttpResponse
-from dashboard.forms import PackageForm
-from .forms import AgencyForm
+# from dashboard.forms import PackageForm
+# from .forms import AgencyForm
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 

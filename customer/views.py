@@ -1,8 +1,8 @@
 #-*- encoding:utf-8 -*- 
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.contrib.auth.decorators import login_required 
 from catalogue.models import Photoshot , MakkahHotel , MadinahHotel , Agency
-
+from django.contrib.auth import login , authenticate
 @login_required
 def profile(request):
 	# default session varibales 
@@ -64,12 +64,12 @@ def login_user(request):
 
         if user : 
             login(request, user)
-            return redirect('profile')
+            return redirect('dashboard')
 
         else : 
             messages.add_message(request , messages.INFO  , 'اسم المستخدم وكلمة المرور ﻻ يتطابقان' )
 
-        
+
         # else : 
 			# messages.add_message(request , messages.INFO ,  ''  ) 
 

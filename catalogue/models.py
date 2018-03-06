@@ -16,6 +16,8 @@ class Date(models.Model):
 	date = models.DateField(auto_now = False , unique = True ) 
 
 class Agency(models.Model):
+	creator = models.ForeignKey(User , null = True )
+
 	active = models.BooleanField(default = True ) 
 	country = models.ForeignKey(Country , null = True ) 
 	city = models.CharField(max_length = 50 , blank = True ) 
@@ -33,7 +35,6 @@ class Agency(models.Model):
 	# bus_cost = models.IntegerField(default = 0 ) # zero means there are no 
 	# flight_cost = models.IntegerField(default = 0 ) # zero means there are no 
 	# for suppliers 
-	user = models.ForeignKey(User , null = True )
 	def __unicode__(self):
 		return self.title 
 
@@ -50,8 +51,21 @@ class Package(models.Model):
 
 	transport = models.CharField(max_length =10 , default ="BUS") # choices are('BUS' , 'FLIGHT')
 
+
+	# hmmm ?
+	makkah_hotel_title = models.CharField(max_length= 200 , blank = True )
+	madinah_hotel_title = models.CharField(max_length= 200 , blank = True )
+		
 	class Meta : 
 		unique_together = ('agency' ,'madinah_hotel' , 'makkah_hotel' , 'transport' )
+
+class AgencyPackage(Package):
+	is_created = models.BooleanField(default = False)
+	is_removed = models.BooleanField(default = False)
+	is_updated = models.BooleanField(default = False)
+
+class CataloguePackage(Package):
+	agency_package = models.ForeignKey(AgencyPackage , null = True )
 
 class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 

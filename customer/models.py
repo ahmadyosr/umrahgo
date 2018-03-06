@@ -9,7 +9,7 @@ from catalogue.models import RoomClass , MakkahHotel , MadinahHotel , Agency
 # Create your models here.
 
 class UserProfile(models.Model):
-	user = models.OneToOneField(User)
+	user = models.OneToOneField(User , null = True )
 	phone_number = models.CharField(max_length = 15 , blank = True)
 
 class Reservation(models.Model):

@@ -1,6 +1,5 @@
 from django import forms 
-from catalogue.models import  Agency 
-
+from catalogue.models import  Agency , Package
 
 class AgencyForm(forms.ModelForm):
 	phone_number= forms.CharField(required = False ) 
@@ -30,14 +29,12 @@ class PackageForm(forms.ModelForm):
 		fields = [
 		'makkah_hotel_title' , 
 		'madinah_hotel_title' , 
-		'makkah_nights' , 
-		'madinah_nights' , 
-		'double_cost' , 
-		'triple_cost' , 
-		'quad_cost' , 
-		'five_cost' , 
+		'single_room_cost' , 
+		'double_room_cost' , 
+		'trip_room_cost' , 
+		'quad_room_cost' , 
+		'quin_room_cost' , 
 		'transport' , 
-		'include_transportation' 
 		]
 
 
