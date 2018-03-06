@@ -35,7 +35,7 @@
 						<div class="col-md-12 col-xs-12 col-sm-12" > 
 						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
 							<div class="form-group text-center">
-									<a class="btn btn-danger btn-lg" href="{% url 'dashboard_package' %}" > اضافة عرض عمرة</a>
+									<a class="btn btn-danger btn-lg" href="{% url 'supplier_package' %}" > اضافة عرض عمرة</a>
 							</div>
 						</div>
 						<div class="col-md-12" style="overflow-x:scroll;text-align:center;"> 
@@ -72,7 +72,7 @@
 						</div>
 
 							<div  class="col-md-12" >
-							<form action="{% url 'dashboard' %}" method="POST">
+							<form action="{% url 'supplier' %}" method="POST">
 							{% csrf_token %} 
 							<div class="section-fortitle text-right mt-5">
 								<h5>معلومات الوكالة السياحية</h5>
