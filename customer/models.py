@@ -24,8 +24,3 @@ class Reservation(models.Model):
 	agency = models.ForeignKey(Agency)
 	departure_date = models.DateField(auto_now = False) 
 	customer_address = models.CharField(max_length= 200 )
-
-@receiver(post_save , sender= User) 
-def post_save_order(sender ,created, instance,**kwargs ):
-	if created : 
-		UserProfile.objects.create(user = instance)

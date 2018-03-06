@@ -18,9 +18,8 @@ class Date(models.Model):
 class Agency(models.Model):
 	created_by = models.ForeignKey(User , null = True )
 	dashboard_agency = models.ForeignKey('Agency', null = True)
-
-	active = models.BooleanField(default = True ) 
-	country = models.ForeignKey(Country , null = True ) 
+	active = models.BooleanField(default = True )
+	country = models.ForeignKey(Country , null = True )
 	city = models.CharField(max_length = 50 , blank = True ) 
 	title = models.CharField(max_length = 50 , blank = True ) 
 	about = models.CharField(max_length = 500 , blank = True )
@@ -31,7 +30,7 @@ class Agency(models.Model):
 	website = models.CharField(max_length = 50  , blank = True ) 
 	facebook_page = models.CharField(max_length = 50 , blank = True )
 	logo  = models.FileField(upload_to = 'logos/' , null = True ) 
-
+	
 	available_dates = models.ManyToManyField(Date) 
 	# bus_cost = models.IntegerField(default = 0 ) # zero means there are no 
 	# flight_cost = models.IntegerField(default = 0 ) # zero means there are no 
@@ -41,9 +40,9 @@ class Agency(models.Model):
 
 class Package(models.Model):
 	created_by = models.ForeignKey(User , null = True )
-	catalogue_agency = models.ForeignKey(Agency)
-	makkah_hotel = models.ForeignKey('MakkahHotel')
-	madinah_hotel = models.ForeignKey('MadinahHotel')
+	catalogue_agency = models.ForeignKey(Agency , null = True )
+	makkah_hotel = models.ForeignKey('MakkahHotel', null = True )
+	madinah_hotel = models.ForeignKey('MadinahHotel', null = True )
 	
 	single_room_cost = models.IntegerField(default = 0 )
 	double_room_cost = models.IntegerField(default = 0 )
@@ -52,7 +51,7 @@ class Package(models.Model):
 	quin_room_cost = models.IntegerField(default = 0 )
 
 
-	transport = models.CharField(max_length =10 , default ="BUS") # choices are('BUS' , 'FLIGHT')
+	transport = models.CharField(max_length =10 , default ="BUS" ) # choices are('BUS' , 'FLIGHT')
 
 
 	# agency user section 
@@ -70,7 +69,7 @@ class Package(models.Model):
 	madinah_hotel_title = models.CharField(max_length= 200 , blank = True )
 
 	# class Meta : 
-	# 	unique_together = ('agency' ,'madinah_hotel' , 'makkah_hotel' , 'transport' )
+	# 	unique_together = ('agency' ,'madinah_hotel' , 'makkah_hotel' , 'psport' )
 
 class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 

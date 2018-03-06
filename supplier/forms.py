@@ -17,7 +17,6 @@ class AgencyForm(forms.ModelForm):
 		'phone_number', 
 		'email' , 
 		'address' , 
-		'address' , 
 		'website' , 
 		'facebook_page' 
 		]
@@ -28,13 +27,25 @@ class PackageForm(forms.ModelForm):
 		model = Package
 		fields = [
 		'makkah_hotel_title' , 
-		'madinah_hotel_title' , 
-		'single_room_cost' , 
-		'double_room_cost' , 
-		'trip_room_cost' , 
-		'quad_room_cost' , 
-		'quin_room_cost' , 
+		'madinah_hotel_title' ,
+		'updated_single_room_cost' , 
+		'updated_double_room_cost', 
+		'updated_trip_room_cost', 
+		'updated_quad_room_cost', 
+		'updated_quin_room_cost', 
 		'transport' , 
+		]
+
+
+class UpdatePackageForm(forms.ModelForm):
+	class Meta : 
+		model = Package
+		fields = [
+		'updated_single_room_cost' , 
+		'updated_double_room_cost', 
+		'updated_trip_room_cost', 
+		'updated_quad_room_cost', 
+		'updated_quin_room_cost', 
 		]
 
 

@@ -36,103 +36,43 @@
 								أضف باكج جديد ، قم بتحديد اسم الفندق في مكة والمدينة ، وتكلفة الشخص حسب حجم الغرفة
 							</div>
 							<div dir="rtl" class="form-group">
-							  <label for="makkah_hotel">حجم الغرفة</label>
-							  <select name="transport" class="form-control">
-							  <option value="True">ثنائي</option>
-							  <option value="False">ثﻻثي</option>
-							  </select>
-							</div>
-
-							<div dir="rtl" class="form-group">
 							  <label for="makkah_hotel">فندق مكة</label>
-							  <select name="transport" class="form-control">
-							  <option value="True">ثنائي</option>
-							  <option value="False">ثﻻثي</option>
-							  </select>
-							</div>
-
-										
-							<div class="slick-gallery-slideshow">
-		
-								<div class="slider gallery-slideshow">
-								{% for photo in photos1 %} 
-									<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
-								{% endfor %} 
-								{% for photo in photos2 %} 
-									<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
-								{% endfor %} 
-								</div>
-								<div class="slider gallery-nav">
-								{% for photo in photos1 %} 
-									<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
-								{% endfor %} 
-								{% for photo in photos2 %} 
-									<div><div class="image"><img src="{{photo.file.url}}" alt="Image" /></div></div>
-								{% endfor %} 
-								</div>
-								
+							  <input type="text" class="form-control" name="makkah_hotel_title"> 
 							</div>
 							<div dir="rtl" class="form-group">
-							  <label for="pwd">فندق المدينة</label>
-							  <select name="transport" class="form-control">
-							  <option value="True">ثنائي</option>
-							  <option value="False">ثﻻثي</option>
-							  </select>							
+							  <label >فندق المدينة</label>
+							  <input type="text" class="form-control" name="madinah_hotel_title"> 						
 							</div>
-<!-- 
-							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
-							  <label for="pwd4">عدد ليالي مكة</label>
-							  <input required name="makkah_nights" type="Number" value="0" class="form-control" id="pwd4">
-							</div>
-							
-							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
-							  <label for="pwd5">عدد ليالي المدينة</label>
-							  <input required name="madinah_nights" type="Number" value="0" class="form-control" id="pwd5">
-							</div>
-							 -->
-
-							<!-- <div dir="rtl" class="form-group">
-							  <label for="pwd">تكلفة الشخص</label>
-							</div>
-
-
-							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
-							  <label for="pwd2">غرفة ثنائي</label>
-							  <input required name="double_cost" type="Number" value="0" class="form-control" id="pwd2">
-							</div>
-							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
-							  <label for="pwd3">غرفة ثﻻثي</label>
-							  <input required name="triple_cost" type="Number" value="0" class="form-control" id="pwd3">
-							</div>
-							
-							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
-							  <label for="pwd4">غرفة رباعي</label>
-							  <input required name="quad_cost" type="Number" value="0" class="form-control" id="pwd4">
-							</div>
-							
-							<div dir="rtl" class="form-group col-md-6 col-sm-6 col-xs-6 ">
-							  <label for="pwd5">غرفة خماسي</label>
-							  <input required name="five_cost" type="Number" value="0" class="form-control" id="pwd5">
-							</div>
-							 -->
 							<div dir="rtl" class="form-group">
-							  <label for="include">عدد الأشخاص</label>
-							  <select name="transport" class="form-control">
-							  <option value="True">نقل بري</option>
-							  <option value="False">طيران</option>
-							  </select>
+							  <label >سعر الغرفة المفردة / الشخص</label>
+							  <input type="Number" class="form-control" name="updated_single_room_cost" > 						
+							</div>
+							<div dir="rtl" class="form-group">
+							  <label >سعر الغرفة الثنائية / الشخص</label>
+							  <input type="Number" class="form-control" name="updated_double_room_cost"> 						
+							</div>
+							<div dir="rtl" class="form-group">
+							  <label >سعر الغرفة الثلاثية / الشخص</label>
+							  <input type="Number" class="form-control" name="updated_trip_room_cost" > 						
+							</div>
+							<div dir="rtl" class="form-group">
+							  <label >سعر الغرفة الرباعية / الشخص</label>
+							  <input type="Number" class="form-control" name="updated_quad_room_cost"> 						
+							</div>
+							<div dir="rtl" class="form-group">
+							  <label >سعر الغرفة الخماسية / الشخص</label>
+							  <input type="Number" class="form-control" name="updated_quin_room_cost" > 						
 							</div>
 							<div dir="rtl" class="form-group">
 							  <label for="include">وسيلة السفر</label>
-							  <select name="transport" class="form-control">
+							  <select name="transport" class="form-control" name="transport">
 							  <option value="True">نقل بري</option>
 							  <option value="False">طيران</option>
 							  </select>
 							</div>
-							
 
 							<div dir="rtl" class="form-group text-center">
-									<input required type="submit" class="btn btn-success btn-lg"  value="التالي" >
+									<input required type="submit" class="btn btn-success btn-lg"  value="إتمام" >
 							</div>
 						</div>
 						</form>

@@ -54,8 +54,16 @@
 													<input   name="password" id="password1" type="password"  class="form-control" required >
 														<label   class="col-xs-12" >إعادة كلمة المرور</label>
 														<input   id="password2" type="password" class="form-control" required >	
+														<label   class="col-xs-12" >اسم الشركة</label>
+														<input  name="title" id="company_title" type="text" class="form-control" required >
+														<label   class="col-xs-12" >الدولة</label>
+														<select  name="country" id="phone_number" type="text" class="form-control" required >
+															{% for country in countries %} 
+															<option value="{{country.id}}">{{country.title}}</option>
+															{% endfor %} 
+														</select>
 														<label   class="col-xs-12" >رقم الهاتف</label>
-														<input  name="phone_number" dir="ltr" id="phone_number" type="text" class="form-control" required value="07">
+														<input  name="phone_number" id="phone_number" type="text" class="form-control" required value="07">
 													{% for message in messages %} 
 													<label style="color:red;">{{message}}</label>
 													{% endfor %} 

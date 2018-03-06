@@ -7,23 +7,20 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError 
 from catalogue.models import Package  , Agency  , Photoshot
 from django.http import HttpResponse
-# from dashboard.forms import PackageForm
-# from .forms import AgencyForm
+from supplier.forms import UpdatePackageForm , PackageForm , AgencyForm
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 @login_required() 
-def supplier(request):
+def agency(request , agency_id ):
     context= {} 
-    packages = Package.objects.filter(user = request.user ) 
+    packages = Package.objects.filter(created_by = request.user).exclude(is_removed = True ) 
     context['packages'] = packages 
-    try : 
-        agency =  Agency.objects.get(user = request.user ) 
-    except ObjectDoesNotExist : 
-        agency = None 
+
+    agency =  Agency.objects.get(created_by = request.user ) 
 
     if request.method == 'POST':
-        agency , r = Agency.objects.get_or_create(user = request.user ) 
+        agency = Agency.objects.get(created_by = request.user ) 
 
         form = AgencyForm(request.POST, instance = agency ) 
         if form.is_valid() : 
@@ -37,17 +34,18 @@ def supplier(request):
 
 def supplier_package(request):
     context={}
+
     if request.method == 'POST' : 
         form = PackageForm(request.POST)
 
         if form.is_valid():
             instance = form.save(commit = False ) 
-            instance.user = request.user 
+            instance.created_by = request.user 
+            instance.is_created = True 
             instance.save()
             messages.add_message(request , messages.INFO , 'تمت اضافة عرض العمرة بنجاح ')
 
             return redirect('supplier')
-
 
     context['photos1'] = Photoshot.objects.all()[:6]
     context['photos2'] = context['photos1']
@@ -57,8 +55,30 @@ def supplier_package(request):
 @login_required
 def remove_package(request, package_id):
     package = Package.objects.get(id = package_id ) 
-    if package.user == request.user : 
-        package.delete()
+    if package.created_by == request.user : 
+        package.is_removed = True 
+        package.save() 
+        messages.add_message(request , messages.INFO , 'تم حذف العرض')
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    return HttpResponse(status =404 )
+
+@login_required
+def update_package(request, package_id):
+    package = Package.objects.get(id = package_id ) 
+
+    if package.created_by == request.user and request.method == 'POST' :
+        form = UpdatePackageForm(request.POST , instance = package)
+        
+        if form.is_valid() :
+            instance = form.save()
+            if not instance.is_created : 
+                instance.is_updated = True 
+                instance.save()
+        else :
+            print form.errors 
+            return HttpResponse(status = 503) 
+
         messages.add_message(request , messages.INFO , 'تم حذف العرض')
         return redirect(request.META.get('HTTP_REFERER'))
 

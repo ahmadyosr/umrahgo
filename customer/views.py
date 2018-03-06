@@ -2,7 +2,11 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.decorators import login_required 
 from catalogue.models import Photoshot , MakkahHotel , MadinahHotel , Agency
-from django.contrib.auth import login , authenticate
+from django.contrib.auth import login , authenticate , logout 
+from catalogue.models import Country
+from django.db import IntegrityError
+from django.contrib.auth.models import User
+from django.contrib import messages
 @login_required
 def profile(request):
 	# default session varibales 
@@ -25,11 +29,12 @@ def reservation(request):
 Authentication views 
 """
 def register_user(request):
-    print request.session.items()
     if request.method == 'POST' : 
         username = request.POST.get('username')
         password = request.POST.get('password')
-        phone_number = request.POST.get('phone_number') 
+        title = request.POST.get('title') 
+        country_id = request.POST.get('country_id')
+        phone_number = request.POST.get('phone_number')
 
         try : 
             user = User.objects.create(
@@ -40,16 +45,25 @@ def register_user(request):
             return redirect(request.META.get('HTTP_REFERER'))
 
         user.set_password(password)
-        user.save() 
-        user.userprofile.phone_number = phone_number  
-        user.userprofile.save()
+        user.save()
 
+        # create agency 
+        Agency.objects.create(
+            created_by = user, 
+            title = title ,
+            country_id = country_id ,  
+            phone_number = phone_number
+         )
+        
         user = authenticate(username= username, password = password )
         login(request ,user)
         
-        return redirect('profile') 
+        return redirect('supplier') 
         
-    return render(request , 'register.html' )
+    context = {}
+    context['countries'] = Country.objects.all() 
+
+    return render(request , 'register.html' , context)
 
 def login_user(request): 
 
