@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+	
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,6 +53,16 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115302054-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-115302054-1');
+	</script>
+
 </head>
 <style>
 /*these styles to RTL elements and components */
@@ -331,18 +341,18 @@
 								
 								<div id="navbar" class="collapse navbar-collapse navbar-arrow pull-right">
 									<ul class="nav navbar-nav" id="responsive-menu">
-										{% if request.user.is_authenticated %} 
+										<li><a href="{% url 'catalogue:about' %}">من نحن</a></li>
+										{% if request.user.is_authenticated and request.user.is_staff == False %} 
 										<li><a href="{% url 'customer:logout_user' %}">تسجيل الخروج</a></li>
-										<li><a href="">لوحة التحكم <span class="label label-primary">fix this</span></a></li>
+										<li><a href="{% url 'customer:login_user'  %}">لوحة التحكم<span class="label label-primary">شركات</span></a></li>
 										{% else %} 
 										<li><a href="{% url 'customer:login_user' %}">دخول الشركات  <span class="label label-primary">شركات</span></a></li>
 										{% endif %} 
-										<li><a href="{% url 'catalogue:about' %}">من نحن</a></li>
 										<li><a href="{% url 'catalogue:contact' %}">اتصل بنا</a></li>
 										<li><a >الدول</a>
 											<ul>
 												{% for country in countries %} 
-												<li><a href="{% url 'catalogue:list' %}?country_code=country.country_code">{{country.title}}</a></li>
+												<li><a href="{% url 'catalogue:agencies_list' %}?country_code={{country.country_code}}">{{country.title}}</a></li>
 												{% endfor %} 
 											</ul>
 										</li>

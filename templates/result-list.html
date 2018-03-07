@@ -75,11 +75,11 @@
 								</div>
 
 							</div>
-							
+
 							{% for package in packages %} 
 							<div class="package-list-item clearfix rtl">
 									<div class="image pull-right">
-										<a  href="{% url 'package' package_id=package.id %}">
+										<a  href="#">
 										<img src="{{package.thumbnail}}" alt="Tour Package" style="max-height:250px;" />
 										</a>
 										<div class="absolute-in-image">
@@ -88,7 +88,7 @@
 									</div>
 																		
 									<div class="content">
-										<h5><a href="{% url 'package' package_id=package.id %}" >{{package.title}} </a></h5>
+										<h5><a href="#" >{{package.title}} </a></h5>
 										<div class="row gap-10">
 											<div class="col-sm-12 col-md-9 pull-right">
 												
@@ -109,7 +109,7 @@
 												 -->
 												<div class="price" dir="rtl">{{package.prices_start_from}} دينار</div>
 												
-												<a href="{% url 'package' package_id=package.id %}" class="btn btn-primary btn-lg">عرض</a>
+												<a href="#" class="btn btn-primary btn-lg">عرض</a>
 												
 											</div>
 										</div>

@@ -7,6 +7,8 @@ from catalogue.models import Country
 from django.db import IntegrityError
 from django.contrib.auth.models import User
 from django.contrib import messages
+from customer.forms import ReservationForm
+from django.http import HttpResponse , HttpResponseRedirect
 @login_required
 def profile(request):
 	# default session varibales 
@@ -19,10 +21,20 @@ def profile(request):
 	return render(request , 'profile.html'  )
 
 def reservation(request):
-    context = {}
-    context['photos'] = Photoshot.objects.all()[:5]
-    context['range_list'] = range(10)
-    return render(request , 'reservation.html' , context )
+    package_id = request.GET.get('package_id')
+    if request.method == 'POST' : 
+        form =  ReservationForm(request.POST) 
+        if form.is_valid():
+            form.save()
+            messages.add_message(request , messages.INFO , 'تم ارسال الطلب بنجاح سنقوم بالتواصل معك بأقرب وقت!') 
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+        else : 
+            print form.errors 
+    if not package_id : 
+        return HttpResponse(status = 404 )
+
+    return render(request , 'reservation.html' , {'package_id' :package_id} )
 
 
 """
@@ -58,7 +70,7 @@ def register_user(request):
         user = authenticate(username= username, password = password )
         login(request ,user)
         
-        return redirect('agency' , agency_id= agency.id) 
+        return redirect('supplier:agency' , agency_id= agency.id) 
         
     context = {}
     context['countries'] = Country.objects.all() 
@@ -66,6 +78,10 @@ def register_user(request):
     return render(request , 'register.html' , context)
 
 def login_user(request): 
+    if request.user.is_authenticated() and request.user.is_staff == False : 
+        # return request.user
+        agency = Agency.objects.get(created_by = request.user)
+        return redirect('supplier:agency' , agency_id = agency.id)
 
     if request.method == "POST":
         username  = request.POST.get('username') 

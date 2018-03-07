@@ -9,13 +9,13 @@ from catalogue.models import Package  , Agency  , Photoshot
 from django.http import HttpResponse
 from supplier.forms import UpdatePackageForm , PackageForm , AgencyForm
 from django.core.exceptions import ObjectDoesNotExist
+from dashboard.views import migrate_prices 
 # Create your views here.
 
 @login_required() 
 def agency(request , agency_id):
     context= {} 
-    agency =  Agency.objects.get(id = agency_id ) 
-    packages = Package.objects.filter(created_by = agency.created_by).exclude(is_removed = True ) 
+    agency =  Agency.objects.get(id = agency_id )
 
     if request.method == 'POST':
         form = AgencyForm(request.POST, instance = agency ) 
@@ -25,16 +25,23 @@ def agency(request , agency_id):
         else: 
             context['form_errors'] = form.errors
 
+    if request.user.is_staff  : 
+        packages = Package.objects.filter(catalogue_agency = agency)
+        context['matched_agencies'] = Agency.objects.filter(created_by__is_staff = False)
+        
+    else : 
+        packages = Package.objects.filter(created_by = request.user).exclude(is_removed = True )
+
     context['agency'] = agency 
     context['packages'] = packages 
-    if request.user.is_staff : 
-        context['matched_agencies'] = Agency.objects.filter(created_by__is_staff = False)
 
     return render(request , 'supplier/agency.html' , context )
 
 def supplier_package(request):
     context={}
-    agency = Agency.objects.get(created_by =request.user ) 
+    agency_id = request.GET.get('agency_id')
+    agency = Agency.objects.get(id = agency_id) 
+
     if request.method == 'POST' : 
         form = PackageForm(request.POST)
 
@@ -42,14 +49,16 @@ def supplier_package(request):
             instance = form.save(commit = False ) 
             instance.created_by = request.user 
             instance.is_created = True 
+
+            if request.user.is_staff  : 
+                instance.catalogue_agency = agency
+                migrate_prices(instance)
             instance.save()
             messages.add_message(request , messages.INFO , 'تمت اضافة عرض العمرة بنجاح ')
 
-            return redirect('supplier:agency' , agency_id = agency.id )
+            return redirect('supplier:agency' , agency_id = agency_id )
 
-    context['photos1'] = Photoshot.objects.all()[:6]
-    context['photos2'] = context['photos1']
-    
+    context['agency'] = agency
     return render(request , 'package_form.html' , context )
 
 @login_required
@@ -67,19 +76,22 @@ def remove_package(request, package_id):
 def update_package(request, package_id):
     package = Package.objects.get(id = package_id ) 
 
-    if package.created_by == request.user and request.method == 'POST' :
+    if (package.created_by == request.user or request.user.is_staff ) and request.method == 'POST' :
         form = UpdatePackageForm(request.POST , instance = package)
         
         if form.is_valid() :
-            instance = form.save()
+            instance = form.save(commit = False )
+            if request.user.is_staff :
+                migrate_prices(instance)
+
             if not instance.is_created : 
                 instance.is_updated = True 
-                instance.save()
+
+            instance.save()
         else :
-            print form.errors 
             return HttpResponse(status = 503) 
 
-        messages.add_message(request , messages.INFO , 'تم حذف العرض')
+        messages.add_message(request , messages.INFO , 'تم تحديث العرض')
         return redirect(request.META.get('HTTP_REFERER'))
 
     return HttpResponse(status =404 )

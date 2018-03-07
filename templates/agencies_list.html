@@ -76,12 +76,12 @@ div#columns:hover figure:not(:hover) {
 					
 						<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
 						
-							<h1 class="hero-title">XXXX{{agency.title}}</h1>
+							<h1 class="hero-title">{{country.title}}</h1>
 							
 							<ol class="breadcrumb-list">
 								<li><a href="/">الرئيسية</a></li>
-								<li><a  href="{% url 'catalogue:list' %}?country_code=JO">NNN</a></li>
-								<li>ABD</li>
+								<li><a  href="{% url 'catalogue:agencies_list' %}?country_code={{country.country_code}}">شركات العمرة</a></li>
+								<!-- <li>ABD</li> -->
 							</ol>
 							
 						</div>
@@ -102,9 +102,9 @@ div#columns:hover figure:not(:hover) {
 
 							<div class="sorting-wrappper rtl">
 			
-								<div class="sorting-header">
-									<h3 class="sorting-title uppercase">3 Countries: Germany, France, Austria</h3>
-									<p class="sorting-lead">587 results found</p>
+								<div class="sorting-header" dir="rlt" >
+									<h3 class="sorting-title uppercase"> يوجد في {{country.title}} <span>{{agencies_count}} </span> شركة عمرة </h3>
+									<!-- <p class="sorting-lead">587 results found</p> -->
 								</div>
 
 							</div>
@@ -114,7 +114,7 @@ div#columns:hover figure:not(:hover) {
 						<figure style="width:100%" >
 							<div style="padding:10px;">
 							<div dir="lrt" class="form-group" >
-								<h3><span class="pull-left"><small>ابتداء من {{agency.start_from}} دينار</small></span><span>{{agency.title}}</span></h3>
+								<h3><span class="pull-left"><small>ابتداء من {{agency.prices_start_from}} دينار</small></span><span>{{agency.title}}</span></h3>
 							</div>
 							<div class="form-group" dir="rtl"> 
 							  <table class="table" >

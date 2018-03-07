@@ -8,19 +8,9 @@ from catalogue.models import RoomClass , MakkahHotel , MadinahHotel , Agency
 
 # Create your models here.
 
-class UserProfile(models.Model):
-	user = models.OneToOneField(User , null = True )
-	phone_number = models.CharField(max_length = 15 , blank = True)
-
 class Reservation(models.Model):
-	user = models.ForeignKey(User)
+	username = models.CharField(max_length =100) 
+	phone_number = models.CharField(max_length = 200)
 
-	room_size = models.ForeignKey(RoomClass)
-	makkah_hotel = models.ForeignKey(MakkahHotel)
-	madinah_hotel = models.ForeignKey(MadinahHotel)
-	rooms_qty = models.IntegerField(default = 0 )
-	guests_qty = models.IntegerField(default = 0 ) 
-	transport = models.CharField(max_length = 50 )
-	agency = models.ForeignKey(Agency)
-	departure_date = models.DateField(auto_now = False) 
-	customer_address = models.CharField(max_length= 200 )
+	departures_qty = models.IntegerField(default = 1)
+	package = models.IntegerField(null = True)

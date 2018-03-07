@@ -29,8 +29,12 @@
               <div class="col-md-9 mt-5"> 
               <p class="lead">اخر التحديثات على الوكالات</p>
               <div class="col-md-12" style="overflow-x:scroll;text-align:center;"> 
+              {% for message in messages %} 
+                {{message}}
+              {% endfor %}
               <table class="table" >
                         <tr>
+                          <td>الشركة</td>
                           <td>النقل</td>
                           <td>فندق مكة</td>
                           <td>فندق المدينة</td>
@@ -45,6 +49,7 @@
                     {% for p in packages %} 
                         <tr>
                         {% csrf_token %} 
+                          <td>{{p.created_by}}</td>
                           <td>{{p.transport}}</td>
                           <td>{{p.makkah_hotel_title}}</td>
                           <td>{{p.madinah_hotel_title}}</td>
@@ -55,13 +60,13 @@
                           <td>{{p.updated_quin_room_cost}}</td>
                           {% if p.is_updated %} 
                           <td><a class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  
-                          href="{% url 'dashboard:update_package' package_id=p.id %}" >تحديث</a></td>
+                          href="{% url 'dashboard:approve_update_package' package_id=p.id %}" >تحديث</a></td>
                           {% elif p.is_created %} 
                           <td><a class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  
-                          href="{% url 'dashboard:add_package' package_id=p.id %}" >اضافة</a></td>
+                          href="{% url 'dashboard:approve_add_package' package_id=p.id %}" >اضافة</a></td>
                           {% elif p.is_removed %} 
                           <td><a class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  
-                          href="{% url 'dashboard:remove_package' package_id=p.id %}" >حذف</a></td>
+                          href="{% url 'dashboard:approve_remove_package' package_id=p.id %}" >حذف</a></td>
                           {% endif %} 
                           <td><a style="border:0;" class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  
                           href="{% url 'dashboard:reject_action' package_id=p.id %}" >رفض</a></td>
@@ -69,10 +74,24 @@
                     {% endfor %} 
 
               </table>
+              </div>  
+              <div class="col-md-12" >
+                <br>
+                <p class="lead">الشركات المسجلة</p>
+                <table class="table">
+                {% for agency in suppliers_agencies %} 
+                <tr>
+                <td>{{agency.title}}</td>
+                <td>{{agency.created_by.username}}</td>
+                <td>{{agency.agency_set.all}}</td>
+                </tr>
+                {% endfor %} 
+                </table>
               </div>
               </div>
               <div class="col-md-3 mt-5">
               <p class="lead">القائمة التالي هي للوكالات المعروضة على الكتالوج</p>
+              <a href="{% url 'dashboard:add_agency' %}" >اضافة وكالة</a>
               <ul class="list-group">
               {% for agency in agencies %}
               <a href="{% url 'supplier:agency' agency_id=agency.id %}" class="list-group-item">{{agency.title}}</a>

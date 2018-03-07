@@ -54,7 +54,7 @@
 													
 												</div>
 												<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
-													<form action="{% url 'login_user' %}" method="POST">
+													<form action="{% url 'customer:login_user' %}" method="POST">
 													{% csrf_token %}  
 														<label  class="col-xs-12 " >البريد الالكتروني</label>
 														<input  name="username" type="email"  class="form-control" >
@@ -62,7 +62,7 @@
 														<input  name="password" type="password"  class="form-control" >
 													<div class="col-md-12 mt-30" style="text-align:center;">
 															<input type="submit" class="btn btn-primary" value="دخول"> 
-													<a class="btn btn-danger" href="{% url 'register_user' %}" >حساب جديد </a>
+													<a class="btn btn-danger" href="{% url 'customer:register_user' %}" >حساب جديد </a>
 													</div>
 													</form>
 												</div>	

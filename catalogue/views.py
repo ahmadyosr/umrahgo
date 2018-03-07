@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect 	
 from django.http import HttpResponse
-from catalogue.models import  Agency , Photoshot , Hotel , Package
+from catalogue.models import  Agency , Photoshot , Hotel , Package, Country 
 from customer.forms import ReservationForm
 # Create your views here.
 
@@ -11,16 +11,23 @@ def landing_page(request):
 
 def agencies_list(request):
 	context = {}
-	# agencies = Agency.objects.filter(created_by__is_staff = True)
-	agencies = Agency.objects.all()
-	packages = []
+	country_code = request.GET.get('country_code')
+	if country_code  : 
+		country = Country.objects.get(country_code = country_code)
+
+	else : 
+		country = Country.objects.get(country_code = 'JO')
+
+	agencies = Agency.objects.filter(created_by__is_staff = True , country = country)
 	
+	packages = []
 	for agency in agencies  : 
 		packages += [Package.objects.filter(catalogue_agency= agency)]
 
 	agencies_list = zip(agencies , packages)
-	print agencies_list
 	context['agencies_list'] = agencies_list
+	context['agencies_count'] = agencies.count
+	context['country'] = country
 	return render(request , 'agencies_list.html', context)
 
 def agency(request , agency_id ):
@@ -34,16 +41,10 @@ def package(request , package_id):
 	package = Package.objects.get(id = package_id)
 
 	context['agency'] = package.catalogue_agency
-	context['photos'] = Photoshot.objects.all()[:6]
 	context['package'] = package
 	context['agency_packages'] = Package.objects.filter(catalogue_agency = package.catalogue_agency)
-	return render(request , 'package.html' , context )
 
-def list(request):
-	country_code = request.GET.get('country_code') 
-	# packages = Package.objects.filter(agency__country__country_code = country_code )
-	packages = None 
-	return render(request , 'result-list.html', {'packages' : packages } )
+	return render(request , 'package.html' , context )
 
 def about(request):
 	return render(request , 'about.html' )

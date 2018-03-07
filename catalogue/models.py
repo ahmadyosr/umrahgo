@@ -1,9 +1,11 @@
+#-*- encoding:UTF-8 -*- 
 from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver 
 
 # Create your models here.
-
 class Country(models.Model):
 	title = models.CharField(max_length = 50)
 	country_code = models.CharField(max_length = 3 , default = 'JO' ) 
@@ -33,9 +35,9 @@ class Agency(models.Model):
 	logo  = models.FileField(upload_to = 'logos/' , null = True ) 
 
 	available_dates = models.ManyToManyField(Date) 
-	# bus_cost = models.IntegerField(default = 0 ) # zero means there are no 
-	# flight_cost = models.IntegerField(default = 0 ) # zero means there are no 
-	# for suppliers 
+
+	prices_start_from = models.IntegerField(default = 0)
+	
 	def __unicode__(self):
 		return self.title 
 
@@ -55,7 +57,7 @@ class Package(models.Model):
 	transport = models.CharField(max_length =10 , default ="BUS" ) # choices are('BUS' , 'FLIGHT')
 	month = models.IntegerField(default =0 )
 	year = models.IntegerField(default =0 )
-	
+
 	# agency user section 
 	updated_single_room_cost = models.IntegerField(default = 0 )
 	updated_double_room_cost = models.IntegerField(default = 0 )
@@ -72,9 +74,16 @@ class Package(models.Model):
 
 	@property
 	def catalogue_title(self):
-		return unicode(self.makkah_hotel_title) +' '+ unicode(self.madinah_hotel_title)
-	# class Meta : 
-	# 	unique_together = ('agency' ,'madinah_hotel' , 'makkah_hotel' , 'psport' )
+		if self.transport == "BUS" : 
+			travel = "السفر براً"
+		else: 
+			travel = "السفر جواً"
+
+		try : 
+			stars = self.makkah_hotel.stars
+		except AttributeError : 
+			stars = '0'
+		return unicode("فندق ") + unicode(stars) + unicode(" نجوم ")+ unicode(travel)
 
 class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 
@@ -104,3 +113,31 @@ class RoomClass(models.Model):
 	class_code = models.CharField(max_length = 20 , unique = True ) 
 	def __unicode__(self):
 		return self.title
+
+
+
+
+## signals for orders postsave 
+@receiver(post_save , sender= Package) 
+def post_save_package(sender ,created, instance,**kwargs ):
+	# calculate the start_from_prices for catalogue_agency 
+	if instance.catalogue_agency : 
+		agency = instance.catalogue_agency
+		start_from = agency.prices_start_from
+
+		single = instance.single_room_cost
+		double = instance.double_room_cost
+		trip = instance.trip_room_cost
+		quad = instance.quad_room_cost
+		quin = instance.quin_room_cost
+		prices = (single , double ,trip , quad , quin )
+
+		for p in prices : 
+			if p > 0 : 
+				if p < start_from : 
+					start_form = p
+
+		agency.prices_start_from = start_from 
+		agency.save()
+
+	return 

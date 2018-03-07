@@ -1,0 +1,130 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+		<div class="main-wrapper">
+			
+			<div class="breadcrumb-wrapper bg-light-2">
+				
+				<div class="container" dir="rtl">
+				
+							<ol class="breadcrumb-list" dir="rtl">
+								<li><a href="/">الرئيسية</a></li>
+								<li><span style="color:grey;">لوحة التحكم</span></li>
+							</ol>
+							
+				</div>
+				
+			</div>
+			
+			<div class="content-wrapper">
+			
+				<div class="container">
+			
+					<div class="row" dir="rtl">
+
+{% if messages %}
+<div style="max-width:500px;margin-right:auto;margin-left:auto;text-align: center;" role="main" >
+<h1><i class="fa fa-thumbs-o-up"></i></h1>
+{% for message in messages %} 
+<h3>{{message}}</h3>
+{% endfor %} 
+
+<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'catalogue:package' package_id=package_id %}" >رجوع</a> 
+
+
+</div>
+{% else %}
+						<div style="max-width:500px;margin-right:auto;margin-left:auto" role="main">
+	
+							<div class="section-title text-right">
+								
+								<h3>حجز رحلة عمرة</h3>
+								
+							</div>
+							<div class="alert alert-success">
+							سوف ستقوم الشركة المعنية بالتواصل معك بأقرب وقت   
+							</div>
+							<div class="payment-container" >
+							
+				
+									<div class="col-md-12">
+									
+										
+										<div class="col-md-12">
+											
+											
+												<div class="row gap-0">
+												
+													
+												</div>
+
+<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
+	<form action="{% url 'customer:reservation' %}" method="POST">
+		{% csrf_token %}  
+		<input type="hidden" name="package" value="{{package_id}}"> 
+		<label  class="col-xs-12 " >الإسم</label>
+		<input   name="username" type="text"  class="form-control" required>
+		<label   class="col-xs-12" >عدد الأشخاص</label>
+		<select   name="departures_qty"  class="form-control" required >
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select>
+		<label   class="col-xs-12" >رقم الهاتف</label>
+		<input  style="text-align:left;" name="phone_number" id="phone_number" type="text" class="form-control" required value="07">
+	{% for message in messages %} 
+	<label style="color:red;">{{message}}</label>
+	{% endfor %} 
+	<label id="phonenumber_match" style="color:red;"></label>
+
+	<div class="col-md-12 mt-30" style="text-align:center;">
+	<input style="margin-bottom: 10px;" type="submit" class="btn btn-danger" value="إتمام">
+	<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'catalogue:package' package_id=package_id %}" >رجوع</a> 
+
+	</div>
+	</form>
+</div>
+												
+												
+											</div>
+									
+										</div>
+										
+									</div>
+									
+									<div class="row mt-20">
+											
+									</div>
+									
+								
+							</div>
+{% endif %} 
+						</div>
+
+
+					</div>
+				
+				</div>
+					
+			</div>
+
+<script>
+let phone_number = $('#phone_number') 
+
+
+phone_number.change(function(){
+	var re = /^[0]{1}[7]{1}[7,8,9]{1}[0-9]{7}/; 
+	var result = phone_number.val().match(re);
+	if (result)
+		$('#phonenumber_match').text(''); 
+	else 
+		$('#phonenumber_match').text('رقم الهاتف غير مقبول , يجب ان يطابق صيغة رقم خلوي أردني'); 
+
+})
+
+
+</script>
+		</div>
+		<!-- end Main Wrapper -->
+{% endblock %} 
