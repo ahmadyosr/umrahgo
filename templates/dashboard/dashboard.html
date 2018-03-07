@@ -63,7 +63,7 @@
                           <td><a class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  
                           href="{% url 'dashboard:remove_package' package_id=p.id %}" >حذف</a></td>
                           {% endif %} 
-                          <td><a class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  
+                          <td><a style="border:0;" class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  
                           href="{% url 'dashboard:reject_action' package_id=p.id %}" >رفض</a></td>
                         </tr>
                     {% endfor %} 
@@ -75,7 +75,7 @@
               <p class="lead">القائمة التالي هي للوكالات المعروضة على الكتالوج</p>
               <ul class="list-group">
               {% for agency in agencies %}
-              <a href="{% url 'agency' agency_id=agency.id %}" class="list-group-item">{{agency.title}}</a>
+              <a href="{% url 'supplier:agency' agency_id=agency.id %}" class="list-group-item">{{agency.title}}</a>
               {% endfor %}
               </ul>
               </div>   
