@@ -65,8 +65,10 @@
 						{{agency.phone_number}}&nbsp;&nbsp;<i class="fa fa-phone"></i></p>
 						<p style="border-bottom:.5px solid #D3D3D3">
 						{{agency.email}}&nbsp;&nbsp;<i class="fa fa-envelope"></i></p>
+						{% if agency.website %}
 						<p style="border-bottom:.5px solid #D3D3D3">
 						{{agency.website}}&nbsp;&nbsp;<i class="fa fa-globe"></i></p>
+						{% endif %} 
 						<ul class="list-group ">
 						<p>البرامج المتاحة</p>
 						{% for p in agency_packages %} 

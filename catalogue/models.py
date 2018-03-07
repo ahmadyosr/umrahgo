@@ -72,6 +72,8 @@ class Package(models.Model):
 	makkah_hotel_title = models.CharField(max_length= 200 , blank = True )
 	madinah_hotel_title = models.CharField(max_length= 200 , blank = True )
 
+	prices_start_from = models.IntegerField(default = 0)
+
 	@property
 	def catalogue_title(self):
 		if self.transport == "BUS" : 
@@ -123,7 +125,9 @@ def post_save_package(sender ,created, instance,**kwargs ):
 	# calculate the start_from_prices for catalogue_agency 
 	if instance.catalogue_agency : 
 		agency = instance.catalogue_agency
-		start_from = agency.prices_start_from
+		agency_start_from = agency.prices_start_from
+		package_start_from = instance.prices_start_from
+
 
 		single = instance.single_room_cost
 		double = instance.double_room_cost
@@ -134,10 +138,19 @@ def post_save_package(sender ,created, instance,**kwargs ):
 
 		for p in prices : 
 			if p > 0 : 
-				if p < start_from : 
-					start_form = p
+				if agency_start_from == 0 : 
+					agency_start_from = p 
+				if p < agency_start_from : 
+					agency_start_from = p
 
-		agency.prices_start_from = start_from 
+				if package_start_from == 0 : 
+					package_start_from = p 
+				if p < package_start_from : 
+					package_start_from = p 
+
+		agency.prices_start_from = agency_start_from 
 		agency.save()
+
+		Package.objects.filter(id= instance.id).update(prices_start_from = package_start_from)
 
 	return 

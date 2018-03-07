@@ -33,7 +33,6 @@ def agencies_list(request):
 def agency(request , agency_id ):
 	agency = Agency.objects.get(id = agency_id)
 	package = Package.objects.filter(catalogue_agency = agency).first()
-	print package 
 	return redirect('catalogue:package' , package_id = package.id )
 
 def package(request , package_id):
@@ -44,8 +43,24 @@ def package(request , package_id):
 	context['package'] = package
 	context['agency_packages'] = Package.objects.filter(catalogue_agency = package.catalogue_agency)
 
+
 	return render(request , 'package.html' , context )
 
+def packages(request):
+	context ={}
+	country_code = request.GET.get('country_code')
+	if country_code  : 
+		country = Country.objects.get(country_code = country_code)
+
+	else : 
+		country = Country.objects.get(country_code = 'JO')
+
+
+	context['packages'] = Package.objects.exclude(catalogue_agency = None)
+	context['country'] = country
+	
+	return render(request , 'packages.html' , context)
+	
 def about(request):
 	return render(request , 'about.html' )
 

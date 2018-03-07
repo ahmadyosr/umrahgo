@@ -2,14 +2,10 @@ from catalogue.models import Package , Agency , MakkahHotel , MadinahHotel
 import random
 def run():
 	
-	packages = Package.objects.all()
-	agencies = Agency.objects.all()
+	package = Package.objects.exclude(catalogue_agency = None).first()
+	print package.id , 'id'
+	print package.prices_start_from 
+	# package.single_room_cost = 2
+	# package.save()
+	print package.prices_start_from
 
-	madinah = MadinahHotel.objects.all()
-	makkah = MakkahHotel.objects.all()
-
-	for p in packages:
-		p.makkah_hotel = random.choice(makkah)
-		p.madinah_hotel = random.choice(madinah)
-		p.save() 
-		
