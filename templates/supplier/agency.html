@@ -82,7 +82,7 @@
 						</div>
 
 							<div  class="col-md-12" >
-							<form action="{% url 'agency' agency_id=agency.id %}" method="POST">
+							<form action="{% url 'supplier:agency' agency_id=agency.id %}" method="POST">
 							{% csrf_token %} 
 							<div class="section-fortitle text-right mt-5">
 								<h5>معلومات الوكالة السياحية</h5>

@@ -1,0 +1,265 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+		<div class="main-wrapper">
+			<!-- start end Page title -->
+			<div class="page-title" style="background-image:url('/static/images/header.jpg');">
+				
+				<div class="container">
+				
+					<div class="row">
+					
+						<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3" dir="rtl">
+						
+							<h1 class="hero-title">{{package.title}}</h1>
+							<small class="hero-title">{{package.title}}</small>
+							<h1 class="hero-title">{{package.prices_start_from}} دينار </h1>
+
+							<!-- 
+							<ol class="breadcrumb-list">
+								<li><a href="index.html">Homepage</a></li>
+								<li><a href="#">Desinations</a></li>
+								<li><a href="#">City</a></li>
+								<li><span>Result list</span></li>
+							</ol>
+							 -->
+						</div>
+						
+					</div>
+
+				</div>
+				
+			</div>
+			<!-- end Page title -->
+			
+			<!-- start end Page title -->
+			<!-- end Page title -->
+			
+			<div class="breadcrumb-wrapper bg-light-2 "  >
+				
+				<div class="container">
+				
+					<ol class="breadcrumb-list" dir="rtl">
+						<li><a href="/">الرئيسية</a></li>
+						<li><a href="{% url 'catalogue:list' %}?country_code=JO">{{package.agency.country.title}}</a></li>
+						<li><a href="">{{package.agency.title}}</a></li>
+						<li><span>{{package.title}}</span></li>
+					</ol>
+					
+				</div>
+				
+			</div>
+			
+			
+			<div class="content-wrapper" style="padding-top:10px">
+			
+				<div class="container">
+			
+					<div class="row" >
+						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
+						<div class="col-md-3 pull-right rtl" style="padding:10px;margin-bottom: 50px">
+						<h3>{{agency.title}}</h3>
+						<ul class="list-group ">
+						<p>البرامج</p>
+						{% for p in agency_packages %} 
+						  <a href="{% url 'catalogue:package' package_id=p.id %}" 
+						  class="list-group-item {% if package.id == p.id %}active{% endif %}">{{p.makkah_hotel_title}}</a>
+						{% endfor %} 
+						</ul>
+						</div>
+						<div  class="col-md-9" style="padding:10px;">
+							<div style="max-width: 600px;margin-right: auto;margin-left: auto">
+							<h1 dir="rtl" >{{package.catalogue_title}}<small>&nbsp;	{{package.double_room_cost}}دينار</small></h1>
+							<div class="alert alert-success"  dir="rtl" > 
+								هذا البرنامج متاح لشهر 3 سنة 2018 
+							</div>
+							<div class="col-xs-12 col-md-12 pull-right rtl" >
+							  <label for="include">الفندق في مكة المكرمة</label>
+							<ul class="list-group ">
+	  						  <li class="list-group-item">{{package.makkah_hotel.title}}<span>&nbsp;&nbsp;{{package.makkah_hotel.stars}} نجوم</span></li>
+	  						  <li  class="list-group-item" >يبعد عن الحرم مسافة {{package.makkah_hotel.distance_from_center}} متر </li>
+	  						  <a  class="list-group-item" >اظهار الصور <i class="fa fa-angle-down"></i></a>
+							</ul>
+							</div>
+							<div class="col-xs-12 col-md-12  "   >
+								<div class="slick-gallery-slideshow " >
+									<div class="slider gallery-slideshow" id="slideshow">
+									{% for photo in photos %} 
+										<div><div class="image"><img src="{{photo.file.url}}"  /></div></div>
+									{% endfor %} 
+									</div>
+									<div class="slider gallery-nav" id="navslider" >
+									{% for photo in photos %} 
+										<div><div class="image"><img src="{{photo.file.url}}"  /></div></div>
+									{% endfor %} 
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-12 rtl" >
+							  <label for="include">الفندق في المدينة المنورة</label>
+							<ul class="list-group ">
+	  						  <li class="list-group-item">{{package.madinah_hotel.title}}<span>&nbsp;&nbsp;{{package.makkah_hotel.stars}} نجوم</span></li>
+	  						  <li  class="list-group-item" >يبعد عن الحرم مسافة {{package.makkah_hotel.distance_from_center}} متر </li>
+  	  						  <a  class="list-group-item" data-toggle="collapse" data-target="#slideshow_madinah">اظهار الصور <i class="fa fa-angle-down"></i> </a>
+							</ul>
+							</div>
+							<div class="col-xs-12 col-md-12 collapsing "  id="slideshow_madinah" >
+								<div class="slick-gallery-slideshow " >
+									<div class="slider gallery-slideshow" id="slideshow">
+									{% for photo in photos %} 
+										<div><div class="image"><img src="{{photo.file.url}}"  /></div></div>
+									{% endfor %} 
+									</div>
+									<div class="slider gallery-nav" id="navslider" >
+									{% for photo in photos %} 
+										<div><div class="image"><img src="{{photo.file.url}}"  /></div></div>
+									{% endfor %} 
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-12" dir="rtl"> 
+							  <table class="table" style="text-align:center">
+							  	<span style="color:#43C458" >تكلفة الشخص في الغرفة</span>
+							  <tr>
+							    {% if package.single_room_cost > 0 %}<td>مفرد</td>{% endif %} 
+							    {% if package.double_room_cost > 0 %}<td>ثنائي</td>{% endif %}
+							    {% if package.trip_room_cost > 0 %}<td>ثلاثي</td>{% endif %}
+							    {% if package.quad_room_cost > 0 %}<td>رباعي</td>{% endif %}
+							    {% if package.quin_room_cost > 0 %}<td>خماسي</td>{% endif %}
+							  </tr>
+							  <tr>
+							    {% if package.single_room_cost > 0 %}<td>{{package.single_room_cost}}</td>{% endif %}
+							    {% if package.double_room_cost > 0 %}<td>{{package.double_room_cost}}</td>{% endif %}
+							    {% if package.trip_room_cost > 0 %}<td>{{package.trip_room_cost}}</td>{% endif %}
+							    {% if package.quad_room_cost > 0 %}<td>{{package.quad_room_cost}}</td>{% endif %}
+							    {% if package.quin_room_cost > 0 %}<td>{{package.quin_room_cost}}</td>{% endif %}
+							  </tr>
+							</table>
+							</div>	
+							<div class="col-xs-12 col-md-12" > 
+							<div class="panel-group ">
+							  <div class="panel panel-default">
+							    <div class="panel-heading text-center" >
+							      <h4 class="panel-title">
+							        <a data-toggle="collapse" href="#collapse1">المواعيد المتاحة</a>
+							      </h4>
+							    </div>
+							    <div id="collapse1" class="panel-collapse collapse" dir="rtl">
+							      <ul class="list-group">
+							        <li class="list-group-item">One</li>
+							        <li class="list-group-item">Two</li>
+							        <li class="list-group-item">Three</li>
+							      </ul>
+							    </div>
+							  </div>
+							</div>
+							</div>
+							<div dir="rtl" class="col-xs-12 col-md-12 text-center" style="margin-top:10%;">
+									<input type="submit" class="btn btn-danger btn-lg" value="حجز" >
+							</div>
+
+						</div>
+						</div>
+						</div>
+							
+					</div>
+
+
+				</div>
+				
+			</div>
+<!-- <script type="text/javascript" src="/static/js/slick.min.js"></script> -->
+
+<script>
+
+var hotel_select = $('#makkah_hotel_select')
+
+hotel_select.on('change',function(){
+        $.ajax({
+
+        url: "/get_hotel_photos/" + hotel_select.val()  ,
+             success: function(result){
+            	var slideshow = $('#slideshow')
+            	$('#slideshow').html('')
+            	var nav_slider = $('#navslider')
+            	$('#navslider').html('')
+            	// alert($('#navslider').html())
+
+            	$('#slideshow').attr('class' , 'slider gallery-slideshow')
+            	$('#navslider').attr('class' , 'slider gallery-nav')
+            	
+				var images_html = ""
+                $(result).find('PHOTO_URL').each(function(){
+                	console.log('one');
+                	var div0  = $('<div>')
+                	var div = $('<div>')
+                	var inner_div = $('<div>' , {'class' : 'image'} ) 
+                	var image = $('<img>' , {'src' : $(this).text()})
+                	var element = $(div0).append($(div).append($(inner_div).append((image))))
+                	images_html = images_html + $(element).clone().html()
+                })
+	        	$('#navslider').html('')
+	        
+				$('.gallery-slideshow').slick('unslick');				
+				$('.gallery-nav').slick('unslick')
+				
+	        	$('#navslider').html(images_html)
+	        	$('#slideshow').html(images_html)
+
+
+				$('.gallery-slideshow').slick({
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					speed: 500,
+					arrows: true,
+					fade: true,
+					asNavFor: '.gallery-nav'
+				});
+				$('.gallery-nav').slick({
+					slidesToShow: 7,
+					slidesToScroll: 4,
+					speed: 500,
+					asNavFor: '.gallery-slideshow',
+					dots: false,
+					centerMode: true,
+					focusOnSelect: true,
+					infinite: true,
+					responsive: [
+						{
+						breakpoint: 1199,
+						settings: {
+							slidesToShow: 7,
+							}
+						}, 
+						{
+						breakpoint: 991,
+						settings: {
+							slidesToShow: 5,
+							}
+						}, 
+						{
+						breakpoint: 767,
+						settings: {
+							slidesToShow: 5,
+							}
+						}, 
+						{
+						breakpoint: 480,
+						settings: {
+							slidesToShow: 3,
+							}
+						}
+					]
+				});
+         }
+    }); 
+    });
+
+
+var agencySelect = $('#agencySelect')
+</script>
+			</div>
+
+		<!-- end Main Wrapper -->
+{% endblock %} 

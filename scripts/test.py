@@ -1,17 +1,15 @@
-from catalogue.models import Package 
-from django.contrib.auth.models import User 
-from customer.models import UserProfile 
-
+from catalogue.models import Package , Agency , MakkahHotel , MadinahHotel 
+import random
 def run():
 	
-	p = UserProfile.objects.get(id =2) 
-	print p 
-	# p = UserProfile.objects.last() 
-	# print p.id , 'profile.id '
-	# print p.user , p.id , 'user name and id ' 
-	# u = p.user
+	packages = Package.objects.all()
+	agencies = Agency.objects.all()
 
-	# p.user = None 
-	# p.save()
-	# u.delete() 
-	
+	madinah = MadinahHotel.objects.all()
+	makkah = MakkahHotel.objects.all()
+
+	for p in packages:
+		p.makkah_hotel = random.choice(makkah)
+		p.madinah_hotel = random.choice(madinah)
+		p.save() 
+		

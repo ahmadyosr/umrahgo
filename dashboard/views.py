@@ -13,6 +13,9 @@ def dashboard(request):
 	context['packages'] = Package.objects.filter(Q(is_created = True ) | Q(is_removed = True) | Q(is_updated = True ) ) 
 	return render(request , 'dashboard/dashboard.html' , context )
 
+def add_agency(request):
+	
+	return render(request,'dashboard/add_agency.html')
 
 def match_agency(request):
 	if request.method == 'POST' : 
@@ -28,8 +31,9 @@ def match_agency(request):
 
 def add_package(request , package_id ):
 	package = Package.objects.get(id = package_id) 
-	package.catalogue_agency = agency
-	package.save() 
+	supplier_agency = 
+	package.catalogue_agency = supplier_agency
+	package.save()
 	return HttpResponse("succesfuly done ")
 def update_package(request , package_id ):
 	return 

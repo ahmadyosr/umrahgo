@@ -332,10 +332,10 @@
 								<div id="navbar" class="collapse navbar-collapse navbar-arrow pull-right">
 									<ul class="nav navbar-nav" id="responsive-menu">
 										{% if request.user.is_authenticated %} 
-										<li><a href="{% url 'logout_user' %}">تسجيل الخروج</a></li>
+										<li><a href="{% url 'customer:logout_user' %}">تسجيل الخروج</a></li>
 										<li><a href="">لوحة التحكم <span class="label label-primary">fix this</span></a></li>
 										{% else %} 
-										<li><a href="{% url 'login_user' %}">دخول الشركات  <span class="label label-primary">شركات</span></a></li>
+										<li><a href="{% url 'customer:login_user' %}">دخول الشركات  <span class="label label-primary">شركات</span></a></li>
 										{% endif %} 
 										<li><a href="{% url 'catalogue:about' %}">من نحن</a></li>
 										<li><a href="{% url 'catalogue:contact' %}">اتصل بنا</a></li>
@@ -349,7 +349,7 @@
 										<li><a>الوكالات</a>
 											<ul>
 												{% for agency in agencies %} 
-												<li><a href="{% url 'catalogue:agency' agency_id=agency.id %}">{{agency.title}}</a></li>
+												<li><a href="{% url 'catalogue:catalogue_agency' agency_id=agency.id %}">{{agency.title}}</a></li>
 												{% endfor %} 
 											</ul>
 										</li>

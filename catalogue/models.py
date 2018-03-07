@@ -53,8 +53,9 @@ class Package(models.Model):
 
 
 	transport = models.CharField(max_length =10 , default ="BUS" ) # choices are('BUS' , 'FLIGHT')
-
-
+	month = models.IntegerField(default =0 )
+	year = models.IntegerField(default =0 )
+	
 	# agency user section 
 	updated_single_room_cost = models.IntegerField(default = 0 )
 	updated_double_room_cost = models.IntegerField(default = 0 )
@@ -69,6 +70,9 @@ class Package(models.Model):
 	makkah_hotel_title = models.CharField(max_length= 200 , blank = True )
 	madinah_hotel_title = models.CharField(max_length= 200 , blank = True )
 
+	@property
+	def catalogue_title(self):
+		return unicode(self.makkah_hotel_title) +' '+ unicode(self.madinah_hotel_title)
 	# class Meta : 
 	# 	unique_together = ('agency' ,'madinah_hotel' , 'makkah_hotel' , 'psport' )
 

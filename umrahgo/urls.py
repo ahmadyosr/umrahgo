@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'' , include('supplier.urls' , namespace = 'supplier') ),
     url(r'' , include('catalogue.urls' , namespace = 'catalogue' ) ), 
     url(r'' , include('dashboard.urls' , namespace = 'dashboard') ),
-    url(r'' , include('customer.urls') )
+    url(r'' , include('customer.urls' , namespace = 'customer' ) )
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

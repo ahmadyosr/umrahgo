@@ -10,23 +10,34 @@ def landing_page(request):
 	return render(request ,'index.html' , {'packages': packages} ) 
 
 def agencies_list(request):
+	context = {}
+	# agencies = Agency.objects.filter(created_by__is_staff = True)
+	agencies = Agency.objects.all()
+	packages = []
+	
+	for agency in agencies  : 
+		packages += [Package.objects.filter(catalogue_agency= agency)]
 
-	return render(request , 'agencies_list.html', {'range_list': range(10)}  )
-
+	agencies_list = zip(agencies , packages)
+	print agencies_list
+	context['agencies_list'] = agencies_list
+	return render(request , 'agencies_list.html', context)
 
 def agency(request , agency_id ):
-
-	context = {}
-	context['recommended_agencies'] = Agency.objects.all()[:3]
-	context['agency'] = Agency.objects.get(id = agency_id)
-	context['photos'] = Photoshot.objects.all()[:6]
-	context['range_list'] = range(5)
-	return render(request , 'agency.html', context )
+	agency = Agency.objects.get(id = agency_id)
+	package = Package.objects.filter(catalogue_agency = agency).first()
+	print package 
+	return redirect('catalogue:package' , package_id = package.id )
 
 def package(request , package_id):
 	context = {}
+	package = Package.objects.get(id = package_id)
 
-	return render(request , 'detail-page.html' , context )
+	context['agency'] = package.catalogue_agency
+	context['photos'] = Photoshot.objects.all()[:6]
+	context['package'] = package
+	context['agency_packages'] = Package.objects.filter(catalogue_agency = package.catalogue_agency)
+	return render(request , 'package.html' , context )
 
 def list(request):
 	country_code = request.GET.get('country_code') 

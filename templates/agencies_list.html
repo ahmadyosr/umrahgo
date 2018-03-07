@@ -109,43 +109,36 @@ div#columns:hover figure:not(:hover) {
 
 							</div>
 							
-						<div id="columns">
-						{% for i in range_list %} 
-						<figure style="width:100%">
+						<div id="columns" dir="rtl" >
+						{% for agency , packages in agencies_list %} 
+						<figure style="width:100%" >
 							<div style="padding:10px;">
-							<div dir="rtl" class="form-group" >
-								<h3 dir="rtl" >شركة كيف حالك <small>ابتداء من</small></h3>
+							<div dir="lrt" class="form-group" >
+								<h3><span class="pull-left"><small>ابتداء من {{agency.start_from}} دينار</small></span><span>{{agency.title}}</span></h3>
 							</div>
 							<div class="form-group" dir="rtl"> 
 							  <table class="table" >
-							  	<span style="color:#43C458" >معلومات السكن</span>
+							  	<span style="color:#43C458" >العروض</span>
 							  <tr>
-							    <td>حجم الغرفة </td>
-							    <td>تكلفة الشخص</td>
+							    <td>فندق مكة</td>
+							    <td>فندق المدينة</td>
+							    <td></td>
 							  </tr>
-							  {% if not forloop.counter == 4 %} 
+							  {% for package in packages %} 
 							  <tr>
-							    <td>خماسي</td>
-							    <td>2</td>
+							    <td>{{package.madinah_hotel.title}}</td>
+							    <td>{{package.makkah_hotel.title}}</td>
+							    <td>{{package.transport}}</td>
 							  </tr>
-							  {% else %} 
-							  {% for i in range_list %} 
-							  <tr>
-							    <td>خماسي</td>
-							    <td>2</td>
-							  </tr>
-							  {% endfor %} 
-							  {% endif %}
+							  {% endfor %}
 							</table>
 							<div style="text-align: center;">
-							<a href="{% url 'catalogue:agency' agency_id=1 %}" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
+							<a href="{% url 'catalogue:catalogue_agency' agency_id=agency.id %}" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار</a>
 							</div>
 							</div>	
 							</div>
-						<figcaption>Cinderella wearing European fashion of the mid-1860’s</figcaption>
 						</figure>
 						{% endfor %} 
-						<small>Art &copy; <a href="//clairehummel.com">Claire Hummel</a></small>
 						</div>
 						</div>
 							

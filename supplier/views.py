@@ -17,7 +17,6 @@ def agency(request , agency_id):
     agency =  Agency.objects.get(id = agency_id ) 
     packages = Package.objects.filter(created_by = agency.created_by).exclude(is_removed = True ) 
 
-
     if request.method == 'POST':
         form = AgencyForm(request.POST, instance = agency ) 
         if form.is_valid() : 
@@ -31,7 +30,7 @@ def agency(request , agency_id):
     if request.user.is_staff : 
         context['matched_agencies'] = Agency.objects.filter(created_by__is_staff = False)
 
-    return render(request , 'agency.html' , context )
+    return render(request , 'supplier/agency.html' , context )
 
 def supplier_package(request):
     context={}
@@ -46,7 +45,7 @@ def supplier_package(request):
             instance.save()
             messages.add_message(request , messages.INFO , 'تمت اضافة عرض العمرة بنجاح ')
 
-            return redirect('agency' , agency_id = agency.id )
+            return redirect('supplier:agency' , agency_id = agency.id )
 
     context['photos1'] = Photoshot.objects.all()[:6]
     context['photos2'] = context['photos1']
