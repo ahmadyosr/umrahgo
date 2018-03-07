@@ -128,7 +128,7 @@ div#columns:hover figure:not(:hover) {
 							  <tr>
 							    <td>{{package.madinah_hotel.title}}</td>
 							    <td>{{package.makkah_hotel.title}}</td>
-							    <td>{{package.transport}}</td>
+							    <td>{% if package.transport == 'BUS' %} براً  {% else %}جواً{% endif %}</td>
 							  </tr>
 							  {% endfor %}
 							</table>
