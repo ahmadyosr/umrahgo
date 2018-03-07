@@ -121,10 +121,10 @@
 									<input type="submit"  value="ربط" >
 								</form>
 							</div>
+							{% endif %} 
 							
 							<form action="{% url 'supplier:agency' agency_id=agency.id %}" method="POST">
 							{% csrf_token %} 
-							{% endif %} 
 							<div class="form-group col-md-6 col-sm-6 col-xs-12 pull-right">
 							  <label for="pwd4">الدولة <span style="color:red;">*</span></label>
 							  <select required name="country" class="form-control" id="pwd4" value="{{agency.country}}">
