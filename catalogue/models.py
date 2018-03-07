@@ -91,7 +91,7 @@ class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 
 	stars = models.IntegerField(default = 0) 
 	photoshots = models.ManyToManyField('Photoshot' , blank = True ) 
-	thumbnail = models.FileField(upload_to ='thumbnails/'  , null = True )
+	thumbnail = models.FileField(upload_to ='thumbnails/'  , null = True , blank = True  )
 
 	def __unicode__(self):
 		return self.title

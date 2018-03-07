@@ -26,6 +26,8 @@ class PackageForm(forms.ModelForm):
 	class Meta : 
 		model = Package
 		fields = [
+		'makkah_hotel' , 
+		'madinah_hotel' , 
 		'makkah_hotel_title' , 
 		'madinah_hotel_title' ,
 		'updated_single_room_cost' , 

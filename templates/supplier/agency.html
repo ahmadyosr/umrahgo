@@ -22,9 +22,11 @@
 					<div class="row" dir="rtl">
 
 						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
-						<div>
+						{% if request.user.is_staff %} 
+						<div class="container">
 						<a class="btn btn-info" href="{% url 'dashboard:dashboard' %}">لوحة التحكم </a>
 						</div>
+						{% endif %} 
 						{% for message in messages %} 
 							<div class="alert alert-info" > 
 							{{message}}
