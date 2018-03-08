@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , logout , login
 from django.contrib.auth.models import User
 from django.db import IntegrityError 
-from catalogue.models import Package  , Agency  , Photoshot
+from catalogue.models import Package  , Agency  , Photoshot , MakkahHotel , MadinahHotel
 from django.http import HttpResponse
 from supplier.forms import UpdatePackageForm , PackageForm , AgencyForm
 from django.core.exceptions import ObjectDoesNotExist
@@ -34,7 +34,6 @@ def agency(request , agency_id):
 
     context['agency'] = agency 
     context['packages'] = packages 
-
     return render(request , 'supplier/agency.html' , context )
 
 def supplier_package(request):
@@ -59,6 +58,9 @@ def supplier_package(request):
             return redirect('supplier:agency' , agency_id = agency_id )
 
     context['agency'] = agency
+    
+    context['makkah_hotels'] = MakkahHotel.objects.all() 
+    context['madinah_hotels'] = MadinahHotel.objects.all() 
     return render(request , 'package_form.html' , context )
 
 @login_required

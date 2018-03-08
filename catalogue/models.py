@@ -42,6 +42,7 @@ class Agency(models.Model):
 		return self.title 
 
 class Package(models.Model):
+	title = models.CharField(max_length =200) 
 	created_by = models.ForeignKey(User , null = True )
 	catalogue_agency = models.ForeignKey(Agency , null = True )
 	makkah_hotel = models.ForeignKey('MakkahHotel', null = True )
@@ -70,8 +71,10 @@ class Package(models.Model):
 	is_updated = models.BooleanField(default = False)
 
 	makkah_hotel_title = models.CharField(max_length= 200 , blank = True )
-	madinah_hotel_title = models.CharField(max_length= 200 , blank = True )
+	makkah_hotel_stars = models.CharField(max_length= 200 , blank = True )
 
+	madinah_hotel_title = models.CharField(max_length= 200 , blank = True )
+	madinah_hotel_stars = models.CharField(max_length= 200 , blank = True )
 	prices_start_from = models.IntegerField(default = 0)
 
 	@property
@@ -92,13 +95,14 @@ class Hotel(models.Model):
 	stars = models.IntegerField(default = 0) 
 	photoshots = models.ManyToManyField('Photoshot' , blank = True ) 
 	thumbnail = models.FileField(upload_to ='thumbnails/'  , null = True , blank = True  )
-
+	distinct = models.CharField(max_length =200 , blank = True )
+	
 	def __unicode__(self):
 		return self.title
 
 class MakkahHotel(Hotel):
 	distance_from_center  = models.IntegerField(default = 0) 
-		
+	
 	def __unicode__(self):
 		return self.title
 

@@ -35,12 +35,32 @@
 							<div class="alert alert-success"  dir="rtl" > 
 								أضف باكج جديد ، قم بتحديد اسم الفندق في مكة والمدينة ، وتكلفة الشخص حسب حجم الغرفة
 							</div>
+							{% if user.is_staff %} 
 							<div dir="rtl" class="form-group">
 							  <label for="makkah_hotel">فندق مكة</label>
-							  <input type="text" class="form-control" name="makkah_hotel_title"> 
+							  <select  class="form-control" name="makkah_hotel"> 
+							  	<option value="" >اختر فندق </option>
+							  	{% for hotel in makkah_hotels %} 
+							  	<option value="{{hotel.id}}" >{{hotel.title}}</option>
+							  	{% endfor %} 
+							  </select>
 							</div>
 							<div dir="rtl" class="form-group">
 							  <label >فندق المدينة</label>
+							  <select  class="form-control" name="madinah_hotel"> 
+							  	<option value="" >اختر فندق </option>
+							  	{% for hotel in madinah_hotels %} 
+							  	<option value="{{hotel.id}}" >{{hotel.title}}</option>
+							  	{% endfor %} 
+							  </select>
+							</div>
+							{% endif %} 
+							<div dir="rtl" class="form-group">
+							  <label for="makkah_hotel">فندق مكة </label>
+							  <input type="text" class="form-control" name="makkah_hotel_title"> 
+							</div>
+							<div dir="rtl" class="form-group">
+							  <label >فندق المدينة </label>
 							  <input type="text" class="form-control" name="madinah_hotel_title"> 						
 							</div>
 							<div dir="rtl" class="form-group">

@@ -1,5 +1,5 @@
 from django import forms 
-from catalogue.models import  Agency , Package
+from catalogue.models import  Agency , Package , MadinahHotel ,MakkahHotel 
 
 class AgencyForm(forms.ModelForm):
 	phone_number= forms.CharField(required = False ) 
@@ -23,6 +23,11 @@ class AgencyForm(forms.ModelForm):
 
 
 class PackageForm(forms.ModelForm):
+
+	makkah_hotel = forms.ModelChoiceField(queryset = MakkahHotel.objects.all()  , required = False ) 
+	madinah_hotel = forms.ModelChoiceField(queryset = MadinahHotel.objects.all()  , required = False ) 
+	madinah_hotel_title = forms.CharField(required = False ) 
+	makkah_hotel_title = forms.CharField(required = False ) 
 	class Meta : 
 		model = Package
 		fields = [
