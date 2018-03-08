@@ -63,8 +63,8 @@
 									      <form action="{% url 'supplier:update_package' package_id=p.id %}" method="POST" >
 									      {% csrf_token %} 
 									        <td style="min-width:150px;">{{p.transport}}</td>
-									        <td style="min-width:150px;">{{p.makkah_hotel_title}}</td>
-									        <td style="min-width:150px;">{{p.madinah_hotel_title}}</td>
+									        <td style="min-width:150px;">{% if p.makkah_hotel %}{{p.makkah_hotel.title}} {% else %} {{p.makkah_hotel_title}}{% endif %} </td>
+									        <td style="min-width:150px;">{% if p.madinah_hotel %}{{p.madinah_hotel.title}} {% else %} {{p.madinah_hotel_title}}{% endif %} </td>
 									        <td><input name="updated_single_room_cost" style="min-width:50px;" type="text" class="form-control" value="{{p.single_room_cost}}"></td>
 									        <td><input name="updated_double_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.double_room_cost}}"></td>
 									        <td><input name="updated_trip_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.trip_room_cost}}"></td>
