@@ -68,7 +68,7 @@ def remove_package(request, package_id):
     package = Package.objects.get(id = package_id ) 
     if package.created_by == request.user : 
         
-        if request.uesr.is_staff : 
+        if request.user.is_staff : 
             package.delete() 
         else : 
             package.is_removed = True 
