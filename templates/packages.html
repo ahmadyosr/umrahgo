@@ -111,13 +111,18 @@ div#columns:hover figure:not(:hover) {
 						<div class="col-md-9" style=""> 
 						{% for package in packages %} 
 						<div class="sidebar-search-wrapper bg-light-2" dir="rtl">
-								
+									<div class="col-md-12" > 
+									<div class="col-md-6" style="padding:0;margin-bottom: 5%;" >
+									<img src="{{package.makkah_hotel.thumbnail.url}}" style=""> 
+									<small>صورة الفندق في مكة المكرمة</small>
+									</div>
+									<div class="col-md-6" > 
 									<div class="sidebar-search-header">
 										<h4>{{package.prices_start_from}} دينار</h4>
 									</div>
 									<div dir="lrt" class="form-group" >
 										<h4><span>{{package.catalogue_title}}</span></h4>
-										<small>{{package.catalogue_agency.title}}</small><br>
+										<strong>شركة {{package.catalogue_agency.title}} للسياحة والسفر</strong><br>
 									</div>
 									<div class="form-group" dir="rtl"> 
 									  <table class="table" >
@@ -131,6 +136,8 @@ div#columns:hover figure:not(:hover) {
 									    <td>{{package.madinah_hotel.title}}</td>
 									  </tr>
 									</table>
+									</div>
+									</div>
 									</div>
 									<div class="sidebar-search-content" style="text-align: center;" > 
 									<a href="{% url 'catalogue:package' package_id=package.id %}" class="btn btn-primary" >اظهر الأسعار </a>

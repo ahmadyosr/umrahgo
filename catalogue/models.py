@@ -55,7 +55,7 @@ class Package(models.Model):
 	quin_room_cost = models.IntegerField(default = 0 )
 
 
-	airlines = models.CharField(max_length =100) # choices are('BUS' , 'FLIGHT')
+	airlines = models.CharField(max_length =100 , blank = True) # choices are('BUS' , 'FLIGHT')
 	transport = models.CharField(max_length =10 , default ="BUS" ) # choices are('BUS' , 'FLIGHT')
 	month = models.IntegerField(default =0 )
 	year = models.IntegerField(default =0 )

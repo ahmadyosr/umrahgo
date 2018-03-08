@@ -56,30 +56,9 @@
 			
 					<div class="row" >
 						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
-						<div class="col-md-3 pull-right rtl" style="padding:10px;margin-bottom: 50px">
-						<h3>{{agency.title}}</h3>
-						<h5>{{agency.city}} - {{agency.country}}</h5>
-						<p style="border-bottom:.5px solid #D3D3D3">
-						{{agency.address}}&nbsp;&nbsp;<i class="fa fa-map-marker"></i></p>
-						<p style="border-bottom:.5px solid #D3D3D3">
-						{{agency.phone_number}}&nbsp;&nbsp;<i class="fa fa-phone"></i></p>
-						<p style="border-bottom:.5px solid #D3D3D3">
-						{{agency.email}}&nbsp;&nbsp;<i class="fa fa-envelope"></i></p>
-						{% if agency.website %}
-						<p style="border-bottom:.5px solid #D3D3D3">
-						{{agency.website}}&nbsp;&nbsp;<i class="fa fa-globe"></i></p>
-						{% endif %} 
-						<ul class="list-group ">
-						<p>البرامج المتاحة</p>
-						{% for p in agency_packages %} 
-						  <a href="{% url 'catalogue:package' package_id=p.id %}" 
-						  class="list-group-item {% if package.id == p.id %}active{% endif %}">{{package.catalogue_title}}<small>&nbsp;	{{package.double_room_cost}}دينار</a>
-						{% endfor %} 
-						</ul>
-						</div>
-						<div  class="col-md-9" style="padding:10px;">
+						<div  class="col-md-9 col-xs-12 col-sm-12" style="padding:10px;">
 							<div style="max-width: 600px;margin-right: auto;margin-left: auto">
-							<h1 dir="rtl" >{{package.catalogue_title}}<small>&nbsp;	{{package.double_room_cost}}دينار</small></h1>
+							<h1 dir="rtl" >{{package.catalogue_title}}<small>&nbsp;	{{package.prices_start_froms}}دينار</small></h1>
 							<div class="alert alert-success"  dir="rtl" > 
 								هذا البرنامج متاح لشهر 3 سنة 2018 
 							</div>
@@ -127,8 +106,14 @@
 									</div>
 								</div>
 							</div>
-
 							<div class="col-xs-12 col-md-12" dir="rtl"> 
+
+							{% if package.airlines != '' %} 
+								<div class="alert alert-success"  dir="rtl" > 
+									خطوط الطيران <br>
+									<i style="font-size:200%;" class="fa fa-plane"></i>&nbsp;&nbsp;{{package.airlines}}
+								</div>
+							{% endif %} 
 							  <table class="table" style="text-align:center">
 							  	<span style="color:#43C458" >تكلفة الشخص في الغرفة</span>
 							  <tr>
@@ -171,6 +156,28 @@
 							</div>
 
 						</div>
+						</div>
+
+						<div class="col-md-3 rtl col-xs-12 col-sm-12 pull-left" style="padding:10px;margin-bottom: 50px">
+						<h3>شركة {{agency.title}} للسياحة والسفر</h3>
+						<h5>{{agency.city}} - {{agency.country}}</h5>
+						<p style="border-bottom:.5px solid #D3D3D3">
+						{{agency.address}}&nbsp;&nbsp;<i class="fa fa-map-marker"></i></p>
+						<p style="border-bottom:.5px solid #D3D3D3">
+						{{agency.phone_number}}&nbsp;&nbsp;<i class="fa fa-phone"></i></p>
+						<p style="border-bottom:.5px solid #D3D3D3">
+						{{agency.email}}&nbsp;&nbsp;<i class="fa fa-envelope"></i></p>
+						{% if agency.website %}
+						<p style="border-bottom:.5px solid #D3D3D3">
+						{{agency.website}}&nbsp;&nbsp;<i class="fa fa-globe"></i></p>
+						{% endif %} 
+						<ul class="list-group ">
+						<h4 style="color:#43C458">البرامج المتاحة</<h4><br>
+						{% for p in agency_packages %} 
+						  <a href="{% url 'catalogue:package' package_id=p.id %}" 
+						  class="list-group-item {% if package.id == p.id %}active{% endif %}">{{package.catalogue_title}}<span >&nbsp;	{{package.prices_start_from}}دينار</span></a>
+						{% endfor %} 
+						</ul>
 						</div>
 						</div>
 							

@@ -28,11 +28,17 @@ class PackageForm(forms.ModelForm):
 	madinah_hotel = forms.ModelChoiceField(queryset = MadinahHotel.objects.all()  , required = False ) 
 	madinah_hotel_title = forms.CharField(required = False ) 
 	makkah_hotel_title = forms.CharField(required = False ) 
+	madinah_hotel_stars = forms.CharField(required = False ) 
+	makkah_hotel_stars = forms.CharField(required = False ) 
+	airlines = forms.CharField(required = False ) 
+
 	class Meta : 
 		model = Package
 		fields = [
-		'makkah_hotel' , 
-		'madinah_hotel' , 
+		'makkah_hotel' ,
+		'madinah_hotel' ,
+		'makkah_hotel_stars' , 
+		'madinah_hotel_stars' , 
 		'makkah_hotel_title' , 
 		'madinah_hotel_title' ,
 		'updated_single_room_cost' , 
@@ -41,6 +47,7 @@ class PackageForm(forms.ModelForm):
 		'updated_quad_room_cost', 
 		'updated_quin_room_cost', 
 		'transport' , 
+		'airlines'
 		]
 
 
