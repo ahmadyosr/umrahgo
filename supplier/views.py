@@ -58,7 +58,7 @@ def supplier_package(request):
             return redirect('supplier:agency' , agency_id = agency_id )
 
     context['agency'] = agency
-    
+
     context['makkah_hotels'] = MakkahHotel.objects.all() 
     context['madinah_hotels'] = MadinahHotel.objects.all() 
     return render(request , 'package_form.html' , context )
@@ -67,8 +67,13 @@ def supplier_package(request):
 def remove_package(request, package_id):
     package = Package.objects.get(id = package_id ) 
     if package.created_by == request.user : 
-        package.is_removed = True 
-        package.save() 
+        
+        if request.uesr.is_staff : 
+            package.delete() 
+        else : 
+            package.is_removed = True 
+            package.save() 
+
         messages.add_message(request , messages.INFO , 'تم حذف العرض')
         return redirect(request.META.get('HTTP_REFERER'))
 
