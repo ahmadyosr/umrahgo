@@ -109,34 +109,36 @@ div#columns:hover figure:not(:hover) {
 
 							</div>	
 						<div class="col-md-9" style=""> 
-						<div id="columns" dir="rtl" style="margin:0;padding: 0">
 						{% for package in packages %} 
-						<figure style="width:100%" >
-							<div style="padding:10px;">
-							<div dir="lrt" class="form-group" >
-								<h4><span>{{package.catalogue_title}}</span></h4>
-								<small>{{package.catalogue_agency.title}}</small><br>
-							</div>
-							<div class="form-group" dir="rtl"> 
-							  <table class="table" >
-							  	<span style="color:#43C458" >التفاصيل</span>
-							  <tr>
-							    <td style="color:#43C458">فندق مكة</td>
-							    <td style="color:#43C458">فندق المدينة</td>
-							  </tr>
-							  <tr>
-							    <td>{{package.makkah_hotel.title}}</td>
-							    <td>{{package.madinah_hotel.title}}</td>
-							  </tr>
-							</table>
-							<div style="text-align: center;">
-							<a href="{% url 'catalogue:package' package_id=package.id %}" style="border:.1px solid #43C458;border-radius: 5px;padding:10px;" >اظهر الأسعار </a><span class="pull-left"><small>ابتداء من {{package.prices_start_from}} دينار</small></span>
-							</div>
-							</div>	
-							</div>
-						</figure>
-						{% endfor %} 
+						<div class="sidebar-search-wrapper bg-light-2" dir="rtl">
+								
+									<div class="sidebar-search-header">
+										<h4>{{package.prices_start_from}} دينار</h4>
+									</div>
+									<div dir="lrt" class="form-group" >
+										<h4><span>{{package.catalogue_title}}</span></h4>
+										<small>{{package.catalogue_agency.title}}</small><br>
+									</div>
+									<div class="form-group" dir="rtl"> 
+									  <table class="table" >
+									  	<span style="color:#43C458" >التفاصيل</span>
+									  <tr>
+									    <td style="color:#43C458">فندق مكة</td>
+									    <td style="color:#43C458">فندق المدينة</td>
+									  </tr>
+									  <tr>
+									    <td>{{package.makkah_hotel.title}}</td>
+									    <td>{{package.madinah_hotel.title}}</td>
+									  </tr>
+									</table>
+									</div>
+									<div class="sidebar-search-content" style="text-align: center;" > 
+									<a href="{% url 'catalogue:package' package_id=package.id %}" class="btn btn-primary" >اظهر الأسعار </a>
+									
+									</div>
+									
 						</div>
+						{% endfor %} 
 						</div>
 						<div class="col-md-3" dir="rtl" id="right-sidebar">
 							
