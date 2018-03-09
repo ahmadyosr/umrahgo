@@ -1,4 +1,7 @@
 {% extends 'base.html' %} 
+{% block title %} 
+<title>{{package.catalogue_title}}</title>
+{% endblock %} 
 {% block main_wrapper %} 
 		<div class="main-wrapper">
 			<!-- start end Page title -->
@@ -58,7 +61,7 @@
 						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
 						<div  class="col-md-9 col-xs-12 col-sm-12" style="padding:10px;">
 							<div style="max-width: 600px;margin-right: auto;margin-left: auto">
-							<h1 dir="rtl" >{{package.catalogue_title}}<small>&nbsp;	{{package.prices_start_froms}}دينار</small></h1>
+							<h1 dir="rtl" >{{package.catalogue_title}}<br><small>{{package.prices_start_from}}&nbsp;دينار</small></h1>
 							<div class="alert alert-success"  dir="rtl" > 
 								هذا البرنامج متاح لشهر 3 سنة 2018 
 							</div>

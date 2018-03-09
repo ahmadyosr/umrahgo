@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from catalogue.models import  Agency , Photoshot , Hotel , Package, Country 
 from customer.forms import ReservationForm
 # Create your views here.
-
-
 def landing_page(request):
 	packages= [] 
 	return render(request ,'index.html' , {'packages': packages} ) 
