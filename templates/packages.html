@@ -112,12 +112,14 @@ div#columns:hover figure:not(:hover) {
 						{% for package in packages %} 
 						<div class="sidebar-search-wrapper bg-light-2" dir="rtl">
 									<div class="col-md-12" >
-									{% if package.makkah_hotel.thumbnail.id %}
 									<div class="col-md-6" style="padding:0;margin-bottom: 5%;" >
+									{% if package.makkah_hotel.thumbnail.id %}
 									<img src="{{package.makkah_hotel.thumbnail.url}}" style=""> 
+									{% else %} 
+									<img src="http://via.placeholder.com/500x500" style=""> 
+									{% endif %}
 									<small>صورة الفندق في مكة المكرمة</small>
 									</div>
-									{% endif %} 
 									<div class="col-md-6" > 
 									<div class="sidebar-search-header">
 										<h4>{{package.prices_start_from}} دينار</h4>
