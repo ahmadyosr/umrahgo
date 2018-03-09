@@ -109,11 +109,11 @@ div#columns:hover figure:not(:hover) {
 
 							</div>	
 						<div class="col-md-9" style=""> 
-						{% for package in packages %} 
+						{% for package in packages %}
 						<div class="sidebar-search-wrapper bg-light-2" dir="rtl">
 									<div class="col-md-12" >
 									<div class="col-md-6" style="padding:0;margin-bottom: 5%;" >
-									{% if package.makkah_hotel.thumbnail.id %}
+									{% if package.makkah_hotel.thumbnail %}
 									<img src="{{package.makkah_hotel.thumbnail.url}}" style=""> 
 									{% else %} 
 									<img src="http://via.placeholder.com/500x250" style=""> 
@@ -133,11 +133,11 @@ div#columns:hover figure:not(:hover) {
 									  	<span style="color:#43C458" >التفاصيل</span>
 									  <tr>
 									    <td style="color:#43C458">فندق مكة</td>
-									    <td style="color:#43C458">فندق المدينة</td>
+									    {% if package.madinah_hotel.id %} <td style="color:#43C458">فندق المدينة</td> {% endif %} 
 									  </tr>
 									  <tr>
 									    <td>{{package.makkah_hotel.title}}</td>
-									    <td>{{package.madinah_hotel.title}}</td>
+									    {% if package.madinah_hotel.id %}  <td>{{package.madinah_hotel.title}}</td> {% endif %} 
 									  </tr>
 									</table>
 									</div>
