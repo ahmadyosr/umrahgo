@@ -3,11 +3,12 @@ from customer.models import Reservation
 
 class ReservationForm(forms.ModelForm):
 	class Meta : 
-		model = Reservation 
+		model = Reservation
 		fields = [
-		'username' , 
-		'phone_number' , 
-		'departures_qty' , 
-		'package', 
-		]
-
+		'package',
+		'name',
+		'phone_number',
+		'departures_qty',
+		'departure_date',
+		'room_size'
+		] 

@@ -40,9 +40,10 @@
 								<h3>حجز رحلة عمرة</h3>
 								
 							</div>
-							<div class="alert alert-success">
-							سوف ستقوم الشركة المعنية بالتواصل معك بأقرب وقت   
+							<div class="alert alert-success" style="margin:20px">
+							قم بالحجز و سنقوم بالتواصل معك بأقرب وقت  
 							</div>
+
 							<div class="payment-container" >
 							
 				
@@ -52,17 +53,55 @@
 										<div class="col-md-12">
 											
 											
-												<div class="row gap-0">
-												
-													
-												</div>
-
 <div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
-	<form action="{% url 'customer:reservation' %}" method="POST">
-		{% csrf_token %}  
-		<input type="hidden" name="package" value="{{package_id}}"> 
+
+  <table class="table" >
+  	<span style="color:#43C458" >التفاصيل</span>
+  <tr>
+    <td>الشركة المشرفة</td>
+    <td>{{package.catalogue_agency.title}}</td>
+  </tr>
+  <tr>
+    <td>فندق مكة</td>
+    <td>{{package.makkah_hotel.title}}<span class="label label-primary">{{package.makkah_hotel.stars}} نجوم</span></td>
+  </tr>
+  <tr>
+    <td>فندق المدينة</td>
+    <td>{% if package.makkah_hotel %}
+    {{package.madinah_hotel.title}} <span class="label label-primary">{{package.madinah_hotel.stars}} نجوم</span> 
+    {% else %}بدون{% endif %} </td>
+  </tr>
+  <tr>
+    <td>وسيلة السفر</td>
+    <td>{% if package.transport == 'BUS' %} باص {% else %} طائرة {% endif %}</td>
+  </tr>
+  {% if package.transport == 'FLIGHT' %} 
+  <tr>
+    <td>خطوط الطيران</td>
+    <td>{{package.airlines}}</td>
+  </tr>
+  {% endif %}
+</table>
+	<form action="{% url 'customer:reservation' package_id=package.id %}" method="POST">
+		{% csrf_token %}
+		<input type="hidden" name="package" value="{{package.id}}">
 		<label  class="col-xs-12 " >الإسم</label>
-		<input   name="username" type="text"  class="form-control" required>
+		<input   name="name" type="text"  class="form-control" required placeholder="اسم صاحب الحجز">
+
+		<label   class="col-xs-12" >الهاتف</label>
+		<div class="input-group" dir="ltr">
+			  <span class="input-group-addon" style="min-width:100px;padding: 0">
+			<select   name="pre_phone_number" class="form-control"   required style="padding: 0;text-align: center;font-size: 150%" >
+				<option value="079">079</option>
+				<option value="078">078</option>
+				<option value="077">077</option>
+			</select></span>
+			<input name="phone_number" id="phone_number" type="text" class="form-control"  placeholder="رقم الهاتف" style="padding: 10px;">
+		</div>
+		<label id="phonenumber_match" style="color:red;"></label>
+
+		<!-- <input  style="text-align:left;" name="phone_number" id="phone_number" type="text" class="form-control" required value="07"> -->
+
 		<label   class="col-xs-12" >عدد الأشخاص</label>
 		<select   name="departures_qty"  class="form-control" required >
 			<option value="1">1</option>
@@ -70,17 +109,35 @@
 			<option value="3">3</option>
 			<option value="4">4</option>
 			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
 		</select>
-		<label   class="col-xs-12" >رقم الهاتف</label>
-		<input  style="text-align:left;" name="phone_number" id="phone_number" type="text" class="form-control" required value="07">
+		<label   class="col-xs-12" >موعد السفر</label>
+		<select   name="departure_date"  class="form-control" required >
+			<option value="{{some_date.isoformat}}">some date horray!</option>
+		{% for date in dates %} 		
+			<option value="{{date.isoformat}}">{{date.isoformat}} {{date.day}}</option>
+		{% endfor %} 
+		</select>
+		<label   class="col-xs-12" >حجم الغرفة</label>
+		<select   name="room_size"  class="form-control" required >
+		{% if package.single_room_cost > 0 %}<option value="1">غرفة مفردة</option> {% endif %} 
+		{% if package.double_room_cost > 0 %}<option value="1">غرفة غرفة ثنائية</option> {% endif %} 
+		{% if package.trip_room_cost > 0 %}<option value="1">غرفة ثلاثية</option> {% endif %} 
+		{% if package.quad_room_cost > 0 %}<option value="1">غرفة رباعية</option> {% endif %} 
+		{% if package.quin_room_cost > 0 %}<option value="1">غرفة خماسية</option> {% endif %} 
+		</select>
+
 	{% for message in messages %} 
 	<label style="color:red;">{{message}}</label>
 	{% endfor %} 
-	<label id="phonenumber_match" style="color:red;"></label>
 
 	<div class="col-md-12 mt-30" style="text-align:center;">
-	<input style="margin-bottom: 10px;" type="submit" class="btn btn-danger" value="إتمام">
-	<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'catalogue:package' package_id=package_id %}" >رجوع</a> 
+	<input style="margin-bottom: 10px;" type="submit" class="btn btn-danger" value="إتمام" id="submit_button">
+	<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'catalogue:package' package_id=package.id %}" >رجوع</a> 
 
 	</div>
 	</form>
@@ -114,12 +171,18 @@ let phone_number = $('#phone_number')
 
 
 phone_number.change(function(){
-	var re = /^[0]{1}[7]{1}[7,8,9]{1}[0-9]{7}/; 
+	var re = /^\d{7}$/; 
 	var result = phone_number.val().match(re);
-	if (result)
+	if (result){
 		$('#phonenumber_match').text(''); 
-	else 
+		$('#submit_button').prop('disabled', false);
+
+	}
+	else {
 		$('#phonenumber_match').text('رقم الهاتف غير مقبول , يجب ان يطابق صيغة رقم خلوي أردني'); 
+		$('#submit_button').prop('disabled', true);
+	}
+
 
 })
 

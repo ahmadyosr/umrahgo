@@ -1,0 +1,149 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+		<div class="main-wrapper">
+			
+			<div class="breadcrumb-wrapper bg-light-2">
+				
+				<div class="container" dir="rtl">
+				
+							<ol class="breadcrumb-list" dir="rtl">
+								<li><a href="/">الرئيسية</a></li>
+								<li><span style="color:grey;">لوحة التحكم</span></li>
+							</ol>
+							
+				</div>
+				
+			</div>
+			
+			<div class="content-wrapper">
+			
+				<div class="container">
+			
+					<div class="row" dir="rtl">
+					
+
+						<div style="max-width:500px;margin-right:auto;margin-left:auto" role="main">
+	
+							<div class="section-title text-right">
+								
+								<h3>تسجيل حساب جديد</h3>
+								
+							</div>
+							<div class="alert alert-success">
+							قم بتسجيل حساب جديد للانضمام لقائمة شركات العمرة  
+							</div>
+							<div class="payment-container" >
+							
+				
+									<div class="col-md-12">
+									
+										
+										<div class="col-md-12">
+											
+											
+												<div class="row gap-0">
+												
+													
+												</div>
+												<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
+													<form action="{% url 'customer:register_agency' %}" method="POST">
+														{% csrf_token %}  
+														<input type="hidden" value="agency" name="group"> 
+														<label  class="col-xs-12 " >البريد الالكتروني</label>
+														<input   name="username" type="email"  class="form-control" required>
+														<label   class="col-xs-12" >كلمة المرور</label>
+													<input   name="password" id="password1" type="password"  class="form-control" required >
+														<label   class="col-xs-12" >إعادة كلمة المرور</label>
+														<input   id="password2" type="password" class="form-control" required >	
+														<label   class="col-xs-12" >اسم الشركة</label>
+														<input  name="title" id="company_title" type="text" class="form-control" required >
+														<label   class="col-xs-12" >الدولة</label>
+														<select  name="country" id="phone_number" type="text" class="form-control" required >
+															{% for country in countries %} 
+															<option value="{{country.id}}">{{country.title}}</option>
+															{% endfor %} 
+														</select>
+														<label   class="col-xs-12" >رقم الهاتف</label>
+														<input  name="phone_number" id="phone_number" type="text" class="form-control" required value="07">
+													{% for message in messages %} 
+													<label style="color:red;">{{message}}</label>
+													{% endfor %} 
+													<label id="password_match" style="color:red;"></label>
+													<label id="phonenumber_match" style="color:red;"></label>
+
+													<div class="col-md-12 mt-30" style="text-align:center;">
+													<input style="margin-bottom: 10px;" id="submit_button" type="submit" class="btn btn-danger" value="إتمام التسجيل">
+													<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'customer:login_agency' %}" >تسجيل دخول</a> 
+													</div>
+													</form>
+												</div>	
+												
+												
+											</div>
+									
+										</div>
+										
+									</div>
+									
+									<div class="row mt-20">
+											
+									</div>
+									
+								
+							</div>
+							
+						</div>
+
+
+					</div>
+				
+				</div>
+					
+			</div>
+
+<script>
+let pass1 = $('#password1')
+let pass2 = $('#password2')
+let phone_number = $('#phone_number') 
+
+
+phone_number.change(function(){
+	var re = /^[0]{1}[7]{1}[7,8,9]{1}[0-9]{7}/; 
+	var result = phone_number.val().match(re);
+	if (result)
+		$('#phonenumber_match').text(''); 
+	else 
+		$('#phonenumber_match').text('رقم الهاتف غير مقبول , يجب ان يطابق صيغة رقم خلوي أردني'); 
+
+})
+
+pass1.change(function(){
+	if( pass1.val() != pass2.val() ){
+		$('#password_match').text('كلمة المرور غير متطابقة'); 
+		$('#submit_button').prop('disabled', true);
+	}
+	else {
+		$('#submit_button').prop('disabled', false);
+		$('#password_match').text(''); 
+
+	}
+
+})
+
+pass2.change(function(){
+	if( pass1.val() != pass2.val() ){
+		$('#password_match').text('كلمة المرور غير متطابقة'); 
+		$('#submit_button').prop('disabled', true);
+	}
+	else {
+		$('#submit_button').prop('disabled', false);
+		$('#password_match').text(''); 
+
+	}
+
+})
+
+</script>
+		</div>
+		<!-- end Main Wrapper -->
+{% endblock %} 

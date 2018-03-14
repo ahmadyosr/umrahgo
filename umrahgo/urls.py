@@ -18,12 +18,15 @@ from django.conf.urls import url , include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static 
-
+from customer import views as customer_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'' , include('supplier.urls' , namespace = 'supplier') ),
     url(r'' , include('catalogue.urls' , namespace = 'catalogue' ) ), 
     url(r'' , include('dashboard.urls' , namespace = 'dashboard') ),
-    url(r'' , include('customer.urls' , namespace = 'customer' ) )
+    url(r'' , include('customer.urls' , namespace = 'customer' ) ),
+    url(r'^oauth/' , include('social_django.urls' , namespace = 'social' ) ),
+    url(r'^fbauth/$'    ,   customer_views.fbauth ,name="home" ) ,
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

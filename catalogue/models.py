@@ -16,6 +16,7 @@ class Country(models.Model):
 
 class Date(models.Model):
 	date = models.DateField(auto_now = False , unique = True ) 
+	day = models.CharField(max_length = 50)
 
 class Agency(models.Model):
 	created_by = models.ForeignKey(User , null = True )
@@ -34,8 +35,6 @@ class Agency(models.Model):
 	facebook_page = models.CharField(max_length = 50 , blank = True )
 	logo  = models.FileField(upload_to = 'logos/' , null = True ) 
 
-	available_dates = models.ManyToManyField(Date) 
-
 	prices_start_from = models.IntegerField(default = 0)
 	
 	def __unicode__(self):
@@ -47,7 +46,6 @@ class Package(models.Model):
 	catalogue_agency = models.ForeignKey(Agency , null = True )
 	makkah_hotel = models.ForeignKey('MakkahHotel', null = True )
 	madinah_hotel = models.ForeignKey('MadinahHotel', null = True )
-	
 	single_room_cost = models.IntegerField(default = 0 )
 	double_room_cost = models.IntegerField(default = 0 )
 	trip_room_cost = models.IntegerField(default = 0 )
@@ -78,7 +76,8 @@ class Package(models.Model):
 	madinah_hotel_stars = models.CharField(max_length= 200 , blank = True )
 	prices_start_from = models.IntegerField(default = 0)
 
-	@property
+	available_dates = models.ManyToManyField(Date, blank = True ) #in range of one month 
+ 	@property
 	def catalogue_title(self):
 		if self.transport == "BUS" : 
 			travel = "السفر براً"
@@ -89,7 +88,7 @@ class Package(models.Model):
 			stars = self.makkah_hotel.stars
 		except AttributeError : 
 			stars = '0'
-		return unicode("فندق ") + unicode(stars) + unicode(" نجوم ")+ unicode(travel)
+		return unicode("فندق ") +unicode(self.makkah_hotel.title) + " "+ unicode(stars) + unicode(" نجوم ")+ unicode(travel)
 
 class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 

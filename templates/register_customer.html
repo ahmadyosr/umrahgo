@@ -30,7 +30,7 @@
 								
 							</div>
 							<div class="alert alert-success">
-							قم بتسجيل حساب جديد للانضمام لقائمة شركات العمرة  
+							<strong>تنويه</strong>&nbsp;قم بإنشاء حساب لمتابعة طلبك  
 							</div>
 							<div class="payment-container" >
 							
@@ -46,33 +46,23 @@
 													
 												</div>
 												<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
-													<form action="{% url 'customer:register_user' %}" method="POST">
-														{% csrf_token %}  
+													<form action="{% url 'customer:register_customer' %}" method="POST">
+														{% csrf_token %}
+														<input name="group_name" type="hidden" value="retail">   
 														<label  class="col-xs-12 " >البريد الالكتروني</label>
 														<input   name="username" type="email"  class="form-control" required>
 														<label   class="col-xs-12" >كلمة المرور</label>
 													<input   name="password" id="password1" type="password"  class="form-control" required >
 														<label   class="col-xs-12" >إعادة كلمة المرور</label>
 														<input   id="password2" type="password" class="form-control" required >	
-														<label   class="col-xs-12" >اسم الشركة</label>
-														<input  name="title" id="company_title" type="text" class="form-control" required >
-														<label   class="col-xs-12" >الدولة</label>
-														<select  name="country" id="phone_number" type="text" class="form-control" required >
-															{% for country in countries %} 
-															<option value="{{country.id}}">{{country.title}}</option>
-															{% endfor %} 
-														</select>
-														<label   class="col-xs-12" >رقم الهاتف</label>
-														<input  name="phone_number" id="phone_number" type="text" class="form-control" required value="07">
 													{% for message in messages %} 
 													<label style="color:red;">{{message}}</label>
 													{% endfor %} 
 													<label id="password_match" style="color:red;"></label>
-													<label id="phonenumber_match" style="color:red;"></label>
 
 													<div class="col-md-12 mt-30" style="text-align:center;">
 													<input style="margin-bottom: 10px;" id="submit_button" type="submit" class="btn btn-danger" value="إتمام التسجيل">
-													<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'customer:login_user' %}" >تسجيل دخول</a> 
+													<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'customer:login_agency' %}" >تسجيل دخول</a> 
 													</div>
 													</form>
 												</div>	
@@ -103,18 +93,6 @@
 <script>
 let pass1 = $('#password1')
 let pass2 = $('#password2')
-let phone_number = $('#phone_number') 
-
-
-phone_number.change(function(){
-	var re = /^[0]{1}[7]{1}[7,8,9]{1}[0-9]{7}/; 
-	var result = phone_number.val().match(re);
-	if (result)
-		$('#phonenumber_match').text(''); 
-	else 
-		$('#phonenumber_match').text('رقم الهاتف غير مقبول , يجب ان يطابق صيغة رقم خلوي أردني'); 
-
-})
 
 pass1.change(function(){
 	if( pass1.val() != pass2.val() ){

@@ -25,7 +25,7 @@
 								<h3>التسجيل للعمرة</h3>
 							</div> -->
 						<div class="col-md-12 col-xs-12 col-sm-12"  > 
-						<form action="{% url 'reservation' %}?next_=true" method="POST">
+						<form action="" method="POST">
 						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
 					
 							<h1 dir="rtl" >معلومات الحجز</h1>
@@ -35,13 +35,16 @@
 								<li>جواز سفر صالح حتى 7 أشهر من تاريخ الرحلة</li>
 								<li>صور شخصية عدد 2 بخلفية بيضاء</li>
 								</ul>
-								<strong>تنويه</strong> سنقوم بالتواصل معك على الرقم 8778979+ ، تستطيع تحديث الرقم في حال كنت قد أخطأت في ادخاله: 
+								<strong>تنويه</strong> سنقوم بالتواصل معك على الرقم {{reservation.phone_number}}، تستطيع تحديث الرقم في حال كنت قد أخطأت في ادخاله: 
 
 				            <div class="input-group" style="width:70%;">
-				                <input type="text" class="form-control"  dir="ltr" value="23242242" >
+				            	<form action="{% url 'customer:change_phone_number' reservation_id=reservation.id %}" method="POST">
+				            	{% csrf_token %}
+				                <input type="text" class="form-control"  dir="ltr" value="{{reservation.phone_number}}" >
 				                <span class="input-group-btn">
-				                    <button type="button" class="btn btn-primary" onclick="return confirm('هل تريد حذف العرض؟')" >تحديث الرقم</button>
+				                    <button type="submit" class="btn btn-primary" onclick="return confirm('هل تريد بالتأكيد تغيير رقم الهاتف؟')" >تحديث الرقم</button>
 				                </span>
+				                </fom>
 				            </div>
 							</div>
 							<div style="text-align: center;">
@@ -49,6 +52,7 @@
 							<!-- <span style="color:;">مندوبنا لم يقم باستلام جواز السفر</span> -->
 							<h3><span class="label label-danger">غير مدفوع</span></h3>
 							<span class="label label-danger">مندوبنا لم يقم باستلام جواز السفر</span>
+							<h3><span class="label label-success">مدفوع</span></h3>
 							</div>
 							<!-- 
 							<div dir="rtl" class="form-group">
@@ -102,25 +106,20 @@
 							<div class="form-group" dir="rtl"> 
 							  <table class="table" >
 							  	<span style="color:#43C458" >تكاليف الرحلة</span>
+							{% if reservation.departures_qty > 1 %} 
 							  <tr>
-							    <td>تكلفة السكن / للشخص  </td>
-							    <td>50</td>
+							    <td>استلام وتوصيل جوازات السفر (دفعة واحدة)</td>
+							    <td>7 دينار</td>
 							  </tr>
+							{% else %}
 							  <tr>
-							    <td>تكلفة النقل / للشخص </td>
-							    <td>30</td>
+							    <td>استلام وتوصيل جواز السفر</td>
+							    <td>7 دينار</td>
 							  </tr>
+							{% endif %}
 							  <tr>
-							    <td>التأشيرة / للشخص </td>
-							    <td>30</td>
-							  </tr>
-							  <tr>
-							    <td>استلام الجوازات من البيت</td>
-							    <td>7</td>
-							  </tr>
-							  <tr>
-							    <td  style="color:#43C458" >تكلفة الشخص</td>
-							    <td  style="color:#43C458" >234 دينار</td>
+							    <td>تكلفة الشخص</td>
+							    <td>234 دينار</td>
 							  </tr>
 							  <tr>
 							    <td  style="color:#43C458" >المجموع ل 1 شخص </td>
@@ -133,34 +132,35 @@
 							  	<span style="color:#43C458" >التفاصيل</span>
 							  <tr>
 							    <td>موعد الإنطلاق</td>
-							    <td>الاربعاء القادم 2-3-2018</td>
+							    <td>{{reservation.departure_date.isoformat}}</td>
 							  </tr>
 							  <tr>
 							    <td>الشركة المشرفة</td>
-							    <td>شركة روابي القدس <span class="label label-primary">رقم هاتف 789779499+</span></td>
+							    <td>{{reservation.package.catalogue_agency.title}}</td>
 							  </tr>
 							  <tr>
 							    <td>وسيلة السفر</td>
-							    <td>طريق بري</td>
+							    <td>{{reservation.package.transport}}</td>
 							  </tr>
 							  <tr>
 							    <td>الغرفة</td>
-							    <td>2 غرفة ثنائية ل5 أشخاص</td>
+							    <td>{{reservation.room_size}}</td>
 							  </tr>
 							  <tr>
 							    <td>فندق مكة</td>
-							    <td>فندق أبراج الكسوة</td>
+							    <td>{{reservation.package.makkah_hotel.title}}</td>
 							  </tr>
 							  <tr>
 							    <td>فندق المدينة</td>
-							    <td>في المنطقة المركزية</td>
+							    <td>{{reservation.package.madinah_hotel.title}}</td>
 							  </tr>
 							</table>
 							</div>
+							{% if reservation %}
 							<div dir="rtl" class="form-group text-center" style="margin-top:10%;">
-									<a  href="{% url 'reservation' %}" class="btn btn-primary">تعديل الحجز</a>
+									<a onclick="return confirm('هل أنت تريد إلغاء الطلب?');" href="{% url 'customer:cancel_reservation' reservation_id=reservation.id %}" class="btn btn-primary btn-sm">الغاء الحجز</a>
 							</div>
-
+							{% endif %}
 						</div>
 						</form>
 

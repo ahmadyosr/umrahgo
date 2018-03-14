@@ -155,9 +155,8 @@
 							</div>
 							</div>
 							<div dir="rtl" class="col-xs-12 col-md-12 text-center" style="margin-top:10%;">
-									<a href="{% url 'customer:reservation' %}?package_id={{package.id}}" class="btn btn-danger btn-lg" >حجز</a>
+									<a href="{% url 'customer:reservation' package_id=package.id%}" class="btn btn-danger btn-lg" >حجز</a>
 							</div>
-
 						</div>
 						</div>
 
@@ -176,9 +175,9 @@
 						{% endif %} 
 						<ul class="list-group ">
 						<h4 style="color:#43C458">البرامج المتاحة</<h4><br>
-						{% for p in agency_packages %} 
+						{% for p in agency_packages %}
 						  <a href="{% url 'catalogue:package' package_id=p.id %}" 
-						  class="list-group-item {% if package.id == p.id %}active{% endif %}">{{package.catalogue_title}}<span >&nbsp;	{{package.prices_start_from}}دينار</span></a>
+						  class="list-group-item {% if package.id == p.id %}active{% endif %}">{{p.catalogue_title}}<small style="color:grey;">&nbsp;&nbsp;{{p.prices_start_from}} دينار </small></a>
 						{% endfor %} 
 						</ul>
 						</div>

@@ -32,7 +32,7 @@
 							{{message}}
 							</div>
 						{% endfor %} 
-
+							<h2>{{agency.title}}</h2>
 							<div class="section-fortitle text-right">
 								<h5>عروض العمرة</h5>
 								<hr>
@@ -71,7 +71,7 @@
 									        <td><input name="updated_quad_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.quad_room_cost}}"></td>
 									        <td><input name="updated_quin_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.quin_room_cost}}"></td>
 									        <td><input type="submit" class="btn btn-primary  btn-inverse" value="تحديث"></td>
-									        <td><a class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  href="{% url 'supplier:remove_package' package_id=p.id %}" >حذف</a></td>
+									        <td><a class="btn btn-primary  btn-inverse" onclick="return confirm('هل تريد حذف العرض؟')"  href="{% url 'supplier:remove_package' package_id=p.id %}" >حذف</a></td>
 									       </form>
 									      </tr>
 										{% endfor %} 
