@@ -10,6 +10,7 @@ def landing_page(request):
 def agencies_list(request):
 	context = {}
 	country_code = request.GET.get('country_code')
+	
 	if country_code  : 
 		country = Country.objects.get(country_code = country_code)
 

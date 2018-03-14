@@ -31,10 +31,11 @@ def agency(request , agency_id):
         
     else : 
         packages = Package.objects.filter(created_by = request.user).exclude(is_removed = True )
+        return render(request , 'supplier/agency.html' , context )
 
     context['agency'] = agency 
     context['packages'] = packages 
-    return render(request , 'supplier/agency.html' , context )
+    return render(request , 'dashboard/agency.html' , context )
 
 def supplier_package(request):
     context={}

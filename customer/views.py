@@ -138,7 +138,6 @@ def register_agency(request):
 
 def register_customer(request):
     if request.method == 'POST' : 
-        group_name = request.POST.get('group')
         user , agency = register_user(request)
         if not user : 
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

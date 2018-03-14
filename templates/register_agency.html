@@ -48,7 +48,7 @@
 												<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
 													<form action="{% url 'customer:register_agency' %}" method="POST">
 														{% csrf_token %}  
-														<input type="hidden" value="agency" name="group"> 
+														<input type="hidden" value="agency" name="group_name"> 
 														<label  class="col-xs-12 " >البريد الالكتروني</label>
 														<input   name="username" type="email"  class="form-control" required>
 														<label   class="col-xs-12" >كلمة المرور</label>
