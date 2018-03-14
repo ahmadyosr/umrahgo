@@ -26,9 +26,10 @@
 							</div> -->
 						<div class="col-md-12 col-xs-12 col-sm-12"  > 
 						<form action="" method="POST">
+
 						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
-					
-							<h1 dir="rtl" >معلومات الحجز</h1>
+						<h1 dir="rtl" >معلومات الحجز</h1>
+						{% if reservation %}
 							<div class="alert alert-success"  dir="rtl" > 
 								<strong>تنويه</strong> سنقوم بالتواصل معك لاستلام جواز السفر والدفعة النقدية من عنوانك بأقرب وقت نرجوع التحقق من التالي : 
 								<ul style="list-style-type:disc;margin-right: 5%;">
@@ -50,27 +51,14 @@
 							<div style="text-align: center;">
 							<!-- <small>الحالة</small><br> -->
 							<!-- <span style="color:;">مندوبنا لم يقم باستلام جواز السفر</span> -->
+							{% if reservation.is_paid %}
+							<h3><span class="label label-success">مدفوع</span></h3>
+							{% else %} 
 							<h3><span class="label label-danger">غير مدفوع</span></h3>
 							<span class="label label-danger">مندوبنا لم يقم باستلام جواز السفر</span>
-							<h3><span class="label label-success">مدفوع</span></h3>
+							{% endif %}
 							</div>
-							<!-- 
-							<div dir="rtl" class="form-group">
-							  <small for="pwd" style="color:#43C458" >تكلفة السكن في فندق أجياد السكن وفندق في المدينة المنورة: 432432 دينار </small>
-							</div> --><!-- 
-							<div class="form-group" dir="rtl"> 
-							  <table class="table" >
-							  	<span style="color:#43C458" >2 غرفة خماسية ل 20 شخص </span>
-							  <tr>
-							    <td>فندق مكة </td>
-							    <td>فندق المدينة</td>
-							  </tr>
-							  <tr>
-							    <td>ابراج الكسوة</td>
-							    <td>فندق في المنطقة المركزية</td>
-							  </tr>
-							</table>
-							</div> -->
+
 							<div class="form-group" dir="rtl" style="display:none"> 
 							<!-- <p style="border-bottom: 0.3px solid #d3d3d3 ">الفندق</p> -->
 							<style>
@@ -156,11 +144,15 @@
 							  </tr>
 							</table>
 							</div>
-							{% if reservation %}
 							<div dir="rtl" class="form-group text-center" style="margin-top:10%;">
 									<a onclick="return confirm('هل أنت تريد إلغاء الطلب?');" href="{% url 'customer:cancel_reservation' reservation_id=reservation.id %}" class="btn btn-primary btn-sm">الغاء الحجز</a>
 							</div>
-							{% endif %}
+						{% else %} 
+							<div dir="rtl" class="form-group text-center" style="margin-top:10%;">
+							<p>لم تقم بالحجز حتى الآن</p>
+							<a  href="{% url 'catalogue:packages' %}" class="btn btn-primary ">تصفح العروض</a>
+							</div>						
+						{% endif %}
 						</div>
 						</form>
 

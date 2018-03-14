@@ -17,5 +17,5 @@ class Reservation(models.Model):
 	room_size = models.CharField(max_length = 100)
 
 
-	is_paid = models.BooleanField(default = True )
+	is_paid = models.BooleanField(default = False )
 	is_canceled = models.BooleanField(default = False)
