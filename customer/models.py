@@ -15,7 +15,7 @@ class Reservation(models.Model):
 	departures_qty = models.CharField(max_length = 100)
 	departure_date = models.DateField(auto_now = False)
 	room_size = models.CharField(max_length = 100)
-
-
+	departure_cost = models.IntegerField(default = 0)
+	
 	is_paid = models.BooleanField(default = False )
 	is_canceled = models.BooleanField(default = False)

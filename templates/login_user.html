@@ -26,7 +26,7 @@
 							<div class="section-title text-right">
 								
 								<h3>تسجيل الدخول</h3>
-								
+								<hr>
 							</div>
 							{% if messages %} 
 							{% for message in messages %} 
@@ -34,11 +34,14 @@
 							{{message}}	
 							</div>
 							{% endfor %} 
-							{% else %} 
-							<div class="alert alert-success">
-							مرحبا بك ، قم بتسجيل الدخول للوحة التحكم
-							</div>
 							{% endif %} 
+
+							<div style="margin:10%;text-align: center;">
+								<button class="loginBtn loginBtn--facebook" onclick="window.location='/oauth/login/facebook/'">
+								  تسجيل الدخول مع فيسبوك
+								</button>
+							</div>
+							
 							<div class="payment-container" >
 							
 				
@@ -54,7 +57,7 @@
 													
 												</div>
 												<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
-													<form action="{% url 'customer:login_agency' %}" method="POST">
+													<form action="{% url 'customer:login_user' %}" method="POST">
 													{% csrf_token %}  
 														<label  class="col-xs-12 " >البريد الالكتروني</label>
 														<input  name="username" type="email"  class="form-control" >
@@ -62,7 +65,7 @@
 														<input  name="password" type="password"  class="form-control" >
 													<div class="col-md-12 mt-30" style="text-align:center;">
 															<input type="submit" class="btn btn-primary" value="دخول"> 
-													<a class="btn btn-danger" href="{% url 'customer:register_user' %}" >حساب جديد </a>
+													<a class="btn btn-danger" href="{% url 'customer:register_customer' %}" >حساب جديد </a>
 													</div>
 													</form>
 												</div>	

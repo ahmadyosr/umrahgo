@@ -17,26 +17,29 @@ import datetime
 """
 retail customer views
 """
-
 @login_required
 def profile(request):
-    # we will not be pessimistic and will assume the user is not registered 
-    if not request.user.is_authenticated() : 
-        return redirect('customer:register_customer')
-
     # print Reservation.objects.filter(user=request.user).delete()
-    if not Reservation.objects.filter(user=request.user , is_canceled = False ).exists() and request.session.get('is_pending') == 'True':
-        data = {}
-        for key , value in request.session.items() : 
-            data[key] = value 
+    does_reservation_exists =  Reservation.objects.filter(user=request.user , is_canceled = False ).exists()
+    reservation_is_pending = request.session.get('is_pending') == 'True'
 
-        form  = ReservationForm(data = data ) 
-        if form.is_valid(): 
-            instance = form.save(commit = False)
-            instance.user = request.user
-            instance.save() 
-            
-            del request.session['is_pending']
+    if reservation_is_pending : 
+        if not does_reservation_exists: 
+            data = {}
+            for key , value in request.session.items() : 
+                data[key] = value 
+
+            form  = ReservationForm(data = data ) 
+
+            if form.is_valid():
+                instance = form.save(commit = False)
+                instance.user = request.user
+                instance.save()
+                del request.session['is_pending']
+
+        elif does_reservation_exists : 
+            messages.add_message(request , messages.INFO , 'يوجد حجز قيد التنفيذ ، الرجاء الغاء الحجز قبل إنشاء حجز آخر .')
+
     try : 
         reservation = Reservation.objects.get(user = request.user , is_canceled = False )
     except ObjectDoesNotExist : 
@@ -59,7 +62,14 @@ def reservation(request, package_id):
             POST = request.POST.dict()
             for key , value in POST.items() : 
                 request.session[key] = value
+
+            package = Package.objects.get(id= request.session.get('package'))
+
+            request.session['departure_cost'] = package.__dict__.get(request.session['room_size']) 
+
+            request.session['room_size'] = request.session['room_size'].replace('_cost' ,'') # check resrervation.html to see why we did this replace
             request.session['is_pending'] = 'True'
+
         return redirect('customer:profile')
 
     return render(request , 'reservation.html' , {'package' : package , 'some_date' : datetime.date.today() })
@@ -68,8 +78,6 @@ def cancel_reservation(request , reservation_id):
     res = Reservation.objects.get(id =reservation_id)
     res.is_canceled = True
     res.save()
-    print res
-    print res.id 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def change_phone_number(request , reservation_id):
@@ -146,7 +154,6 @@ def register_customer(request):
 
     return render(request , 'register_customer.html')
 
-
 def authenticate_user(request):
     username  = request.POST.get('username') 
     password        = request.POST.get('password') 
@@ -158,55 +165,36 @@ def authenticate_user(request):
 
     return user 
 
-def login_agency(request):
-    if request.user.is_authenticated(): 
-
-        if request.user.groups.filter(name="agency").exists() : 
-            # return request.user
-            agency = Agency.objects.get(created_by = request.user)
-            return redirect('supplier:agency' , agency_id = agency.id)
-
-        else : 
-            return HttpResponse(status = 404)
-
+def login_user(request):
+    request.session['group'] = 'retail' # this will be used in 'post_fb_auth' view
 
     if request.method == "POST":
         user = authenticate_user(request)
 
         if user : 
-            if not user.groups.filter(name="agency").exists():
-                return HttpResponse(status = 404 ) 
-
             login(request, user)
-            agency = Agency.objects.get(created_by = user)
-            return redirect('supplier:agency' , agency_id = agency.id)
 
-    return render(request , 'login_agency.html'  ) 
+            if user.groups.filter(name="retail").exists():
+                return redirect('customer:profile')
 
-def login_customer(request):
-    if request.user.is_authenticated(): 
+            elif user.groups.filter(name="supplier").exists():
+                # return request.user
+                agency = Agency.objects.get(created_by = request.user)
+                return redirect('supplier:agency' , agency_id = agency.id)
+        
+        return HttpResponse(status = 404)
+        
+    return render(request , 'login_user.html'  ) 
 
-        if request.user.groups.filter(name="retail").exists() : 
-            return redirect('customer:profile')
+def post_fb_auth(request):
+    group_name = request.session.get('group')
+    user = request.user
 
-        else : 
-            return HttpResponse(status = 404)
+    if not user.groups.exists() and group_name :
+        group ,created  = Group.objects.get_or_create(name=group_name)
+        user.groups.add(group)
 
-
-    if request.method == "POST":
-        user = authenticate_user(request)
-
-        if user : 
-            if not user.groups.filter(name="retail").exists():
-                return HttpResponse(status = 404 ) 
-
-            login(request, user)
-            return redirect('customer:profile')
-
-        else : 
-            return HttpResponseRedirect
-    return render(request , 'login_customer.html'  ) 
-
+    return redirect('customer:profile')
 
 @login_required 
 def logout_user(request):
@@ -214,3 +202,6 @@ def logout_user(request):
     return redirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required
+def delete_account(request):
+    return HttpResponse(status =404)

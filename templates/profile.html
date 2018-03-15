@@ -29,6 +29,11 @@
 
 						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
 						<h1 dir="rtl" >معلومات الحجز</h1>
+						{% for message in messages %} 
+						<div class="alert alert-danger" dir="rtl">
+						{{message}}	
+						</div>
+						{% endfor %} 
 						{% if reservation %}
 							<div class="alert alert-success"  dir="rtl" > 
 								<strong>تنويه</strong> سنقوم بالتواصل معك لاستلام جواز السفر والدفعة النقدية من عنوانك بأقرب وقت نرجوع التحقق من التالي : 
@@ -107,11 +112,11 @@
 							{% endif %}
 							  <tr>
 							    <td>تكلفة الشخص</td>
-							    <td>234 دينار</td>
+							    <td>{{reservation.departure_cost}} دينار</td>
 							  </tr>
 							  <tr>
-							    <td  style="color:#43C458" >المجموع ل 1 شخص </td>
-							    <td  style="color:#43C458" >234 دينار</td>
+							    <td  style="color:#43C458" >المجموع ل {{reservation.departures_qty}} شخص </td>
+							    <td  style="color:#43C458" >{% widthratio reservation.departures_qty 1 reservation.departure_cost %} دينار</td>
 							  </tr>
 							</table>
 							</div>
@@ -128,11 +133,25 @@
 							  </tr>
 							  <tr>
 							    <td>وسيلة السفر</td>
-							    <td>{{reservation.package.transport}}</td>
+							    {% if reservation.package.transport == 'BUS' %}
+							    <td>باص</td>
+							    {% else %} 
+							    <td>طائرة</td>
+							    {% endif %}
 							  </tr>
 							  <tr>
 							    <td>الغرفة</td>
-							    <td>{{reservation.room_size}}</td>
+							    {% if reservation.room_size == 'single_room' %}
+							    <td>غرفة مفردة</td>
+							    {% elif reservation.room_size == 'double_room' %}
+							    <td>غرفة ثنائية</td>
+							    {% elif reservation.room_size == 'trip_room' %} 
+							    <td>غرفة ثﻻثية</td>
+							    {% elif reservation.room_size == 'quad_room' %} 
+							    <td>غرفة رباعية</td>
+							    {% elif reservation.room_size == 'quin_room' %}
+							    <td>غرفة خماسية</td>
+							    {% endif %}
 							  </tr>
 							  <tr>
 							    <td>فندق مكة</td>
@@ -145,7 +164,7 @@
 							</table>
 							</div>
 							<div dir="rtl" class="form-group text-center" style="margin-top:10%;">
-									<a onclick="return confirm('هل أنت تريد إلغاء الطلب?');" href="{% url 'customer:cancel_reservation' reservation_id=reservation.id %}" class="btn btn-primary btn-sm">الغاء الحجز</a>
+									<a onclick="return confirm('هل أنت تريد إلغاء الطلب؟');" href="{% url 'customer:cancel_reservation' reservation_id=reservation.id %}" class="btn btn-primary btn-sm">الغاء الحجز</a>
 							</div>
 						{% else %} 
 							<div dir="rtl" class="form-group text-center" style="margin-top:10%;">
@@ -161,11 +180,10 @@
 							
 					</div>
 
-
 				</div>
 				
 			</div>
-					
+
 			</div>
 
 		<!-- end Main Wrapper -->

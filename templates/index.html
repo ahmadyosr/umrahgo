@@ -408,7 +408,7 @@
 													
 												</div>
 												<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
-													<form action="{% url 'customer:login_agency' %}" method="POST">
+													<form action="{% url 'customer:login_user' %}" method="POST">
 													{% csrf_token %}  
 														<label  class="col-xs-12 " >البريد الالكتروني</label>
 														<input  name="username" type="email"  class="form-control" >

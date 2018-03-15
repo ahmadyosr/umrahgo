@@ -180,11 +180,11 @@ MEDIA_URL                 = '/media/'
 
 
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'customer:login_user'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/profile'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'customer:post_fb_auth'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '1862875713756793'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'b898554252e64f421b2336b888dafad6'  # App Secret

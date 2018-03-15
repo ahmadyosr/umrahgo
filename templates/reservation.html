@@ -124,11 +124,11 @@
 		</select>
 		<label   class="col-xs-12" >حجم الغرفة</label>
 		<select   name="room_size"  class="form-control" required >
-		{% if package.single_room_cost > 0 %}<option value="1">غرفة مفردة</option> {% endif %} 
-		{% if package.double_room_cost > 0 %}<option value="1">غرفة غرفة ثنائية</option> {% endif %} 
-		{% if package.trip_room_cost > 0 %}<option value="1">غرفة ثلاثية</option> {% endif %} 
-		{% if package.quad_room_cost > 0 %}<option value="1">غرفة رباعية</option> {% endif %} 
-		{% if package.quin_room_cost > 0 %}<option value="1">غرفة خماسية</option> {% endif %} 
+		{% if package.single_room_cost > 0 %}<option value="single_room_cost">غرفة مفردة</option> {% endif %} 
+		{% if package.double_room_cost > 0 %}<option value="double_room_cost">غرفة ثنائية</option> {% endif %} 
+		{% if package.trip_room_cost > 0 %}<option value="trip_room_cost">غرفة ثلاثية</option> {% endif %} 
+		{% if package.quad_room_cost > 0 %}<option value="quad_room_cost">غرفة رباعية</option> {% endif %} 
+		{% if package.quin_room_cost > 0 %}<option value="quin_room_cost">غرفة خماسية</option> {% endif %} 
 		</select>
 
 	{% for message in messages %} 

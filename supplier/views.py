@@ -12,7 +12,16 @@ from django.core.exceptions import ObjectDoesNotExist
 from dashboard.views import migrate_prices 
 # Create your views here.
 
-@login_required() 
+@login_required
+def agency_profile(request):
+    if user.groups.filter(name="supplier").exists():
+        agency = Agency.objects.get(created_by = request.user)
+        return redirect('supplier:agency' , agency_id = agency.id)
+
+    return render      
+    return HttpResponse(status = 404)
+
+@login_required 
 def agency(request , agency_id):
     context= {} 
     agency =  Agency.objects.get(id = agency_id )

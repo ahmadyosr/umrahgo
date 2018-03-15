@@ -48,7 +48,7 @@
 												<div style="max-width:500px;margin-right:auto;margin-left:auto"  dir="rtl"  >
 													<form action="{% url 'customer:register_agency' %}" method="POST">
 														{% csrf_token %}  
-														<input type="hidden" value="agency" name="group_name"> 
+														<input type="hidden" value="supplier" name="group_name"> 
 														<label  class="col-xs-12 " >البريد الالكتروني</label>
 														<input   name="username" type="email"  class="form-control" required>
 														<label   class="col-xs-12" >كلمة المرور</label>
@@ -73,7 +73,7 @@
 
 													<div class="col-md-12 mt-30" style="text-align:center;">
 													<input style="margin-bottom: 10px;" id="submit_button" type="submit" class="btn btn-danger" value="إتمام التسجيل">
-													<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'customer:login_agency' %}" >تسجيل دخول</a> 
+													<a  style="margin-bottom: 10px;" class="btn btn-primary" href="{% url 'customer:login_user' %}" >تسجيل دخول</a> 
 													</div>
 													</form>
 												</div>	
