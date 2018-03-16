@@ -130,3 +130,9 @@ def dashboard_package(request):
     context['makkah_hotels'] = MakkahHotel.objects.all() 
     context['madinah_hotels'] = MadinahHotel.objects.all() 
     return render(request , 'dashboard/package_crud.html' , context )
+
+
+def prices_table(request):
+	context = {}
+	packages = Package.objects.exclude(catalogue_agency = None).order_by('-id')
+	return render(request ,'dashboard/prices_table.html' , {'packages':packages})

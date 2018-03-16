@@ -36,6 +36,8 @@
 						<div  style="max-width:500px;margin-right:auto;margin-left:auto" >
 							<div class="form-group text-center">
 									<a class="btn btn-danger btn-lg" href="{% url 'supplier:supplier_package' %}?agency_id={{agency.id}}" > اضافة عرض عمرة</a>
+									<a class="btn btn-info btn-lg" href="{% url 'dashboard:prices_table' %}" > تصفح أسعار السوق 
+									<span>({{packages_count}} عرض)</span></a>
 							</div>
 						</div>
 						<div class="col-md-12" style="overflow-x:scroll;text-align:center;"> 

@@ -47,6 +47,13 @@
 
 							</div>	
 						<div class="col-md-9" style=""> 
+
+						<div class="sidebar-header clearfix" dir="rtl">
+							<!-- <h4></h4> -->
+							<a href="#" class="sidebar-reset-filter"><i class="fa fa-arrow-up"></i>الأسعار&nbsp;&nbsp;&nbsp;</a>
+							<a href="#" class="sidebar-reset-filter"><i class="fa fa-arrow-down"></i>الأسعار</a>
+						</div>
+						
 						{% for package in packages %}
 						<div class="sidebar-search-wrapper bg-light-2" dir="rtl">
 									<div class="col-md-12" >
@@ -93,7 +100,7 @@
 							
 							<aside class="sidebar with-filter">
 				
-								<div class="sidebar-search-wrapper bg-light-2">
+								<div class="sidebar-search-wrapper bg-light-2" style="display: none;">
 								
 									<div class="sidebar-search-header">
 										<h4>Search Again</h4>
@@ -198,6 +205,12 @@
 										<h6 class="sidebar-title">Name Contain</h6>
 										<div class="sidebar-module-inner">
 											<div class="sidebar-mini-search">
+												<div class="input-group">
+													<input type="text" class="form-control" placeholder="Search for...">
+													<span class="input-group-btn">
+														<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+													</span>
+												</div>
 												<div class="input-group">
 													<input type="text" class="form-control" placeholder="Search for...">
 													<span class="input-group-btn">
@@ -390,6 +403,7 @@
 <!-- <script type="text/javascript" src="/static/js/slick.min.js"></script> -->
 
 <script>
+// $('#price_range').va()
 $("#right-sidebar *").attr("disabled", "disabled").off('click');
 
 </script>

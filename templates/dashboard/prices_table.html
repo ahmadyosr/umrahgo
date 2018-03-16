@@ -1,0 +1,74 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+		<div class="main-wrapper">
+			
+			<div class="breadcrumb-wrapper bg-light-2">
+				
+				<div class="container" dir="rtl">
+				
+							<ol class="breadcrumb-list" dir="rtl">
+								<li><a href="/">الرئيسية</a></li>
+								<li><span style="color:grey;">لوحة التحكم</span></li>
+							</ol>
+							
+				</div>
+				
+			</div>
+			
+			<div class="content-wrapper">
+			
+				<div class="container">
+			
+					<div class="row" dir="rtl">
+
+						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
+						<h2>{{agency.title}}</h2>
+						{% if request.META.HTTP_REFERER %} 
+						<a class="btn btn-primary"  style="margin:3%;" href={{request.META.HTTP_REFERER}}>رجوع</a>
+						{% endif %}
+						<div class="col-md-12 col-xs-12 col-sm-12"  style="z-index: 10100" > 
+						<div class="col-md-12" style="overflow-x:scroll;text-align:center;"> 
+							<table class="table" >
+									      <tr>
+									        <td>الشركة</td>
+									        <td>النقل</td>
+									        <td>فندق مكة</td>
+									        <td>فندق المدينة</td>
+									        <td>مفرد</td>
+									        <td>ثنائي</td>
+									        <td>ثﻻثي</td>
+									        <td>رباعي</td>
+									        <td>خماسي</td>
+									      </tr>
+										{% for p in packages %} 
+									      <tr>
+									        <td style="min-width:150px;">x{{p.catalogue_agency.title}}</td>
+									        <td style="min-width:150px;">{{p.transport}}</td>
+									        <td style="min-width:150px;">{{p.makkah_hotel.title}}
+									        <small style="color:grey;">&nbsp; {{p.makkah_hotel.stars}} نجوم</small></td>
+									        <td style="min-width:150px;">{{p.madinah_hotel.title}}</td>
+									        <td>{{p.single_room_cost}}</td>
+									        <td>{{p.double_room_cost}}</td>
+									        <td>{{p.trip_room_cost}}</td>
+									        <td>{{p.quad_room_cost}}</td>
+									        <td>{{p.quin_room_cost}}</td>
+									      </tr>
+										{% endfor %} 
+							</table>
+						</div>
+
+						</div>
+
+						</div>
+							
+					</div>
+
+
+				</div>
+				
+			</div>
+					
+			</div>
+
+		<!-- end Main Wrapper -->
+{% endblock %} 

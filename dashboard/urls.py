@@ -12,4 +12,8 @@ urlpatterns	= [
 	url(r'^approve_update_package/(?P<package_id>\d+)/$' , views.approve_update_package ,name="approve_update_package" ) , 
 	url(r'^approve_remove_package/(?P<package_id>\d+)/$' , views.approve_remove_package ,name="approve_remove_package" ) , 
 	url(r'^reject_action/(?P<package_id>\d+)/$' , views.reject_action ,name="reject_action" ) , 
+
+
+
+	url(r'^prices_table/$' , views.prices_table ,name="prices_table" ) , 
 ]

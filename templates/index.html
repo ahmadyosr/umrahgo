@@ -379,7 +379,7 @@
 			<div style="margin-right: 10px;margin-left: 10px" >
 							<div class="section-title text-right" >
 								
-								<h3>تسجيل الدخول للشركات</h3>
+								<h3>تسجيل الدخول</h3>
 								
 							</div>
 							{% if messages %} 
@@ -390,9 +390,16 @@
 							{% endfor %} 
 							{% else %} 
 							<div class="alert alert-success" dir="rtl">
-							<strong>تنويه</strong>	مرحبا بعودتك ، تستطيع تسجيل الدخول لتعديل برامج العمرة الخاصة بكم أو الإنضمام لنا ان بتسجيل حساب جديد  
+							<strong>تنويه</strong>	مرحبا بعودتك ، تستطيع تسجيل الدخول باستخدام البريد الإلكتروني أو عن طريق حسابك في الفيسبوك  
 							</div>
 							{% endif %} 
+
+							<div style="margin:10%;text-align: center;">
+								<button class="loginBtn loginBtn--facebook" onclick="window.location='/oauth/login/facebook/'">
+								  تسجيل الدخول مع فيسبوك
+								</button>
+							</div>
+							
 							<div class="payment-container" >
 							
 				
