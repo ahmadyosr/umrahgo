@@ -47,17 +47,39 @@ def package(request , package_id):
 
 def packages(request):
 	context ={}
-	country_code = request.GET.get('country_code')
-	if country_code  : 
-		country = Country.objects.get(country_code = country_code)
 
-	else : 
-		country = Country.objects.get(country_code = 'JO')
-
-
-	context['packages'] = Package.objects.exclude(catalogue_agency = None)
-	context['country'] = country
+	if request.GET.get('filter_search') : 
+				
+		country = request.GET.get('country')
+		catalogue_agency = request.GET.get('catalogue_agency')
+		transport = request.GET.get('transport')
+		
+		prices_range = request.GET.get('prices_range')
+		prices_from = prices_range.split('-')[0]
+		prices_to = prices_range.split('-')[1]
 	
+		query = {}
+		if country: 
+			query['catalogue_agency__country'] = int(country)
+
+		if catalogue_agency : 
+			query['catalogue_agency'] = int(catalogue_agency)
+
+		if transport : 
+			query['transport'] = transport
+
+		if prices_range : 
+			query['prices_start_from__gt'] = prices_from
+			query['prices_start_from__lt'] = prices_to
+			context['prices_range'] = prices_range
+
+		context = dict(context.items() + query.items() ) # to be used in packages.htl
+
+		packages = Package.objects.exclude(catalogue_agency = None).filter(**query)
+	else: 
+		packages = Package.objects.exclude(catalogue_agency = None)
+
+	context['packages'] = packages
 	return render(request , 'packages.html' , context)
 	
 def about(request):

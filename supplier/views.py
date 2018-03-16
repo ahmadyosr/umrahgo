@@ -33,6 +33,7 @@ def agency_profile(request):
     context['agency'] = agency
     context['packages'] = packages
     context['packages_count'] = Package.objects.exclude(catalogue_agency = None).count()
+    
     return render(request , 'supplier/agency.html', context )      
 
 @login_required 

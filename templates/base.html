@@ -409,7 +409,7 @@
 									{% endif %}
 										<li><a href="{% url 'catalogue:about' %}">من نحن</a></li>
 										<li><a href="{% url 'catalogue:contact' %}">اتصل بنا</a></li>
-										<li><a >الدول</a>
+										<li><a >المدن</a>
 											<ul>
 												{% for country in countries %} 
 												<li><a href="{% url 'catalogue:agencies_list' %}?country_code={{country.country_code}}">{{country.title}}</a></li>

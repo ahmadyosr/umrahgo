@@ -3,6 +3,73 @@
 <title>برامج العمرة</title>
 {% endblock %} 
 {% block main_wrapper %} 
+<style>
+/* styling the checkboxed */
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-right: 35px;
+    /*margin-bottom: 12px;*/
+    cursor: pointer;
+    /*font-size: 22px;*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #43C458;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+</style>
+
 		<div class="main-wrapper">
 			
 			<!-- start end Page title -->
@@ -14,7 +81,7 @@
 					
 						<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
 						
-							<h1 class="hero-title">{{country.title}}</h1>
+							<h1 class="hero-title">الأردن</h1>
 							
 							<ol class="breadcrumb-list">
 								<li><a href="/">الرئيسية</a></li>
@@ -41,19 +108,24 @@
 							<div class="sorting-wrappper rtl">
 			
 								<div class="sorting-header" dir="rlt" >
-									<h3 class="sorting-title uppercase"> يتوفر في {{country.title}} <span>{{packages.count}} </span> برنامج عمرة </h3>
+									<h3 class="sorting-title uppercase"> يتوفر  <span>{{packages.count}} </span> برنامج عمرة </h3>
 									<p class="sorting-lead">عدد الشركات : {{agencies.count}} شركة </p>
 								</div>
 
 							</div>	
 						<div class="col-md-9" style=""> 
 
-						<div class="sidebar-header clearfix" dir="rtl">
+						<div class="sidebar-header clearfix" dir="rtl" style="display: none;">
 							<!-- <h4></h4> -->
 							<a href="#" class="sidebar-reset-filter"><i class="fa fa-arrow-up"></i>الأسعار&nbsp;&nbsp;&nbsp;</a>
 							<a href="#" class="sidebar-reset-filter"><i class="fa fa-arrow-down"></i>الأسعار</a>
 						</div>
-						
+						{% if not packages %} 
+						<div class="col-md-12" dir="rtl" style="padding: 10%;padding-right: 0">
+						<p >ﻻ يوجد نتائج مطابقة للبحث ، حاول البحث مرة أخرى . </p>
+						</div>
+						{% endif %} 
+
 						{% for package in packages %}
 						<div class="sidebar-search-wrapper bg-light-2" dir="rtl">
 									<div class="col-md-12" >
@@ -95,6 +167,31 @@
 									
 						</div>
 						{% endfor %} 
+						<div class="flex-column flex-sm-12" dir="rtl">
+							<nav class="pager-right">
+								<ul class="pagination" style="" >
+									<li>
+										<a href="#" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><span>...</span></li>
+									<li><a href="#">11</a></li>
+									<li><a href="#">12</a></li>
+									<li><a href="#">13</a></li>
+									<li>
+										<a href="#" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					
+
 						</div>
 						<div class="col-md-3" dir="rtl" id="right-sidebar">
 							
@@ -187,7 +284,7 @@
 											</select>
 											
 										</div>
-									
+
 										<a href="#" class="btn btn-primary btn-block">Search</a>
 									
 									</div>
@@ -195,173 +292,98 @@
 								</div>
 								
 								<div class="sidebar-header clearfix">
-									<h4>Filter Results</h4>
-									<a href="#" class="sidebar-reset-filter"><i class="fa fa-times"></i> reset filter</a>
+									<h4 class="pull-right">تصفية النتائج</h4>
 								</div>
 								
 								<div class="sidebar-inner">
-								
+								<form action="{% url 'catalogue:packages' %}" method="GET">
+									<input type="hidden" value="True" name="filter_search"> 
 									<div class="sidebar-module">
-										<h6 class="sidebar-title">Name Contain</h6>
 										<div class="sidebar-module-inner">
-											<div class="sidebar-mini-search">
+												<h6 class="sidebar-title" >المدينة</h6>
 												<div class="input-group">
-													<input type="text" class="form-control" placeholder="Search for...">
-													<span class="input-group-btn">
-														<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-													</span>
+													<select class="form-control" name="country">
+														<option value="">الكل</option>
+														{% for countr in countries %}
+														<option value="{{countr.id}}" 
+														{% if catalogue_agency__country == countr.id %}
+														selected
+														{% endif %}
+														>{{countr.title}}</option>
+														{% endfor %}
+													</select>
 												</div>
+												<h6 class="sidebar-title" style="margin-top:4%">الشركة</h6>
 												<div class="input-group">
-													<input type="text" class="form-control" placeholder="Search for...">
-													<span class="input-group-btn">
-														<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-													</span>
+													<select class="form-control" name="catalogue_agency">
+														<option value="">الكل</option>
+														{% for agency in agencies %} 
+														<option 
+														{% if catalogue_agency == agency.id %}
+														selected 
+														{% endif %} 
+														value="{{agency.id}}">{{agency.title}}</option>
+														{% endfor %}
+													</select>
 												</div>
-											</div>
+												<h6 class="sidebar-title" style="margin-top:4%">وسيلة السفر</h6>
+												<div class="input-group">
+													<select class="form-control" name="transport">
+														<option  value="">بر وجو</option>
+														<option {% if transport == 'BUS' %} selected {% endif %} value="BUS">براً</option>
+														<option {% if transport == 'FLIGHT' %} selected {% endif %} value="FLIGHT">جوا</option>
+													</select>
+												</div>
+										</div>
+									</div>
+
+									<div class="sidebar-module">
+										<h6 class="sidebar-title">الأسعار{{prices_range}}</h6>
+										<div class="sidebar-module-inner">
+
+											<label class="container" style="margin-bottom: 12px">أقل من 200
+											  <input type="radio"  name="prices_range" 
+											  value="0-200"
+											  {% if prices_range == '0-200' %} checked {% endif %}>
+											  <span class="checkmark"></span>
+											</label>
+											<label class="container"  style="margin-bottom: 12px">بين 200 و 300
+											  <input type="radio" name="prices_range" 
+											  value="200-300"
+											  {% if prices_range == '200-300' %} checked {% endif %}>
+											  <span class="checkmark"></span>
+											</label>
+											<label class="container"  style="margin-bottom: 12px">بين 300 400
+											  <input type="radio" name="prices_range" 
+											  value="300-400"
+											  {% if prices_range == '300-400' %} checked {% endif %}>
+											  <span class="checkmark"></span>
+											</label>
+											<label class="container"  style="margin-bottom: 12px">أكثر من 400
+											  <input type="radio" name="prices_range" 
+											  value="400-10000"
+											  {% if prices_range == '400-10000' %} checked {% endif %}>
+											  <span class="checkmark"></span>
+											</label>
+
 										</div>
 									</div>
 									
-									<div class="sidebar-module">
-										<h6 class="sidebar-title">Price Range</h6>
-										<div class="sidebar-module-inner">
-											<input id="price_range" />
-										</div>
-									</div>
+									
+									
+									
+									
 									
 									<div class="clear"></div>
 									
-									<div class="sidebar-module">
-										<h6 class="sidebar-title">Star Range</h6>
-										<div class="sidebar-module-inner">
-											<input id="star_range" />
-										</div>
-									</div>
-									
-									<div class="clear"></div>
-									
-									<div class="sidebar-module">
-									
-										<h6 class="sidebar-title">Starting Point</h6>
-										<div class="sidebar-module-inner">
-											<div class="checkbox-block">
-												<input id="starting_point-1" name="starting_point" type="checkbox" class="checkbox"/>
-												<label class="" for="starting_point-1">Berlin <span class="checkbox-count">(854)</span></label>
-											</div>
-											<div class="checkbox-block">
-												<input id="starting_point-2" name="starting_point" type="checkbox" class="checkbox"/>
-												<label class="" for="starting_point-2">Paris <span class="checkbox-count">(25)</span></label>
-											</div>
-											<div class="checkbox-block">
-												<input id="starting_point-3" name="starting_point" type="checkbox" class="checkbox"/>
-												<label class="" for="starting_point-3">Munich <span class="checkbox-count">(254)</span></label>
-											</div>
-											<div class="starting_point-block">
-												<input id="property_type-4" name="starting_point" type="checkbox" class="checkbox"/>
-												<label class="" for="property_type-4">Lyon<span class="checkbox-count">(22)</span></label>
-											</div>
-											<div class="starting_point-block">
-												<input id="property_type-5" name="starting_point" type="checkbox" class="checkbox"/>
-												<label class="" for="property_type-5">Vienna  <span class="checkbox-count">(9)</span></label>
-											</div>
-											
-											<div class="more-less-wrapper">
-												
-												<div id="property_type_more_less" class="collapse"> 
-													<div class="more-less-inner">
-													
-														<div class="checkbox-block">
-															<input id="starting_point-6" name="starting_point" type="checkbox" class="checkbox"/>
-															<label class="" for="starting_point-6">Toulouse <span class="checkbox-count">(3)</span></label>
-														</div>
-														<div class="checkbox-block">
-															<input id="starting_point-7" name="starting_point" type="checkbox" class="checkbox"/>
-															<label class="" for="starting_point-7">Graz  <span class="checkbox-count">(25)</span></label>
-														</div>
-														<div class="checkbox-block">
-															<input id="starting_point-8" name="starting_point" type="checkbox" class="checkbox"/>
-															<label class="" for="starting_point-8">Linz  <span class="checkbox-count">(2)</span></label>
-														</div>
-														
-													</div>
-												</div>
-												<button class="btn btn-more-less collapsed" data-toggle="collapse" data-target="#property_type_more_less">Show more</button>
-												
-											</div>
-											
-										</div>
-									
-									</div>
-									
-									<div class="clear"></div>
-									
-									<div class="sidebar-module">
-									
-										<h6 class="sidebar-title">Ending Point</h6>
-										<div class="sidebar-module-inner">
-											<div class="checkbox-block">
-												<input id="ending_point-1" name="ending_point" type="checkbox" class="checkbox"/>
-												<label class="" for="ending_point-1">Berlin <span class="checkbox-count">(854)</span></label>
-											</div>
-											<div class="checkbox-block">
-												<input id="ending_point-2" name="ending_point" type="checkbox" class="checkbox"/>
-												<label class="" for="ending_point-2">Paris <span class="checkbox-count">(25)</span></label>
-											</div>
-											<div class="checkbox-block">
-												<input id="ending_point-3" name="ending_point" type="checkbox" class="checkbox"/>
-												<label class="" for="ending_point-3">Munich <span class="checkbox-count">(254)</span></label>
-											</div>
-											<div class="starting_point-block">
-												<input id="ending_point-4" name="ending_point" type="checkbox" class="checkbox"/>
-												<label class="" for="ending_point-4">Lyon<span class="checkbox-count">(22)</span></label>
-											</div>
-											<div class="starting_point-block">
-												<input id="ending_point-5" name="ending_point" type="checkbox" class="checkbox"/>
-												<label class="" for="ending_point-5">Vienna  <span class="checkbox-count">(9)</span></label>
-											</div>
-											
-											<div class="more-less-wrapper">
-												
-												<div id="hotel_facilities_more_less" class="collapse"> 
-													<div class="more-less-inner">
-													
-														<div class="checkbox-block">
-															<input id="ending_point-6" name="ending_point" type="checkbox" class="checkbox"/>
-															<label class="" for="ending_point-6">Toulouse <span class="checkbox-count">(3)</span></label>
-														</div>
-														<div class="checkbox-block">
-															<input id="ending_point-7" name="ending_point" type="checkbox" class="checkbox"/>
-															<label class="" for="ending_point-7">Graz  <span class="checkbox-count">(25)</span></label>
-														</div>
-														<div class="checkbox-block">
-															<input id="ending_point-8" name="ending_point" type="checkbox" class="checkbox"/>
-															<label class="" for="ending_point-8">Linz  <span class="checkbox-count">(2)</span></label>
-														</div>
-														
-													</div>
-												</div>
-												<button class="btn btn-more-less collapsed" data-toggle="collapse" data-target="#hotel_facilities_more_less">Show more</button>
-												
-											</div>
-											
-										</div>
-									
-										
-									</div>
 									
 									<div class="clear"></div>
 								
 									<div class="sidebar-module">
 									
-										<h6 class="sidebar-title">Filter Select</h6>
 										<div class="sidebar-module-inner">
-											<select class="select2-single form-control" data-placeholder="Select Placeholder">
-												<option value="">Select Placeholder</option>
-												<option value="0">Select One</option>
-												<option value="1">Select Two</option>
-												<option value="2">Select Three</option>
-												<option value="3">Select Four</option>
-												<option value="4">Select Five</option>
-											</select>
+											<button style="border:1px solid #43C458;border-radius: 10px;padding: 5%;" 
+											type="submit"> تحديث البحث</button>
 										</div>
 										
 									</div>
@@ -370,20 +392,20 @@
 									
 									<div class="sidebar-module">
 									
-										<h6 class="sidebar-title">Filter Text Inside Sidebar Inner</h6>
+										<h6 class="sidebar-title">نتائج البحث</h6>
 										<div class="sidebar-module-inner">
-											<p>Park fat she nor does play deal our. Procured sex material his offering humanity laughing moderate can.</p>
+											<p>قم بتغيير تفضيلات البحث في الأعلى ثم اضغط على تحديث البحث للحصول على نتائج تناسبك</p>
 										</div>
 										
 									</div>
 									
 									<div class="clear"></div>
-									
+								</form>
 								</div>
 								
 								<div class="sidebar-box">
-									<h4 class="sidebar-title">Sidebar Text</h4>
-									<p>Park fat she nor does play deal our. Procured sex material his offering humanity laughing moderate can. Unreserved had she nay dissimilar admiration interested.</p>
+									<h4 class="sidebar-title">كيفية الحجز؟</h4>
+									<p>قم بتصفح العروض ثم اضغط اضغط على إظهار الأسعار لتستطيع الحجز وإنشاء حساب</p>
 								</div>
 							
 							</aside>
@@ -391,7 +413,7 @@
 							
 						</div>
 						
-					
+
 						</div>
 							
 					</div>
@@ -400,13 +422,7 @@
 				</div>
 				
 			</div>
-<!-- <script type="text/javascript" src="/static/js/slick.min.js"></script> -->
 
-<script>
-// $('#price_range').va()
-$("#right-sidebar *").attr("disabled", "disabled").off('click');
-
-</script>
 			</div>
 
 		<!-- end Main Wrapper -->

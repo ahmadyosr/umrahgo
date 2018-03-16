@@ -90,24 +90,10 @@
 							<div class="col-xs-12 col-md-12 rtl" >
 							  <label for="include">الفندق في المدينة المنورة</label>
 							<ul class="list-group ">
-	  						  <li class="list-group-item">{{package.madinah_hotel.title}}<span>&nbsp;&nbsp;{{package.makkah_hotel.stars}} نجوم</span></li>
+	  						  <li class="list-group-item">{{package.madinah_hotel.title}}<span>&nbsp;&nbsp;{{package.madinah_hotel.stars}} نجوم</span></li>
 	  						  <li  class="list-group-item" >يبعد عن الحرم مسافة {{package.makkah_hotel.distance_from_center}} متر </li>
   	  						  <a  style="color:green;" class="list-group-item" data-toggle="collapse" data-target="#slideshow_madinah">اظهار الصور <i class="fa fa-angle-down"></i> </a>
 							</ul>
-							</div>
-							<div class="col-xs-12 col-md-12 collapsing "  id="slideshow_madinah" >
-								<div class="slick-gallery-slideshow " >
-									<div class="slider gallery-slideshow" id="slideshow">
-									{% for photo in photos %} 
-										<div><div class="image"><img src="{{photo.file.url}}"  /></div></div>
-									{% endfor %} 
-									</div>
-									<div class="slider gallery-nav" id="navslider" >
-									{% for photo in photos %} 
-										<div><div class="image"><img src="{{photo.file.url}}"  /></div></div>
-									{% endfor %} 
-									</div>
-								</div>
 							</div>
 							<div class="col-xs-12 col-md-12" dir="rtl"> 
 
