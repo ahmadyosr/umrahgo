@@ -67,8 +67,11 @@
   </tr>
   <tr>
     <td>فندق المدينة</td>
-    <td>{% if package.makkah_hotel %}
-    {{package.madinah_hotel.title}} <span class="label label-primary">{{package.madinah_hotel.stars}} نجوم</span> 
+    <td>{% if package.madinah_hotel.id %}
+    {{package.madinah_hotel.title}} 
+    {% if not package.madinah_hotel.title == 'المنطقة المركزية' %} 
+    <span class="label label-primary">{{package.madinah_hotel.stars}} نجوم</span> 
+    {% endif %}
     {% else %}بدون{% endif %} </td>
   </tr>
   <tr>
@@ -117,9 +120,8 @@
 		</select>
 		<label   class="col-xs-12" >موعد السفر</label>
 		<select   name="departure_date"  class="form-control" required >
-			<option value="{{some_date.isoformat}}">some date horray!</option>
-		{% for date in dates %} 		
-			<option value="{{date.isoformat}}">{{date.isoformat}} {{date.day}}</option>
+		{% for date in package.available_dates.all %} 		
+			<option value="{{date.date.isoformat}}">{{date.date.isoformat}} {{date.day}}</option>
 		{% endfor %} 
 		</select>
 		<label   class="col-xs-12" >حجم الغرفة</label>
