@@ -88,6 +88,22 @@
                 {% endfor %} 
                 </table>
               </div>
+               
+              <div class="col-md-12 mt-5" >
+                  <p>قائمة الفنادق</p>
+                  <div class="col-md-6">
+                  {% for hotel in makkah_hotels %} 
+                  <a href="{% url 'dashboard:hotel_photos' hotel_id=hotel.id %}?hotel_type=makkah_hotel">{{hotel.title}}</a><br>
+                  {% endfor %}
+                  </div>
+                  <div class="col-md-6">
+                  {% for hotel in madinah_hotels %} 
+                  <a href="{% url 'dashboard:hotel_photos' hotel_id=hotel.id %}?hotel_type=madinah_hotel">{{hotel.title}}</a><br>
+                  {% endfor %}
+                  </div>
+              </div>  
+                  <a class="btn btn-primary" href="{% url 'dashboard:prices_table' %}">أسعار السوق</a>
+
               </div>
               <div class="col-md-3 mt-5">
               <p class="lead">القائمة التالي هي للوكالات المعروضة على الكتالوج</p>
@@ -97,7 +113,9 @@
               <a href="{% url 'supplier:agency' agency_id=agency.id %}" class="list-group-item">{{agency.title}}</a>
               {% endfor %}
               </ul>
-              </div>   
+              </div> 
+
+
             </div>
               
           </div>

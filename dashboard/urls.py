@@ -16,4 +16,6 @@ urlpatterns	= [
 
 
 	url(r'^prices_table/$' , views.prices_table ,name="prices_table" ) , 
+	url(r'^hotel_photos/(?P<hotel_id>\d+)/$' , views.hotel_photos ,name="hotel_photos" ) , 
+	url(r'^remove_photo/(?P<photo_id>\d+)/$' , views.remove_photo ,name="remove_photo" ) , 
 ]

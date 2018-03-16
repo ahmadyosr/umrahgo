@@ -1,10 +1,11 @@
 #-*- encoding:UTF-* -*-
 from django.shortcuts import render , redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from catalogue.models import Agency , Package
+from catalogue.models import Agency , Package , MakkahHotel, MadinahHotel , Photoshot
 from supplier.forms import AgencyForm
 from django.db.models import Q 
 from django.contrib import messages 
+from django.contrib.auth.decorators import login_required
 from django.db.models import ObjectDoesNotExist
 
 
@@ -18,6 +19,7 @@ def migrate_prices(package):
 	return
 
 # Create your views here.
+@login_required(login_url='/admin/login/')
 def dashboard(request):
 	if not request.user.is_staff  : 
 		return HttpResponse(status = 404 )
@@ -26,6 +28,8 @@ def dashboard(request):
 	context['agencies'] = Agency.objects.filter(created_by__is_staff = True)
 	context['packages'] = Package.objects.exclude(created_by__is_staff = True).filter(Q(is_created = True ) | Q(is_removed = True) | Q(is_updated = True ) ) 
 	context['suppliers_agencies'] = Agency.objects.filter(created_by__is_staff = False).order_by('-id') 
+	context['makkah_hotels'] = MakkahHotel.objects.all()
+	context['madinah_hotels'] = MadinahHotel.objects.all()
 
 	return render(request , 'dashboard/dashboard.html' , context )
 
@@ -136,3 +140,33 @@ def prices_table(request):
 	context = {}
 	packages = Package.objects.exclude(catalogue_agency = None).order_by('-id')
 	return render(request ,'dashboard/prices_table.html' , {'packages':packages})
+
+# @user_passes_test(user_is_staff)
+@login_required(login_url = '/admin/login_staff/')
+def remove_photo(request , photo_id):
+	Photoshot.objects.get(id = photo_id).delete() 
+
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
+
+# @user_passes_test(user_is_staff)
+@login_required(login_url = '/admin/login_staff/')
+def hotel_photos(request , hotel_id ):	
+	
+	hotel_type = request.GET.get('hotel_type')
+
+	if hotel_type == 'makkah_hotel' : 
+		hotel = MakkahHotel.objects.get(id = hotel_id)
+	elif hotel_type == 'madinah_hotel' : 
+		hotel = MadinahHotel.objects.get(id = hotel_id)
+
+	photos 			= hotel.photoshots.all()
+
+	if request.method =="POST":
+		files 			= request.FILES.getlist('files')
+		
+		if files : 
+			for file in files : 
+				photo 			= Photoshot.objects.create(file= file ) 
+				hotel.photoshots.add(photo)
+
+	return render(request , 'dashboard/hotel_photos.html' ,	{'photos' : photos ,'hotel' :hotel , 'hotel_type':hotel_type} ) 

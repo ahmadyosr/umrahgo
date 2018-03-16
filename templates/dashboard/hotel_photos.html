@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% block main_wrapper %} 
+<div class="container"  >
+<h1>{{hotel.title}}</h1>
+
+{% if photos %} 
+<div class="col-md-12 mt-5 alert alert-info" dir="rtl" >
+  قمت بإضافة {{photos.count}} صورة
+</div>
+
+{% for photo in photos %} 
+<div class="col-md-3" style="text-align: center;" >
+  <a href="{{photo.file.url}}"><img src="{{photo.file.url}}" class='img-thumbnail' ></a><br>
+  <a href="{% url 'dashboard:remove_photo' photo_id=photo.id %}">إزالة</a>
+  </div>
+{% endfor %} 
+{% else %} 
+
+<div class="mt-5 alert alert-info"  dir="rtl" >
+ 	لم تقم بإضافة صور حتى الآن 
+</div>
+{% endif %}
+<br>
+<div class="mt-5" style="" class="col-md-12" dir="rtl" > 
+<form method="POST" enctype="multipart/form-data" action="{% url 'dashboard:hotel_photos' hotel_id=hotel.id %}?hotel_type={{hotel_type}}">
+<label >تحميل صور</label><input class="form-control" name="files" type="file" multiple >
+{% csrf_token %}
+<input class="form-control" type="submit" value="إتمام">
+</form>
+</div>
+</div>
+{% endblock %} 
