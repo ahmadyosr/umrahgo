@@ -55,9 +55,7 @@ def packages(request):
 		transport = request.GET.get('transport')
 		
 		prices_range = request.GET.get('prices_range')
-		prices_from = prices_range.split('-')[0]
-		prices_to = prices_range.split('-')[1]
-	
+
 		query = {}
 		if country: 
 			query['catalogue_agency__country'] = int(country)
@@ -69,6 +67,9 @@ def packages(request):
 			query['transport'] = transport
 
 		if prices_range : 
+			prices_from = prices_range.split('-')[0]
+			prices_to = prices_range.split('-')[1]
+	
 			query['prices_start_from__gt'] = prices_from
 			query['prices_start_from__lt'] = prices_to
 			context['prices_range'] = prices_range
