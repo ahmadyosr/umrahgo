@@ -469,8 +469,9 @@
 									<ul class="footer-menu">
 										
 										<li><a href="{% url 'supplier:agency_profile'  %}">لوحة التحكم  <span class="label label-primary">شركات</span></a></li>
+										{% if not user.is_authenticated %}
 										<li><a href="{% url 'customer:register_agency'  %}">تسجيل الشركات  <span class="label label-primary">شركات</span></a></li>
-
+										{% endif %}
 										<li><a href="static-page.html">Who we are</a></li>
 										<li><a href="static-page.html">Careers</a></li>
 										<li><a href="static-page.html">Company history</a></li>

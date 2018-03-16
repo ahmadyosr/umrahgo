@@ -6,7 +6,8 @@ from catalogue.models import (
 	Photoshot , 
 	Country , 
 	Agency, 
-	RoomClass  
+	RoomClass, 
+	Package
 	)
 # Register your models here.
 admin.site.register(Hotel)
@@ -16,3 +17,4 @@ admin.site.register(Photoshot)
 admin.site.register(Country) 
 admin.site.register(Agency) 
 admin.site.register(RoomClass) 
+admin.site.register(Package) 

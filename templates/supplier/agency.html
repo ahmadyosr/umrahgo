@@ -22,11 +22,6 @@
 					<div class="row" dir="rtl">
 
 						<div class="col-md-12 col-xs-12 col-sm-12 " role="main">
-						{% if request.user.is_staff %} 
-						<div class="container">
-						<a class="btn btn-info" href="{% url 'dashboard:dashboard' %}">لوحة التحكم </a>
-						</div>
-						{% endif %} 
 						{% for message in messages %} 
 							<div class="alert alert-info" > 
 							{{message}}
@@ -46,6 +41,7 @@
 						<div class="col-md-12" style="overflow-x:scroll;text-align:center;"> 
 							<table class="table" >
 									      <tr>
+									        <td></td>
 									        <td>النقل</td>
 									        <td>فندق مكة</td>
 									        <td>فندق المدينة</td>
@@ -55,31 +51,10 @@
 									        <td>رباعي</td>
 									        <td>خماسي</td>
 									        <td></td>
-									        <td></td>
 									      </tr>
-									    {% if request.user.is_staff %} 
 										{% for p in packages %} 
 									      <tr>
-									      <form action="{% url 'supplier:update_package' package_id=p.id %}" method="POST" >
-									      {% csrf_token %} 
-									        <td style="min-width:150px;">{{p.transport}}</td>
-									        <td style="min-width:150px;">{% if p.makkah_hotel %}{{p.makkah_hotel.title}} {% else %} {{p.makkah_hotel_title}}{% endif %} </td>
-									        <td style="min-width:150px;">{% if p.madinah_hotel %}{{p.madinah_hotel.title}} {% else %} {{p.madinah_hotel_title}}{% endif %} </td>
-									        <td><input name="updated_single_room_cost" style="min-width:50px;" type="text" class="form-control" value="{{p.single_room_cost}}"></td>
-									        <td><input name="updated_double_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.double_room_cost}}"></td>
-									        <td><input name="updated_trip_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.trip_room_cost}}"></td>
-									        <td><input name="updated_quad_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.quad_room_cost}}"></td>
-									        <td><input name="updated_quin_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.quin_room_cost}}"></td>
-									        <td><input type="submit" class="btn btn-primary  btn-inverse" value="تحديث"></td>
-									        <td><a class="btn btn-primary  btn-inverse" onclick="return confirm('هل تريد حذف العرض؟')"  href="{% url 'supplier:remove_package' package_id=p.id %}" >حذف</a></td>
-									       </form>
-									      </tr>
-										{% endfor %} 
-										{% else %} 
-										{% for p in packages %} 
-									      <tr>
-									      <form action="{% url 'supplier:update_package' package_id=p.id %}" method="POST" >
-									      {% csrf_token %} 
+									      	<td><a href="{% url 'supplier:supplier_package' %}?package_id={{p.id}}">تعديل</a></td>
 									        <td style="min-width:150px;">{{p.transport}}</td>
 									        <td style="min-width:150px;">{{p.makkah_hotel_title}}</td>
 									        <td style="min-width:150px;">{{p.madinah_hotel_title}}</td>
@@ -88,12 +63,9 @@
 									        <td><input name="updated_trip_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.updated_trip_room_cost}}"></td>
 									        <td><input name="updated_quad_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.updated_quad_room_cost}}"></td>
 									        <td><input name="updated_quin_room_cost" style="min-width:50px;"  type="text" class="form-control" value="{{p.updated_quin_room_cost}}"></td>
-									        <td><input type="submit" class="btn btn-primary  btn-inverse" value="تحديث"></td>
-									        <td><a class="btn btn-primary  btn-inverse" click="return confirm('هل تريد حذف العرض؟')"  href="{% url 'supplier:remove_package' package_id=p.id %}" >حذف</a></td>
-									       </form>
+									      	<td><a href="{% url 'supplier:remove_package' package_id=p.id %}">حذف</a></td>
 									      </tr>
 										{% endfor %} 
-										{% endif %} 
 							</table>
 							{% if not packages %}
 							<p >ﻻ يوجد عروض مضافة</p>
@@ -108,24 +80,7 @@
 								<hr>
 							</div>
 							<h3>قم بتحديث بيانات الشركة</h3>
-							{% if user.is_staff %} 
-							<div class="form-group text-center">
-								<form action="{% url 'dashboard:match_agency' %}" method="POST">
-									{% csrf_token %} 
-									<input type="hidden" value="{{agency.id}}" name="agency"> 
-									<small>مربوط مع {{agency.supplier_account_agency}} / {{agency.supplier_account_agency.username}}</small><br>
-									<small>اربط مع وكالة اخرى</small>
-									<select name="matched_agency">
-										{% for agency in matched_agencies %} 
-										<option value="{{agency.id}}" >{{agency.title}} / {{agency.created_by.username}}</option>
-										{% endfor %} 
-									</select>
-									<input type="submit"  value="ربط" >
-								</form>
-							</div>
-							{% endif %} 
-							
-							<form action="{% url 'supplier:agency' agency_id=agency.id %}" method="POST">
+							<form action="{% url 'supplier:agency_profile' %}" method="POST">
 							{% csrf_token %} 
 							<div class="form-group col-md-6 col-sm-6 col-xs-12 pull-right">
 							  <label for="pwd4">الدولة <span style="color:red;">*</span></label>

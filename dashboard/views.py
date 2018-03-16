@@ -1,3 +1,4 @@
+#-*- encoding:UTF-* -*-
 from django.shortcuts import render , redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from catalogue.models import Agency , Package
@@ -102,3 +103,30 @@ def reject_action(request , package_id ):
 		package.delete() 
 
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def dashboard_package(request):
+    context={}
+    agency_id = request.GET.get('agency_id')
+    agency = Agency.objects.get(id = agency_id) 
+
+    if request.method == 'POST' : 
+        form = PackageForm(request.POST)
+
+        if form.is_valid():
+            instance = form.save(commit = False ) 
+            instance.created_by = request.user 
+            instance.is_created = True 
+
+            if request.user.is_staff  : 
+                instance.catalogue_agency = agency
+                migrate_prices(instance)
+            instance.save()
+            messages.add_message(request , messages.INFO , 'تمت اضافة عرض العمرة بنجاح ')
+
+            return redirect('supplier:agency' , agency_id = agency_id )
+
+    context['agency'] = agency
+
+    context['makkah_hotels'] = MakkahHotel.objects.all() 
+    context['madinah_hotels'] = MadinahHotel.objects.all() 
+    return render(request , 'dashboard/package_crud.html' , context )

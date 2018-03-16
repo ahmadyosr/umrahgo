@@ -41,42 +41,51 @@ class Agency(models.Model):
 		return self.title 
 
 class Package(models.Model):
+	# management 
 	title = models.CharField(max_length =200) 
 	created_by = models.ForeignKey(User , null = True )
 	catalogue_agency = models.ForeignKey(Agency , null = True )
+	available_dates = models.ManyToManyField(Date, blank = True ) #in scope of three months
+
+	# accomodation
 	makkah_hotel = models.ForeignKey('MakkahHotel', null = True )
 	madinah_hotel = models.ForeignKey('MadinahHotel', null = True )
+	
+	makkah_hotel_title = models.CharField(max_length= 200 , blank = True )
+	makkah_hotel_stars = models.CharField(max_length= 200 , blank = True )
+	makkah_hotel_distance = models.IntegerField(default = 0 ) #>>new
+	
+	madinah_hotel_title = models.CharField(max_length= 200 , blank = True )
+	madinah_hotel_stars = models.CharField(max_length= 200 , blank = True )
+	madinah_hotel_distance = models.IntegerField(default = 0 ) #>>new
+
+	# transport
+	bus_model = models.CharField(max_length=100 , blank = True) #>>new
+	bus_capacity = models.CharField(max_length=100 , blank = True) #>>new
+
+	airlines = models.CharField(max_length =100 , blank = True) # choices are('BUS' , 'FLIGHT')
+	transport = models.CharField(max_length =10 , default ="BUS" ) # choices are('BUS' , 'FLIGHT')
+
+	#prices 
 	single_room_cost = models.IntegerField(default = 0 )
 	double_room_cost = models.IntegerField(default = 0 )
 	trip_room_cost = models.IntegerField(default = 0 )
 	quad_room_cost = models.IntegerField(default = 0 )
 	quin_room_cost = models.IntegerField(default = 0 )
 
-
-	airlines = models.CharField(max_length =100 , blank = True) # choices are('BUS' , 'FLIGHT')
-	transport = models.CharField(max_length =10 , default ="BUS" ) # choices are('BUS' , 'FLIGHT')
-	month = models.IntegerField(default =0 )
-	year = models.IntegerField(default =0 )
-
-	# agency user section 
 	updated_single_room_cost = models.IntegerField(default = 0 )
 	updated_double_room_cost = models.IntegerField(default = 0 )
 	updated_trip_room_cost = models.IntegerField(default = 0 )
 	updated_quad_room_cost = models.IntegerField(default = 0 )
 	updated_quin_room_cost = models.IntegerField(default = 0 )
-
+	
+	prices_start_from = models.IntegerField(default = 0)
+	
+	# agency's user action
 	is_created = models.BooleanField(default = False)
 	is_removed = models.BooleanField(default = False)
 	is_updated = models.BooleanField(default = False)
-
-	makkah_hotel_title = models.CharField(max_length= 200 , blank = True )
-	makkah_hotel_stars = models.CharField(max_length= 200 , blank = True )
-
-	madinah_hotel_title = models.CharField(max_length= 200 , blank = True )
-	madinah_hotel_stars = models.CharField(max_length= 200 , blank = True )
-	prices_start_from = models.IntegerField(default = 0)
-
-	available_dates = models.ManyToManyField(Date, blank = True ) #in range of one month 
+	
  	@property
 	def catalogue_title(self):
 		if self.transport == "BUS" : 
@@ -96,7 +105,6 @@ class Hotel(models.Model):
 	photoshots = models.ManyToManyField('Photoshot' , blank = True ) 
 	thumbnail = models.FileField(upload_to ='thumbnails/'  , null = True , blank = True  )
 	distinct = models.CharField(max_length =200 , blank = True )
-	
 	def __unicode__(self):
 		return self.title
 

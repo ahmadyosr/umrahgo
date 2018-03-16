@@ -30,6 +30,9 @@ class PackageForm(forms.ModelForm):
 	makkah_hotel_title = forms.CharField(required = False ) 
 	madinah_hotel_stars = forms.CharField(required = False ) 
 	makkah_hotel_stars = forms.CharField(required = False ) 
+
+	madinah_hotel_distance = forms.CharField(required = False ) 
+	makkah_hotel_distance = forms.CharField(required = False ) 
 	airlines = forms.CharField(required = False ) 
 
 	class Meta : 
@@ -37,17 +40,26 @@ class PackageForm(forms.ModelForm):
 		fields = [
 		'makkah_hotel' ,
 		'madinah_hotel' ,
-		'makkah_hotel_stars' , 
-		'madinah_hotel_stars' , 
+
+		'makkah_hotel_distance' , 
+		'madinah_hotel_distance' , 
+
+		'makkah_hotel_stars' ,
+		'madinah_hotel_stars' ,
+
 		'makkah_hotel_title' , 
 		'madinah_hotel_title' ,
+
 		'updated_single_room_cost' , 
 		'updated_double_room_cost', 
 		'updated_trip_room_cost', 
 		'updated_quad_room_cost', 
 		'updated_quin_room_cost', 
+		
 		'transport' , 
-		'airlines'
+		'airlines',
+		'bus_model' , 
+		'bus_capacity' , 
 		]
 
 

@@ -118,7 +118,7 @@ def register_user(request):
     user = authenticate(username= username, password = password )
 
     login(request ,user)
-    if group_name == 'agency' : 
+    if group_name == 'supplier' : 
         # create agency 
         agency = Agency.objects.create(
             created_by = user, 
@@ -137,7 +137,7 @@ def register_agency(request):
         if not user : 
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-        return redirect('supplier:agency' , agency_id= agency.id)
+        return redirect('supplier:agency_profile')
 
     context = {}
     context['countries'] = Country.objects.all() 
@@ -178,9 +178,7 @@ def login_user(request):
                 return redirect('customer:profile')
 
             elif user.groups.filter(name="supplier").exists():
-                # return request.user
-                agency = Agency.objects.get(created_by = request.user)
-                return redirect('supplier:agency' , agency_id = agency.id)
+                return redirect('supplier:agency_profile')
         
         return HttpResponse(status = 404)
         
