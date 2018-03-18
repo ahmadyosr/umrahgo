@@ -1,10 +1,7 @@
-{% extends 'base.html' %} 
-{% block title %}
-<title>برامج العمرة</title>
-{% endblock %} 
-{% block main_wrapper %} 
+
 <style>
-/* styling the checkboxed */
+/* styling the checkboxes */
+
 /* The container */
 .container {
     display: block;
@@ -115,19 +112,14 @@
 							</div>	
 						<div class="col-md-9" style=""> 
 
-						<div class="sidebar-header clearfix" dir="rtl" style="display: none;">
-							<!-- <h4></h4> -->
-							<a href="#" class="sidebar-reset-filter"><i class="fa fa-arrow-up"></i>الأسعار&nbsp;&nbsp;&nbsp;</a>
-							<a href="#" class="sidebar-reset-filter"><i class="fa fa-arrow-down"></i>الأسعار</a>
-						</div>
-						{% if not packages %} 
+						{% if not page.object_list %} 
 						<div class="col-md-12" dir="rtl" style="padding: 10%;padding-right: 0">
 						<p >ﻻ يوجد نتائج مطابقة للبحث ، حاول البحث مرة أخرى . </p>
 						</div>
 						{% endif %} 
 
-						{% for package in packages %}
-						<div class="sidebar-search-wrapper bg-light-2" dir="rtl">
+						{% for package in page.object_list %}
+						<div class="sidebar-search-wrapper bg-light-2" dir="rtl" >
 									<div class="col-md-12" >
 									<div class="col-md-6" style="padding:0;margin-bottom: 5%;" >
 									{% if package.makkah_hotel.thumbnail %}
@@ -167,130 +159,34 @@
 									
 						</div>
 						{% endfor %} 
-						<div class="flex-column flex-sm-12" dir="rtl">
-							<nav class="pager-right">
-								<ul class="pagination" style="" >
-									<li>
-										<a href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><span>...</span></li>
-									<li><a href="#">11</a></li>
-									<li><a href="#">12</a></li>
-									<li><a href="#">13</a></li>
-									<li>
-										<a href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-									</li>
-								</ul>
-							</nav>
+						<div class="flex-column flex-sm-12 text-center" dir="rtl">
+						{% if page.has_previous %}
+						<a>&nbsp;<i class="fa fa-arrow-right"></i> السابق </a>
+						{% endif %}
+						{% for i in page_range %} 
+								<a 
+								href="{% url 'catalogue:packages' %}
+								?filter_search=True
+								&page_no={{i}}
+								&country={{country}}
+								&catalogue_agency={{catalogue_agency}}
+								&transport={{transport}}
+								&prices_range={{prices_range}}" 
+
+								class="btn btn-primary btn-sm 
+								{% if page_no == i or not page_no %} active {% endif %}"
+								>{{i}}</a>
+						{% endfor %}
+						{% if page.has_next %}
+						<a>&nbsp;التالي<i class="fa fa-arrow-left"></i></a>
+						{% endif %}
 						</div>
 					
-
 						</div>
 						<div class="col-md-3" dir="rtl" id="right-sidebar">
 							
 							<aside class="sidebar with-filter">
 				
-								<div class="sidebar-search-wrapper bg-light-2" style="display: none;">
-								
-									<div class="sidebar-search-header">
-										<h4>Search Again</h4>
-									</div>
-									
-									<div class="sidebar-search-content">
-
-										<div class="form-group">
-											
-											<select name="destination" class="select2-multi form-control" data-placeholder="Choose a Destination" multiple>
-												<option value="">Choose a Destination</option>
-												<option value="0">Any Destination</option>
-												<option value="Albania">Albania</option>
-												<option value="Austria" selected>Austria</option>
-												<option value="Belgium">Belgium</option>
-												<option value="Bosnia">Bosnia</option>
-												<option value="Croatia">Croatia</option>
-												<option value="Czech Republic">Czech Republic</option>
-												<option value="Denmark">Denmark</option>
-												<option value="Egypt">Egypt</option>
-												<option value="England">England</option>
-												<option value="Estonia">Estonia</option>
-												<option value="Finland">Finland</option>
-												<option value="France" selected>France</option>
-												<option value="Germany" selected>Germany</option>
-												<option value="Greece">Greece</option>
-												<option value="Herzegovina">Herzegovina</option>
-												<option value="Hungary">Hungary</option>
-												<option value="Ireland">Ireland</option>
-												<option value="Italy">Italy</option>
-												<option value="Latvia">Latvia</option>
-												<option value="Liechtenstein">Liechtenstein</option>
-												<option value="Lithuania">Lithuania</option>
-												<option value="Luxembourg">Luxembourg</option>
-												<option value="Monaco">Monaco</option>
-												<option value="Montenegro">Montenegro</option>
-												<option value="Netherlands">Netherlands</option>
-												<option value="Northern Ireland">Northern Ireland</option>
-												<option value="Poland">Poland</option>
-												<option value="Portugal">Portugal</option>
-												<option value="Russia">Russia</option>
-												<option value="Scotland">Scotland</option>
-												<option value="Serbia">Serbia</option>
-												<option value="Slovakia">Slovakia</option>
-												<option value="Slovenia">Slovenia</option>
-												<option value="Spain">Spain</option>
-												<option value="Sweden">Sweden</option>
-												<option value="Switzerland">Switzerland</option>
-												<option value="Turkey">Turkey</option>
-												<option value="Vatican City">Vatican City</option>
-												<option value="Wales">Wales</option>
-											</select>
-
-										</div>
-									
-										<div class="form-group">
-														
-											<select name="month" class="select2-multi form-control" data-placeholder="Choose a Departure Month" multiple>
-												<option value="">Choose a Departure Month</option>
-												<option value="0">Any Departure Month</option>
-												<option value="1">January</option>
-												<option value="2">February</option>
-												<option value="3">March</option>
-												<option value="4" selected>April</option>
-												<option value="5">May</option>
-												<option value="6">June</option>
-												<option value="7">July</option>
-												<option value="8">August</option>
-												<option value="9">September</option>
-												<option value="10">October</option>
-												<option value="11">November</option>
-												<option value="12">December</option>
-											</select>
-											
-										</div>
-										
-										<div class="form-group">
-
-											<select name="year" class="select2-multi form-control" data-placeholder="Choose a Departure Year" multiple>
-												<option value="">Choose a Departure Year</option>
-												<option value="0">Any Departure Year</option>
-												<option value="2016" selected>2016</option>
-												<option value="2017">2017</option>
-											</select>
-											
-										</div>
-
-										<a href="#" class="btn btn-primary btn-block">Search</a>
-									
-									</div>
-									
-								</div>
-								
 								<div class="sidebar-header clearfix">
 									<h4 class="pull-right">تصفية النتائج</h4>
 								</div>
@@ -338,9 +234,15 @@
 									</div>
 
 									<div class="sidebar-module">
-										<h6 class="sidebar-title">الأسعار{{prices_range}}</h6>
+										<h6 class="sidebar-title">الأسعار</h6>
 										<div class="sidebar-module-inner">
 
+											<label class="container" style="margin-bottom: 12px">كل الأسعار
+											  <input type="radio"  name="prices_range" 
+											  value="0-10000"
+											  {% if prices_range == '0-10000' or not prices_range %} checked {% endif %}>
+											  <span class="checkmark"></span>
+											</label>
 											<label class="container" style="margin-bottom: 12px">أقل من 200
 											  <input type="radio"  name="prices_range" 
 											  value="0-200"
@@ -426,4 +328,3 @@
 			</div>
 
 		<!-- end Main Wrapper -->
-{% endblock %} 

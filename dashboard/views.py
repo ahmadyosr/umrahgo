@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import ObjectDoesNotExist
 
 
+
 # utility functions 
 def migrate_prices(package):
 	package.single_room_cost = package.updated_single_room_cost

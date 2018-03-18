@@ -2,6 +2,8 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from catalogue.models import  Agency , Photoshot , Hotel , Package, Country 
 from customer.forms import ReservationForm
+from django.core.paginator import Paginator
+
 # Create your views here.
 def landing_page(request):
 	packages= [] 
@@ -48,8 +50,12 @@ def package(request , package_id):
 def packages(request):
 	context ={}
 
+	page_no = request.GET.get('page_no')
+	if not page_no : 
+		page_no = 1
+
 	if request.GET.get('filter_search') : 
-				
+		
 		country = request.GET.get('country')
 		catalogue_agency = request.GET.get('catalogue_agency')
 		transport = request.GET.get('transport')
@@ -76,11 +82,19 @@ def packages(request):
 
 		context = dict(context.items() + query.items() ) # to be used in packages.htl
 
-		packages = Package.objects.exclude(catalogue_agency = None).filter(**query)
+		packages = Package.objects.exclude(catalogue_agency = None).filter(**query).order_by('prices_start_from')
 	else: 
-		packages = Package.objects.exclude(catalogue_agency = None)
+		packages = Package.objects.exclude(catalogue_agency = None).order_by('prices_start_from')
+	
 
-	context['packages'] = packages
+	paginator = Paginator(packages , 12)
+	page = paginator.page(page_no)
+
+	context['page_range'] = paginator.page_range
+
+	context['page'] = page
+	context['page_no'] = int(page_no) # converted to integer to be comparable
+
 	return render(request , 'packages.html' , context)
 	
 def about(request):
