@@ -12,7 +12,7 @@ class Country(models.Model):
 	currency = models.CharField(max_length = 50)
 
 	def __unicode__(self):
-		return self.title
+		return unicode(self.title)
 
 class Date(models.Model):
 	date = models.DateField(auto_now = False , unique = True ) 
