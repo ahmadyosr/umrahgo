@@ -23,8 +23,7 @@ class Agency(models.Model):
 	supplier_account_agency = models.ForeignKey('Agency', null = True)
 
 	active = models.BooleanField(default = True )
-	country = models.ForeignKey(Country , null = True )
-	city = models.CharField(max_length = 50 , blank = True ) 
+	city = models.ForeignKey(Country , null = True )
 	title = models.CharField(max_length = 50 , blank = True ) 
 	about = models.CharField(max_length = 500 , blank = True )
 
@@ -61,7 +60,7 @@ class Package(models.Model):
 
 	# transport
 	bus_model = models.CharField(max_length=100 , blank = True) #>>new
-	bus_capacity = models.CharField(max_length=100 , blank = True) #>>new
+	bus_capacity = models.IntegerField(null = True) #>>new
 
 	airlines = models.CharField(max_length =100 , blank = True) # choices are('BUS' , 'FLIGHT')
 	transport = models.CharField(max_length =10 , default ="BUS" ) # choices are('BUS' , 'FLIGHT')

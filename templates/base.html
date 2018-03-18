@@ -328,21 +328,9 @@
 										<ul class="clearfix">
 										
 											<li class="user-action">
-												<a data-toggle="modal" href="#loginModal" class="btn">اتصل بنا</a>
+												<a href="{% url 'catalogue:contact' %}" data-toggle="modal" href="#loginModal" class="btn">اتصل بنا</a>
 											</li>
 
-											<li class="dropdown bt-dropdown-click hidden-xs">
-												<a id="language-dropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-													<i class="ion-social-usd hidden-xss"></i> Dollar
-													<span class="caret"></span>
-												</a>
-												<ul class="dropdown-menu" aria-labelledby="language-dropdown">
-													<li><a href="#"><i class="ion-social-usd"></i> Dollar</a></li>
-													<li><a href="#"><i class="ion-social-euro"></i> Europe</a></li>
-													<li><a href="#"><i class="ion-social-yen"></i> Yen</a></li>
-												</ul>
-											</li> 
-											
 											<li class="dropdown bt-dropdown-click hidden-xs">
 												<a id="currncy-dropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 													<i class="ion-android-globe hidden-xss"></i> عربي
@@ -407,15 +395,8 @@
 									{% if not user|has_group:'supplier' %}
 										<li><a href="{% url 'customer:profile' %}">الحساب</a></li>
 									{% endif %}
-										<li><a href="{% url 'catalogue:about' %}">من نحن</a></li>
+										<!-- <li><a href="{% url 'catalogue:about' %}">من نحن</a></li> -->
 										<li><a href="{% url 'catalogue:contact' %}">اتصل بنا</a></li>
-										<li><a >المدن</a>
-											<ul>
-												{% for country in countries %} 
-												<li><a href="{% url 'catalogue:agencies_list' %}?country_code={{country.country_code}}">{{country.title}}</a></li>
-												{% endfor %} 
-											</ul>
-										</li>
 										<li><a>الوكالات</a>
 											<ul>
 												{% for agency in agencies %} 
@@ -472,13 +453,8 @@
 										{% if not user.is_authenticated %}
 										<li><a href="{% url 'customer:register_agency'  %}">تسجيل الشركات  <span class="label label-primary">شركات</span></a></li>
 										{% endif %}
-										<li><a href="static-page.html">Who we are</a></li>
-										<li><a href="static-page.html">Careers</a></li>
-										<li><a href="static-page.html">Company history</a></li>
-										<li><a href="static-page.html">Legal</a></li>
-										<li><a href="static-page.html">Partners</a></li>
-										<li><a href="static-page.html">Privacy notice</a></li>
-										<li><a href="/sitemap.xml">Site map</a></li>
+										<li><a href="{% url 'catalogue:contact' %}"من نحن</a></li>
+										<li><a href="/sitemap.xml">خارطة الموقع</a></li>
 										
 									</ul>
 									
@@ -495,17 +471,14 @@
 							<div class="footer-logo pull-right">
 								<img src="/static/images/logo_arabic.png" alt="Logo" />
 							</div>
-							<p class="footer-address"><br><br>324 Yarang Road, T.Chabangtigo, Muanng Pattani 9400 <br/> <i class="fa fa-phone"></i> +66 28 878 5452 <br/> <i class="fa fa-phone"></i> +66 2 547 2223 <br/> <i class="fa fa-envelope-o"></i> <a href="#">support@tourpacker.com</a></p>
+							<p class="footer-address"><br><br>عمان - الجبيهة 11941<br/> <i class="fa fa-phone"></i> +962789779499 <br/> <i class="fa fa-envelope-o"></i> <a href="#">ahmadyosr@gmail.com</a></p>
 							
 							<div class="footer-social">
 							
-								<a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
-								<a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
-								<a href="#" data-toggle="tooltip" data-placement="top" title="Google Plus"><i class="fa fa-google-plus"></i></a>
-								<a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+								<a href="https://www.facebook.com/عمرة-جو-194372204626905" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
 							
 							</div>
-							<p class="copy-right">&#169; Copyright 2016 Tour Packer. All Rights Reserved</p>
+							<p class="copy-right">&#169; Copyright 2016 Umrah-Go!. All Rights Reserved</p>
 							
 						</div>
 						

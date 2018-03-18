@@ -11,7 +11,6 @@ class AgencyForm(forms.ModelForm):
 	class Meta : 
 		model = Agency 
 		fields = [
-		'country' , 
 		'city' , 
 		'title' , 
 		'phone_number', 

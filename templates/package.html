@@ -6,7 +6,7 @@
 		<div class="main-wrapper">
 			<!-- start end Page title -->
 			<div class="page-title" style="background-image:url('/static/images/header.jpg');">
-				
+
 				<div class="container">
 				
 					<div class="row">
@@ -51,8 +51,11 @@
 				</div>
 				
 			</div>
-			
-			
+			{% if request.META.HTTP_REFERER %}
+			<div class="mt-20 container">
+			<a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary pull-right">رجوع</a>
+			</div>
+			{% endif %}
 			<div class="content-wrapper" style="padding-top:10px">
 			
 				<div class="container">
@@ -101,10 +104,16 @@
 							{% endif %}
 							<div class="col-xs-12 col-md-12" dir="rtl"> 
 
-							{% if package.airlines != '' %} 
+							{% if package.transport == 'FLIGHT' %} 
 								<div class="alert alert-success"  dir="rtl" > 
 									خطوط الطيران <br>
 									<i style="font-size:200%;" class="fa fa-plane"></i>&nbsp;&nbsp;{{package.airlines}}
+								</div>
+							{% endif %} 
+							{% if package.bus_model and package.bus_capacity %} 
+								<div class="alert alert-success"  dir="rtl" > 
+									<i style="font-size:200%;" class="fa fa-bus"></i>&nbsp;&nbsp;نوع الباصات <br>
+									{{package.bus_model}}<br><small>{{package.bus_capacity}} شخص </small>
 								</div>
 							{% endif %} 
 							  <table class="table" style="text-align:center">
@@ -152,7 +161,7 @@
 
 						<div class="col-md-3 rtl col-xs-12 col-sm-12 pull-left" style="padding:10px;margin-bottom: 50px">
 						<h3>شركة {{agency.title}} للسياحة والسفر</h3>
-						<h5>{{agency.city}} - {{agency.country}}</h5>
+						<h5>{{agency.city.title}}</h5>
 						<p style="border-bottom:.5px solid #D3D3D3">
 						{{agency.address}}&nbsp;&nbsp;<i class="fa fa-map-marker"></i></p>
 						<p style="border-bottom:.5px solid #D3D3D3">

@@ -1,9 +1,13 @@
-
+{% extends 'base.html' %} 
+{% block title %}
+<title>برامج العمرة</title>
+{% endblock %} 
+{% block main_wrapper %} 
 <style>
 /* styling the checkboxes */
 
 /* The container */
-.container {
+.checkbox-container {
     display: block;
     position: relative;
     padding-right: 35px;
@@ -158,10 +162,19 @@
 									</div>
 									
 						</div>
-						{% endfor %} 
-						<div class="flex-column flex-sm-12 text-center" dir="rtl">
+						{% endfor %}
+
+						<div class="flex-column flex-sm-12 text-center" dir="rtl" style="margin:10%;">
 						{% if page.has_previous %}
-						<a>&nbsp;<i class="fa fa-arrow-right"></i> السابق </a>
+						<a 
+						href="{% url 'catalogue:packages' %}
+						?filter_search=True
+						&page_no={{page.previous_page_number}}
+						&country={{country}}
+						&catalogue_agency={{catalogue_agency}}
+						&transport={{transport}}
+						&prices_range={{prices_range}}" 
+						>&nbsp;<i class="fa fa-arrow-right"></i> السابق </a>
 						{% endif %}
 						{% for i in page_range %} 
 								<a 
@@ -172,16 +185,23 @@
 								&catalogue_agency={{catalogue_agency}}
 								&transport={{transport}}
 								&prices_range={{prices_range}}" 
-
-								class="btn btn-primary btn-sm 
-								{% if page_no == i or not page_no %} active {% endif %}"
+								style="font-size: 200%;margin:2%;
+								{% if page_no == i or not page_no %} border-bottom:2px solid #43C458; {% endif %}"
 								>{{i}}</a>
 						{% endfor %}
 						{% if page.has_next %}
-						<a>&nbsp;التالي<i class="fa fa-arrow-left"></i></a>
+						<a 
+						href="{% url 'catalogue:packages' %}
+						?filter_search=True
+						&page_no={{page.next_page_number}}
+						&country={{country}}
+						&catalogue_agency={{catalogue_agency}}
+						&transport={{transport}}
+						&prices_range={{prices_range}}" 
+						>&nbsp;التالي<i class="fa fa-arrow-left"></i></a>
 						{% endif %}
 						</div>
-					
+
 						</div>
 						<div class="col-md-3" dir="rtl" id="right-sidebar">
 							
@@ -202,7 +222,7 @@
 														<option value="">الكل</option>
 														{% for countr in countries %}
 														<option value="{{countr.id}}" 
-														{% if catalogue_agency__country == countr.id %}
+														{% if catalogue_agency__city == countr.id %}
 														selected
 														{% endif %}
 														>{{countr.title}}</option>
@@ -237,31 +257,31 @@
 										<h6 class="sidebar-title">الأسعار</h6>
 										<div class="sidebar-module-inner">
 
-											<label class="container" style="margin-bottom: 12px">كل الأسعار
+											<label class="container checkbox-container" style="margin-bottom: 12px">كل الأسعار
 											  <input type="radio"  name="prices_range" 
 											  value="0-10000"
 											  {% if prices_range == '0-10000' or not prices_range %} checked {% endif %}>
 											  <span class="checkmark"></span>
 											</label>
-											<label class="container" style="margin-bottom: 12px">أقل من 200
+											<label class="container checkbox-container" style="margin-bottom: 12px">أقل من 200
 											  <input type="radio"  name="prices_range" 
 											  value="0-200"
 											  {% if prices_range == '0-200' %} checked {% endif %}>
 											  <span class="checkmark"></span>
 											</label>
-											<label class="container"  style="margin-bottom: 12px">بين 200 و 300
+											<label class="container checkbox-container"  style="margin-bottom: 12px">بين 200 و 300
 											  <input type="radio" name="prices_range" 
 											  value="200-300"
 											  {% if prices_range == '200-300' %} checked {% endif %}>
 											  <span class="checkmark"></span>
 											</label>
-											<label class="container"  style="margin-bottom: 12px">بين 300 400
+											<label class="container checkbox-container"  style="margin-bottom: 12px">بين 300 400
 											  <input type="radio" name="prices_range" 
 											  value="300-400"
 											  {% if prices_range == '300-400' %} checked {% endif %}>
 											  <span class="checkmark"></span>
 											</label>
-											<label class="container"  style="margin-bottom: 12px">أكثر من 400
+											<label class="container checkbox-container"  style="margin-bottom: 12px">أكثر من 400
 											  <input type="radio" name="prices_range" 
 											  value="400-10000"
 											  {% if prices_range == '400-10000' %} checked {% endif %}>
@@ -328,3 +348,4 @@
 			</div>
 
 		<!-- end Main Wrapper -->
+{% endblock %} 

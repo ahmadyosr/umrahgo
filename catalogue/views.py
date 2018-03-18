@@ -6,8 +6,8 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def landing_page(request):
-	packages= [] 
-	return render(request ,'index.html' , {'packages': packages} ) 
+	agencies = Agency.objects.filter(created_by__is_staff = True).only('id' , 'title')
+	return render(request ,'index.html' , {'agencies' : agencies} ) 
 
 def agencies_list(request):
 	context = {}
@@ -19,7 +19,7 @@ def agencies_list(request):
 	else : 
 		country = Country.objects.get(country_code = 'JO')
 
-	agencies = Agency.objects.filter(created_by__is_staff = True , country = country)
+	agencies = Agency.objects.filter(created_by__is_staff = True , city = country)
 	
 	packages = []
 	for agency in agencies  : 
@@ -55,7 +55,6 @@ def packages(request):
 		page_no = 1
 
 	if request.GET.get('filter_search') : 
-		
 		country = request.GET.get('country')
 		catalogue_agency = request.GET.get('catalogue_agency')
 		transport = request.GET.get('transport')
@@ -64,7 +63,7 @@ def packages(request):
 
 		query = {}
 		if country: 
-			query['catalogue_agency__country'] = int(country)
+			query['catalogue_agency__city'] = int(country)
 
 		if catalogue_agency : 
 			query['catalogue_agency'] = int(catalogue_agency)
@@ -86,7 +85,6 @@ def packages(request):
 	else: 
 		packages = Package.objects.exclude(catalogue_agency = None).order_by('prices_start_from')
 	
-
 	paginator = Paginator(packages , 12)
 	page = paginator.page(page_no)
 
@@ -94,7 +92,6 @@ def packages(request):
 
 	context['page'] = page
 	context['page_no'] = int(page_no) # converted to integer to be comparable
-
 	return render(request , 'packages.html' , context)
 	
 def about(request):

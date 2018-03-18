@@ -303,12 +303,12 @@
 						<div class="image-bg" style="background-image:url('/static/images/backgrounds/split.jpg');"></div>
 					</div> -->
 					
-					<div class=""  style="max-width: 400px;margin-right: auto;margin-left: auto;margin-top:5%; margin-bottom:5%;" >
+					<div class=""  style="max-width: 400px;margin-right: auto;margin-left: auto;margin-bottom:5%;margin-top:5%" >
 						
 						<div class=" rtl" >
 						
 							<div class="section-title  text-right">
-							
+								
 								<h3>طريقة عملنا</h3>
 								<p class=""></p>
 								
@@ -316,7 +316,7 @@
 							
 							<div class="featured-item">
 							
-								<h4>تصفح شركات العمرة والعروض </h4>
+								<h4>اختر برنامج العمرة المناسب</h4>
 								
 								<div class="content clearfix">
 								
@@ -329,25 +329,10 @@
 								</div>
 							</div>
 							
-							<div class="featured-item">
-							
-								<h4>اختر البرنامج المناسب</h4>
-								
-								<div class="content clearfix">
-								
-									<div class="icon pull-right rtl-left-margin">
-										<i class="pe-7s-home"></i>
-									</div>
-									
-									<p class="">اذا كنت فردا ً أو مجموعة كاملة ، سوف تجد الباكج المناسب لك </p>
-									
-								</div>
-							</div>
-							
 							
 							<div class="featured-item">
 							
-								<h4>احجز العمرة</h4>
+								<h4>نستلم منك جواز السفر</h4>
 								
 								<div class="content clearfix">
 								
@@ -355,15 +340,14 @@
 										<i class="pe-7s-car"></i>
 									</div>
 									
-									<p>احزم أمتعتك جيدا قبل السفر ، سواء كنت ستسافر برا ً أو جواً </p>
+									<p>سنقوم باستلام جواز سفرك والمدفوعات من باب بيتك لتقوم شركة السفر بإتمام الإجراءات</p>
 									
 								</div>
 							</div>
-							
-							
+
 							<div class="featured-item" style="text-align: center;">
 								<div class="content clearfix">
-									<a href="{% url 'catalogue:packages' %}?country_code=JO"  class="btn btn-primary btn-lg" > ابدأ</a>
+									<a href="{% url 'catalogue:packages' %}?country_code=JO"  class="btn btn-primary btn-lg" >ابدأ</a>
 								</div>
 							</div>
 							
@@ -374,6 +358,46 @@
 				</div>
 				
 			</section>
+
+			<section class="bg-light" style="" >
+			
+				<div class="container">
+				
+					<div class="row">
+						
+						<div class="col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+							
+							<div class="section-title">
+							
+								<h3>شركاؤنا</h3>
+								<p>احجز مع أفضل شركات العمرة في السوق</p>
+							</div>
+							
+						</div>
+					
+					</div>
+					<div class="row">
+
+						<div class="col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+							{% for agency in agencies %} 
+							<div class="section-title">
+										<h4 style="color:black">{{agency.title}}</h4>
+										<h6 style="color:grey">{{agency.city.title}}</h6>
+										<p style="color:grey">{{agency.address}}</p>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+					
+				</div>
+				
+					<div class="container" style="text-align: center;">
+
+						<a href="{% url 'catalogue:packages' %}" class="btn btn-primary btn-lg">تصفح العروض</a>
+						
+					</div>
+			</section>
+
 			<section class="bg-light" >
 			<div style="max-width:500px;margin-right:auto;margin-left:auto" role="main">
 			<div style="margin-right: 10px;margin-left: 10px" >
@@ -442,49 +466,6 @@
 									
 							</div>	
 							</div>
-			</section>
-			<section class="bg-light" style="display:none;" >
-			
-				<div class="container">
-				
-					<div class="row">
-						
-						<div class="col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-							
-							<div class="section-title">
-							
-								<h3>اسمع منهم</h3>
-								<p>ماذا يقول الناس عنا؟</p>
-							</div>
-							
-						</div>
-					
-					</div>
-					
-					<div class="testimonial-wrapper rtl">
-					
-						<div class="row">
-							
-							<div class="col-xs-12 col-sm-12 col-md-6 pull-right">
-								<div class="testimonial-item clearfix">
-									<div class="image pull-right rtl-static rtl-left-margin">
-										<img src="/static/images/man/01.jpg" alt="Man" />
-									</div>
-									<div  >
-										<h4 style="color:black">Antony Robert</h4>
-										<h6 style="color:grey">From Spain</h6>
-										<p style="color:grey">She meant new their sex could defer child. An lose at quit to life do dull. Moreover end horrible endeavor entrance any families. Income appear extent on of thrown in admire.</p>
-									</div>
-								</div>
-							</div>
-							
-							
-						</div>
-						
-					</div>
-					
-				</div>
-				
 			</section>
 			
 			<div class="newsletter-wrapper">
