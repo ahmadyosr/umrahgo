@@ -20,7 +20,7 @@ class Date(models.Model):
 
 class Agency(models.Model):
 	created_by = models.ForeignKey(User , null = True )
-	supplier_account_agency = models.ForeignKey('Agency', null = True)
+	supplier_account_agency = models.ForeignKey('Agency', null = True , blank = True )
 
 	active = models.BooleanField(default = True )
 	city = models.ForeignKey(Country , null = True )
