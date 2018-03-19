@@ -60,7 +60,7 @@ class Package(models.Model):
 
 	# transport
 	bus_model = models.CharField(max_length=100 , blank = True) #>>new
-	bus_capacity = models.IntegerField(null = True) #>>new
+	bus_capacity = models.IntegerField(null = True,blank = True) #>>new
 
 	airlines = models.CharField(max_length =100 , blank = True) # choices are('BUS' , 'FLIGHT')
 	transport = models.CharField(max_length =10 , default ="BUS" ) # choices are('BUS' , 'FLIGHT')

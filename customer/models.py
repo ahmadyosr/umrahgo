@@ -13,7 +13,7 @@ class Reservation(models.Model):
 	name = models.CharField(max_length = 100)
 	phone_number = models.CharField(max_length = 100)
 	departures_qty = models.CharField(max_length = 100)
-	departure_date = models.DateField(auto_now = False)
+	departure_date = models.DateField(auto_now = False , blank = True , null = True )
 	room_size = models.CharField(max_length = 100)
 	departure_cost = models.IntegerField(default = 0)
 	

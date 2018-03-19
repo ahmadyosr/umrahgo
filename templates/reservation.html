@@ -118,12 +118,14 @@
 			<option value="9">9</option>
 			<option value="10">10</option>
 		</select>
+		<!--
 		<label   class="col-xs-12" >موعد السفر</label>
 		<select   name="departure_date"  class="form-control" required >
 		{% for date in package.available_dates.all %} 		
 			<option value="{{date.date.isoformat}}">{{date.date.isoformat}} {{date.day}}</option>
 		{% endfor %} 
 		</select>
+		-->
 		<label   class="col-xs-12" >حجم الغرفة</label>
 		<select   name="room_size"  class="form-control" required >
 		{% if package.single_room_cost > 0 %}<option value="single_room_cost">غرفة مفردة</option> {% endif %} 

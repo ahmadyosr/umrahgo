@@ -39,7 +39,7 @@
 								<strong>تنويه</strong> سنقوم بالتواصل معك لاستلام جواز السفر والدفعة النقدية من عنوانك بأقرب وقت نرجوع التحقق من التالي : 
 								<ul style="list-style-type:disc;margin-right: 5%;">
 								<li>جواز سفر صالح حتى 7 أشهر من تاريخ الرحلة</li>
-								<li>صور شخصية عدد 2 بخلفية بيضاء</li>
+								<!-- <li>صور شخصية عدد 2 بخلفية بيضاء</li> -->
 								</ul>
 								<strong>تنويه</strong> سنقوم بالتواصل معك على الرقم {{reservation.phone_number}}، تستطيع تحديث الرقم في حال كنت قد أخطأت في ادخاله: 
 
@@ -123,10 +123,12 @@
 							<div class="form-group" dir="rtl"> 
 							  <table class="table" >
 							  	<span style="color:#43C458" >التفاصيل</span>
+							  	{% if reservation.departure_date %}
 							  <tr>
 							    <td>موعد الإنطلاق</td>
 							    <td>{{reservation.departure_date.isoformat}}</td>
 							  </tr>
+							  	{% endif %}
 							  <tr>
 							    <td>الشركة المشرفة</td>
 							    <td>{{reservation.package.catalogue_agency.title}}</td>

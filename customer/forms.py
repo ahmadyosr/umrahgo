@@ -10,7 +10,7 @@ class ReservationForm(forms.ModelForm):
 		'name',
 		'phone_number',
 		'departures_qty',
-		'departure_date',
+		# 'departure_date',
 		'room_size',
 		'departure_cost'
 		] 

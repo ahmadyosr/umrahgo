@@ -2,7 +2,7 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from catalogue.models import Agency , Package , MakkahHotel, MadinahHotel , Photoshot
-from supplier.forms import AgencyForm
+from supplier.forms import AgencyForm , PackageForm
 from django.db.models import Q 
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required
@@ -129,7 +129,9 @@ def dashboard_package(request):
             messages.add_message(request , messages.INFO , 'تمت اضافة عرض العمرة بنجاح ')
 
             return redirect('supplier:agency' , agency_id = agency_id )
-
+        else : 
+        	print form.errors 
+        	
     context['agency'] = agency
 
     context['makkah_hotels'] = MakkahHotel.objects.all() 
