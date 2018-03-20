@@ -58,7 +58,13 @@ class PackageForm(forms.ModelForm):
 		'transport' , 
 		'airlines',
 		'bus_model' ,
-		'bus_capacity' , 
+		'bus_capacity' ,
+
+		'nights',
+		'days', 
+		'makkah_nights',
+		'madinah_nights',
+		'meal' , 
 		]
 
 

@@ -40,8 +40,14 @@ class Agency(models.Model):
 		return self.title 
 
 class Package(models.Model):
+	# duration
+	nights = models.IntegerField(null = True , blank = True)
+	days = models.IntegerField(null = True , blank = True)
+	makkah_nights = models.IntegerField(null = True , blank = True)
+	madinah_nights = models.IntegerField(null = True , blank = True)
+	meal = models.CharField(max_length= 100, blank = True)
 	# management 
-	title = models.CharField(max_length =200) 
+	title = models.CharField(max_length =200 , blank = True) 
 	created_by = models.ForeignKey(User , null = True )
 	catalogue_agency = models.ForeignKey(Agency , null = True )
 	available_dates = models.ManyToManyField(Date, blank = True ) #in scope of three months
@@ -85,8 +91,10 @@ class Package(models.Model):
 	is_removed = models.BooleanField(default = False)
 	is_updated = models.BooleanField(default = False)
 	
+
  	@property
 	def catalogue_title(self):
+		# return 'fdsfds' 
 		if self.transport == "BUS" : 
 			travel = "السفر براً"
 		else: 
@@ -96,7 +104,20 @@ class Package(models.Model):
 			stars = self.makkah_hotel.stars
 		except AttributeError : 
 			stars = '0'
-		return unicode("فندق ") +unicode(self.makkah_hotel.title) + " "+ unicode(stars) + unicode(" نجوم ")+ unicode(travel)
+		if self.nights > 0 :
+			nights_phrase = ' ' +str(self.nights)+' ليالي'
+		else : 
+			nights_phrase = ' '
+
+		return unicode("فندق ") +unicode(self.makkah_hotel.title) \
+		+ " "+ unicode(stars)\
+		+ unicode(" نجوم ")+ unicode(travel) + nights_phrase
+
+	def __unicode__(self):
+		if self.makkah_hotel and self.madinah_hotel : 
+			return self.catalogue_title
+		else : 
+			return str(self.id)
 
 class Hotel(models.Model):
 	title = models.CharField(max_length = 50) 
